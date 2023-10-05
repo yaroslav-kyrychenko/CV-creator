@@ -12,8 +12,68 @@
       <img class="img-logo" src="" alt="Logo of the website that reads CVer" />
     </a>
 
-    <div class="container-form-window">
-      PLACEHOLDER FOR THE ACCORDION ELEMENT WITH THE FORMS
+    <div class="container-form">
+      <div class="section-header section-personal-details">
+        <label class="btn toggle-switch">
+          <input type="checkbox" />
+          <span class="slider"></span>
+        </label>
+        <p class="section-title">Dane osobowe</p>
+        <button class="btn btn-expand">
+          <ion-icon
+            class="icon chevron-down"
+            name="chevron-down-outline"
+          ></ion-icon>
+        </button>
+      </div>
+      <div class="section-content">
+        <form action="" method="get" class="form form-personal-details">
+          <div class="form-personal-details">
+            <label for="name">Imię i nazwisko</label>
+            <input
+              type="text"
+              name="name"
+              class="input-name"
+              placeholder="Imię i nazwisko"
+            />
+          </div>
+
+          <div class="form-personal-details">
+            <label for="birthyear">Rok urodzenia</label>
+            <input
+              type="text"
+              name="birthyear"
+              class="input-birthyear"
+              placeholder="Rok urodzenia"
+            />
+          </div>
+
+          <div class="form-personal-details">
+            <label for="phone-number">Nr telefonu</label>
+            <input
+              type="tel"
+              name="phone-number"
+              class="input-phone-number"
+              placeholder="Nr telefonu"
+            />
+          </div>
+
+          <div class="form-personal-details">
+            <label for="social-media-links"
+              >Linki do portali społecznościowych</label
+            >
+            <input
+              type="url"
+              name="social-media-links"
+              class="input-social-media-links"
+              placeholder="Linki do portali społecznościowych"
+            />
+          </div>
+        </form>
+        <button class="btn btn-add-new">
+          <ion-icon class="icon plus-sign" name="add-outline"></ion-icon>
+        </button>
+      </div>
     </div>
 
     <div class="container-preview-window">
@@ -26,5 +86,14 @@
         wyłącznie w edukacyjnych celach.
       </p>
     </footer>
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
   </body>
 </html>

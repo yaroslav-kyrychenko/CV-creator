@@ -27,8 +27,7 @@ Nazwy sekcji i pól do uzupełnienia:
    a. Imię i nazwisko
    b. Rok urodzenia
    c. Nr telefonu
-   d. Adres
-   e. Linki do portali społecznościowych
+   d. Linki do portali społecznościowych
 2. Edukacja
    a. Nazwa uczelni
    b. Wykształcenie
