@@ -27,7 +27,8 @@ Nazwy sekcji i pól do uzupełnienia:
    a. Imię i nazwisko
    b. Rok urodzenia
    c. Nr telefonu
-   d. Linki do portali społecznościowych
+   d. Email
+   e. Linki do portali społecznościowych
 2. Edukacja
    a. Nazwa uczelni
    b. Wykształcenie
@@ -38,10 +39,10 @@ Nazwy sekcji i pól do uzupełnienia:
 3. Doświadczenie zawodowe
    a. Nazwa firmy
    b. Stanowisko
-   c. Rok początku pracy
-   d. Rok końca pracy
+   c. Data początku pracy
+   d. Data końca pracy
    e. Krótki opis obowiązków
 4. Umiejętności
-   a. Umiejętności miękkie
-   b. Umiejętności twarde
+   a. Umiejętności twarde
+   b. Umiejętności miękkie
 5. Certyfikaty
