@@ -1,0 +1,20 @@
+.section-main-part {
+  display: flex;
+  gap: 9.6rem;
+  /* align-items: center; */
+  justify-content: space-around;
+}
+
+.container-form {
+  width: 51.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.container-preview-window {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
