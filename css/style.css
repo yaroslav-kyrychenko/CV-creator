@@ -5,7 +5,7 @@
   justify-content: space-around;
 }
 
-.container-form {
+.config-container {
   width: 51.2rem;
   display: flex;
   flex-direction: column;

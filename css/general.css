@@ -45,7 +45,7 @@ html {
   font-size: 62.5%;
 }
 
-.section-header {
+.config-section-header {
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -53,7 +53,8 @@ html {
   margin-bottom: 1.6rem;
 }
 
-.section-content {
+.config-section {
+  width: 100%;
 }
 
 .form {

@@ -31,7 +31,7 @@ Nazwy sekcji i pól do uzupełnienia:
    e. Linki do portali społecznościowych
 2. Edukacja
    a. Nazwa uczelni
-   b. Wykształcenie
+   b. Uzyskany tytuł
    c. Nazwa kierunku
    d. Nazwa specjalności
    e. Rok początku studiów
