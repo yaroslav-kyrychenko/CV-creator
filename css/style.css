@@ -1,20 +1,86 @@
+/* 
+--- 1 TYPOGRAPHY SYSTEM
+- Font sizes (px):
+10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98
+
+- Font weights:
+Default: 
+Medium: 
+Semi-bold: 
+Bold: 
+
+- Font heights:
+Default: 
+Small: 
+Medium: 
+Paragraph default: 
+Large: 
+
+- Letter spacing: 
+
+--- 2 COLOURS
+Primary:
+
+Tints:
+Shades:
+Accents:
+Greys:
+
+--- 3 SHADOWS
+
+--- 4 BORDER RADIUS
+
+--- 5 WHITESPACE
+- Spacing system (px)
+2 / 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80 / 96 / 128
+*/
+
 .section-main-part {
   display: flex;
   gap: 9.6rem;
   /* align-items: center; */
-  justify-content: space-around;
+  justify-content: space-between;
+  flex-basis: auto;
 }
 
+/* /////////////////////////////////////
+CONFIG SECTION
+//////////////////////////////////// */
+
 .config-container {
-  width: 51.2rem;
+  width: 63.6rem;
+  padding: 6.4rem 0 6.4rem 6.4rem;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
+/* /////////////////////////////////////
+PREVIEW WINDOW
+//////////////////////////////////// */
+
 .container-preview-window {
+  width: 89.6rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  gap: 3.2rem;
+  line-height: 2rem;
+}
+
+.img-user-photo {
+  width: 25%;
+  border-radius: 1rem;
+}
+
+.resume-name {
+  font-size: 3.2rem;
+  padding: 2.4rem 0;
+}
+
+.text-bottom-disclaimer {
+  text-align: center;
+  margin: 3.2rem 0;
 }

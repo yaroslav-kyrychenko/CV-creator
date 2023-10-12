@@ -144,24 +144,26 @@
                 type="text"
                 name="specialisation-name"
                 class="input-specialisation-name"
-                placeholder="Nazwa kierunku"
+                placeholder="Nazwa specjalności"
               />
             </div>
             <!-- DOKOŃCZ TUTAJ LISTĘ DROPDOWN W JS -->
             <div class="form-item form-item-education">
-              <label for="Rok początku studiów">Rok początku studiów</label>
+              <label for="degree-start-year">Rok początku studiów</label>
               <input
                 type="text"
                 name="degree-start-year"
                 class="input-degree-start-year"
+                placeholder="Rok początku studiów"
               />
             </div>
             <div class="form-item form-item-education">
-              <label for="Rok końca studiów">Rok końca studiów</label>
+              <label for="degree-end-year">Rok końca studiów</label>
               <input
                 type="text"
                 name="degree-end-year"
                 class="input-degree-end-year"
+                placeholder="Rok końca studiów"
               />
             </div>
           </form>
@@ -185,7 +187,56 @@
             </button>
           </div>
 
-          <form action="" method="get" class="form form-experience"></form>
+          <form action="" method="get" class="form form-experience">
+            <div class="form-item form-item-experience">
+              <label for="company-name">Przedsiębiorstwo</label>
+              <input
+                type="text"
+                name="company-name"
+                placeholder="Nazwa przedsiębiorstwa"
+              />
+            </div>
+
+            <div class="form-item form-item-experience">
+              <label for="position-title">Stanowisko</label>
+              <input
+                type="text"
+                name="position-title"
+                placeholder="Nazwa
+              stanowiska"
+              />
+            </div>
+
+            <div class="form-item form-item-experience">
+              <label for="job-start-date">Data rozpoczęcia pracy</label>
+              <input
+                type="date"
+                name="job-start-date"
+                placeholder="Data początku pracy"
+              />
+            </div>
+
+            <div class="form-item form-item-experience">
+              <label for="job-end-date">Data zakończenia pracy</label>
+              <input
+                type="date"
+                name="job-end-date"
+                placeholder="Data zakończenia pracy"
+              />
+            </div>
+
+            <div class="form-item form-item-experience">
+              <label for="job-description">Krótki opis obowiązków</label>
+              <input
+                type="text"
+                name="job-description"
+                placeholder="Krótki opis obowiązków"
+              />
+            </div>
+          </form>
+          <button class="btn btn-add-new">
+            <ion-icon class="icon plus-sign" name="add-outline"></ion-icon>
+          </button>
         </div>
 
         <div class="config-section config-section-skills">
@@ -203,7 +254,30 @@
             </button>
           </div>
 
-          <form action="" method="get" class="form form-skills"></form>
+          <form action="" method="get" class="form form-skills">
+            <div class="form-item form-item-skills">
+              <label for="hard-skills">Umiejętności twarde</label>
+              <input
+                type="text"
+                name="hard-skill"
+                class="input-hard-skill"
+                placeholder="Umiejętność twarda"
+              />
+              <button class="btn btn-add-new">
+                <ion-icon class="icon plus-sign" name="add-outline"></ion-icon>
+              </button>
+            </div>
+
+            <div class="form-item form-item-skills">
+              <label for="soft-skills">Umiejętności miękkie</label>
+              <input
+                type="text"
+                name="soft-skill"
+                class="input-soft-skill"
+                placeholder="Umiejętność miękka"
+              />
+            </div>
+          </form>
         </div>
 
         <div class="config-section config-section-certificates">
@@ -221,13 +295,30 @@
             </button>
           </div>
 
-          <form action="" method="get" class="form form-certificates"></form>
+          <form action="" method="get" class="form form-certificates">
+            <div class="form-item form-item-certificates">
+              <label for="certificates">Lista certyfikatów</label>
+              <input
+                type="text"
+                name="certificate"
+                class="input-certificate"
+                placeholder="Nazwa certyfikatu"
+              />
+              <button class="btn btn-add-new">
+                <ion-icon class="icon plus-sign" name="add-outline"></ion-icon>
+              </button>
+            </div>
+          </form>
         </div>
       </div>
 
       <div class="container-preview-window">
         <div class="resume-personal-details">
-          <img class="img-user-photo" src="" alt="User photo for the resume" />
+          <img
+            class="img-user-photo"
+            src="img/frodo.webp"
+            alt="User photo for the resume"
+          />
           <h2 class="resume-name">Frodo Baggins</h2>
           <p class="resume-birthyear">2968 (wiek 51 lat na początku wyprawy)</p>
           <p class="resume-phone-number">+41 555 123 456</p>
@@ -237,7 +328,7 @@
         </div>
 
         <div class="resume-education">
-          <h3 class="resume-section-heading">Edukacja</h3>
+          <h4 class="resume-section-heading">Edukacja</h4>
           <p class="resume-university-name">
             Brak (nie ukończył formalnej uczelni)
           </p>
@@ -260,7 +351,7 @@
         </div>
 
         <div class="resume-experience">
-          <h3 class="resume-section-heading">Doświadczenie zawodowe</h3>
+          <h4 class="resume-section-heading">Doświadczenie zawodowe</h4>
           <p class="resume-company-name">Podgórskie Gospodarstwo Bagosłów</p>
           <p class="resume-position-title">Gospodarz</p>
           <p class="resume-job-start-date">
@@ -276,9 +367,9 @@
         </div>
 
         <div class="resume-skills">
-          <h3 class="resume-section-heading">Umiejętności</h3>
+          <h4 class="resume-section-heading">Umiejętności</h4>
           <div class="resume-container-hard-skills">
-            <h4 class="resume-subsection-headings">Umiejętności twarde</h4>
+            <h5 class="resume-subsection-headings">Umiejętności twarde</h5>
             <ul class="resume-list-hard-skills">
               <li class="resume-list-item-hard-skills">
                 Znajomość terenu Shire
@@ -290,7 +381,7 @@
             </ul>
           </div>
           <div class="resume-container-soft-skills">
-            <h4 class="resume-subsection-headings">Umiejętności miękkie</h4>
+            <h5 class="resume-subsection-headings">Umiejętności miękkie</h5>
             <ul class="resume-list-soft-skills">
               <li class="resume-list-item-soft-skills">Mądrość</li>
               <li class="resume-list-item-soft-skills">Odwaga</li>
@@ -304,7 +395,7 @@
         </div>
 
         <div class="resume-certificates">
-          <h3 class="resume-section-heading">Certyfikaty</h3>
+          <h4 class="resume-section-heading">Certyfikaty</h4>
           <ul class="resume-list-certificates">
             <li class="resume-list-item-certificate">
               Brak (świat Śródziemia nie jest znany z nadawania certyfikatów
