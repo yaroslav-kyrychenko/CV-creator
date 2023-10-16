@@ -46,10 +46,11 @@ html {
 }
 
 body {
-  font-family: 'Verdana', sans-serif;
+  font-family: 'Lato', 'Verdana', sans-serif;
 }
 
-input {
+input,
+select {
   font-family: inherit;
   font-size: 1.6rem;
 }
@@ -79,6 +80,10 @@ CONFIG SECTION
   font-size: 2.4rem;
 }
 
+.input-text-field {
+  width: 50%;
+}
+
 .form {
   display: flex;
   flex-direction: column;
@@ -93,3 +98,17 @@ CONFIG SECTION
 /* /////////////////////////////////////
 PREVIEW WINDOW
 //////////////////////////////////// */
+
+.resume-section-heading {
+  font-size: 2.4rem;
+  padding-bottom: 1.6rem;
+}
+
+.resume-subsection-heading {
+  font-size: 2rem;
+  padding-bottom: 1.2rem;
+}
+
+.resume-subsection-heading-soft {
+  padding-top: 1.6rem;
+}

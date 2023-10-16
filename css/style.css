@@ -38,7 +38,7 @@ Greys:
 .section-main-part {
   display: flex;
   gap: 9.6rem;
-  /* align-items: center; */
+  align-items: start;
   justify-content: space-between;
   flex-basis: auto;
 }
@@ -48,7 +48,7 @@ CONFIG SECTION
 //////////////////////////////////// */
 
 .config-container {
-  width: 63.6rem;
+  width: 35vw;
   padding: 6.4rem 0 6.4rem 6.4rem;
 
   display: flex;
@@ -62,12 +62,17 @@ PREVIEW WINDOW
 //////////////////////////////////// */
 
 .container-preview-window {
-  width: 89.6rem;
+  width: 50vw;
+  padding: 6.4rem 6.4rem 6.4rem 0;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 3.2rem;
   line-height: 2rem;
+
+  font-size: 1.6rem;
+  line-height: 3rem;
 }
 
 .img-user-photo {
