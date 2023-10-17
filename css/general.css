@@ -20,8 +20,10 @@ Large:
 
 --- 2 COLOURS
 Primary:
+#bdc3c7
 
 Tints:
+#262728
 Shades:
 Accents:
 Greys:
@@ -47,6 +49,7 @@ html {
 
 body {
   font-family: 'Lato', 'Verdana', sans-serif;
+  color: #262728;
 }
 
 input,
@@ -72,12 +75,77 @@ CONFIG SECTION
   width: 100%;
   display: flex;
   justify-content: space-between;
-  padding-bottom: 1.6rem;
+  align-items: center;
+  padding: 1.6rem 1.6rem;
   margin-bottom: 1.6rem;
+
+  background-color: #bdc3c7;
+  border: 0.1rem solid #262728;
+  border-radius: 1rem;
+}
+
+.toggle-switch {
+  position: relative;
+  width: 5.5rem;
+  height: 3rem;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ebedee;
+  transition: 0.4s;
+  border-radius: 3.4rem;
+}
+
+.slider:before {
+  position: absolute;
+  content: '';
+  height: 2.2rem;
+  width: 2.2rem;
+  left: 0.4rem;
+  bottom: 0.4rem;
+  background-color: #262728;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+.toggle-switch input:checked + .slider {
+  background-color: #262728;
+}
+
+.toggle-switch input:checked + .slider:before {
+  transform: translateX(2.5rem);
+  background-color: #ebedee;
 }
 
 .config-section-title {
+  font-size: 3rem;
+}
+
+.btn-expand {
+  height: 3rem;
+  width: 5.5rem;
+
+  background-color: #ebedee;
+  border: none;
+  border-radius: 3rem;
+  cursor: pointer;
+}
+
+.icon-chevron-down {
   font-size: 2.4rem;
+  color: #262728;
 }
 
 .input-text-field {
