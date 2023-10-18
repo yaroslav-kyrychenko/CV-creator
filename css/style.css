@@ -20,9 +20,12 @@ Large:
 
 --- 2 COLOURS
 Primary:
+#bdc3c7
 
 Tints:
+#262728
 Shades:
+#676869
 Accents:
 Greys:
 
@@ -83,6 +86,42 @@ PREVIEW WINDOW
 .resume-name {
   font-size: 3.2rem;
   padding: 2.4rem 0;
+}
+
+.resume-degree-container {
+  display: flex;
+  font-weight: 700;
+}
+
+.resume-separator-line {
+  border: 0.05rem solid;
+  margin: 0 1.6rem;
+}
+
+.resume-university-name {
+  font-weight: 700;
+}
+
+.resume-degree-duration {
+  display: flex;
+  color: #676869;
+  font-style: italic;
+}
+
+.resume-position-title {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.resume-company-name {
+  font-weight: 600;
+}
+
+.resume-job-duration {
+  display: flex;
+  color: #676869;
+  font-style: italic;
+  margin-bottom: 0.8rem;
 }
 
 .text-bottom-disclaimer {

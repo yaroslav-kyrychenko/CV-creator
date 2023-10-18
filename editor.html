@@ -167,6 +167,8 @@
                 placeholder="Rok końca studiów"
               />
             </div>
+
+            <!-- WRÓĆ DODAJ GUZIK AKTUALNIE STUDIUJĘ -->
           </form>
           <button class="btn btn-add-new">
             <ion-icon class="icon plus-sign" name="add-outline"></ion-icon>
@@ -212,7 +214,7 @@
             <div class="form-item form-item-experience">
               <label for="job-start-date">Data rozpoczęcia pracy</label>
               <input
-                type="date"
+                type="month"
                 name="job-start-date"
                 placeholder="Data początku pracy"
               />
@@ -221,7 +223,7 @@
             <div class="form-item form-item-experience">
               <label for="job-end-date">Data zakończenia pracy</label>
               <input
-                type="date"
+                type="month"
                 name="job-end-date"
                 placeholder="Data zakończenia pracy"
               />
@@ -236,6 +238,8 @@
                 placeholder="Krótki opis obowiązków"
               />
             </div>
+
+            <!-- WRÓĆ DODAJ GUZIK AKTUALNIE PRACUJĘ -->
           </form>
           <button class="btn btn-add-new">
             <ion-icon class="icon plus-sign" name="add-outline"></ion-icon>
@@ -332,37 +336,45 @@
 
         <div class="resume-education">
           <h4 class="resume-section-heading">Edukacja</h4>
+          <div class="resume-degree-container">
+            <p class="resume-education-level">
+              Podstawowe wykształcenie w Shire
+            </p>
+            <span class="resume-separator-line"></span>
+            <p class="resume-degree-name">
+              Brak (nie ukończył formalnych studiów)
+            </p>
+          </div>
           <p class="resume-university-name">
             Brak (nie ukończył formalnej uczelni)
           </p>
-          <p class="resume-education-level">
-            Podstawowe wykształcenie w Shire (Hobbity są bardziej skoncentrowani
-            na rolnictwie niż na formalnej edukacji)
-          </p>
-          <p class="resume-degree-name">
-            Brak (nie ukończył formalnych studiów)
-          </p>
+          <div class="resume-degree-duration">
+            <p class="resume-degree-start-year">
+              Brak (nie ukończył formalnych studiów)
+            </p>
+            &nbsp;-&nbsp;
+            <p class="resume-degree-end-year">
+              Brak (nie ukończył formalnych studiów)
+            </p>
+          </div>
           <p class="resume-specialisation-name">
-            Brak (nie ukończył formalnych studiów)
-          </p>
-          <p class="resume-degree-start-year">
-            Brak (nie ukończył formalnych studiów)
-          </p>
-          <p class="resume-degree-end-year">
-            Brak (nie ukończył formalnych studiów)
+            Specjalność&colon; Brak (nie ukończył formalnych studiów)
           </p>
         </div>
 
         <div class="resume-experience">
           <h4 class="resume-section-heading">Doświadczenie zawodowe</h4>
-          <p class="resume-company-name">Podgórskie Gospodarstwo Bagosłów</p>
           <p class="resume-position-title">Gospodarz</p>
-          <p class="resume-job-start-date">
-            3001 (rok, w którym odziedziczył Bag End)
-          </p>
-          <p class="resume-job-end-date">
-            3018 (rok wyjazdu z Shire w podróż do Mordoru)
-          </p>
+          <p class="resume-company-name">Podgórskie Gospodarstwo Bagosłów</p>
+          <div class="resume-job-duration">
+            <p class="resume-job-start-date">
+              3001 (rok, w którym odziedziczył Bag End)
+            </p>
+            &nbsp;-&nbsp;
+            <p class="resume-job-end-date">
+              3018 (rok wyjazdu z Shire w podróż do Mordoru)
+            </p>
+          </div>
           <p class="resume-job-description">
             Zarządzanie gospodarstwem rolniczym Bagosłów, utrzymanie domu Bag
             End.

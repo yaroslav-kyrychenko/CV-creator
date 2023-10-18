@@ -5,6 +5,9 @@ An education project aimed at developing a simple and quick-to-use resume creato
 ## Websites used for references:
 
 - https://resumebuilder.indeed.com
+- https://resume.com
+- https://builder.zety.com
+- https://livecareer.com
 
 ### Fonts used:
 
