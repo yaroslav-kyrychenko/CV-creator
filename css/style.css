@@ -4,10 +4,10 @@
 10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98
 
 - Font weights:
-Default: 
+Default: 400
 Medium: 
-Semi-bold: 
-Bold: 
+Semi-bold: 600
+Bold: 700
 
 - Font heights:
 Default: 
@@ -17,15 +17,17 @@ Paragraph default:
 Large: 
 
 - Letter spacing: 
+2rem, 3rem
 
 --- 2 COLOURS
 Primary:
 #bdc3c7
 
 Tints:
-#262728
+#aab0b3
 Shades:
 #676869
+#262728
 Accents:
 Greys:
 
@@ -37,6 +39,68 @@ Greys:
 - Spacing system (px)
 2 / 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80 / 96 / 128
 */
+
+/* /////////////////////////////////////
+START PAGE
+//////////////////////////////////// */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.list-advantage-bullet-points {
+  font-size: 2.4rem;
+  line-height: 4.8rem;
+  margin: 12.8rem 0 6.4rem 0;
+  list-style: none;
+}
+
+.link-editor,
+.link-editor:link,
+.link-editor:visited {
+  font-size: 3rem;
+  /* color: #262728; */
+  color: #3c3d3e;
+  background-color: #bdc3c7;
+  text-decoration: none;
+  padding: 2.4rem 4.8rem;
+  border-radius: 1rem;
+  box-shadow: none;
+  transition: all 0.3s;
+}
+
+@keyframes pulsate {
+  0% {
+    background-color: #bdc3c7;
+    box-shadow: none;
+  }
+
+  50% {
+    background-color: #aab0b3;
+    box-shadow: 0 0 0 8px #aab0b3;
+  }
+
+  100% {
+    background-color: #bdc3c7;
+    box-shadow: none;
+  }
+}
+
+.link-editor:hover,
+.link-editor:active {
+  background-color: #aab0b3;
+  color: #262728;
+  /* box-shadow: 0 0 0 4px #aab0b3; */
+  /* transition: all 0.4s; */
+  animation: pulsate 1.5s infinite;
+}
+
+/* /////////////////////////////////////
+RESUME CREATOR
+//////////////////////////////////// */
 
 .section-main-part {
   display: flex;
@@ -58,6 +122,7 @@ CONFIG SECTION
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  transition: all 0.6s;
 }
 
 /* /////////////////////////////////////
@@ -122,6 +187,18 @@ PREVIEW WINDOW
   color: #676869;
   font-style: italic;
   margin-bottom: 0.8rem;
+}
+
+/* /////////////////////////////////////
+BOTTOM DISCLAIMER
+//////////////////////////////////// */
+
+.text-bottom-disclaimer-start {
+  position: absolute;
+  bottom: 0%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 3.2rem 0;
 }
 
 .text-bottom-disclaimer {
