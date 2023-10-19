@@ -11,4 +11,8 @@ An education project aimed at developing a simple and quick-to-use resume creato
 
 ### Fonts used:
 
-- Verdana;
+- Lato;
+
+### Icons
+
+- https://ionic.io/ionicons
