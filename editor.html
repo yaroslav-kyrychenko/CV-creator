@@ -31,7 +31,9 @@
               ></ion-icon>
             </button>
           </div>
-          <div class="config-section-content">
+          <div
+            class="config-section-content config-section-content-personal-details hidden"
+          >
             <form action="" method="get" class="form form-personal-details">
               <div class="form-item form-item-personal-details">
                 <!-- WRÓĆ DODAJ TUTAJ ZDJĘCIE -->
@@ -110,69 +112,73 @@
             </button>
           </div>
 
-          <form action="" method="get" class="form form-education">
-            <div class="form-item form-item-education">
-              <label for="university-name">Uczelnia</label>
-              <input
-                type="text"
-                name="university-name"
-                class="input-text-field input-university-name"
-                placeholder="Nazwa uczelni"
-              />
-            </div>
+          <div
+            class="config-section-content config-section-content-education hidden"
+          >
+            <form action="" method="get" class="form form-education">
+              <div class="form-item form-item-education">
+                <label for="university-name">Uczelnia</label>
+                <input
+                  type="text"
+                  name="university-name"
+                  class="input-text-field input-university-name"
+                  placeholder="Nazwa uczelni"
+                />
+              </div>
 
-            <div class="form-item form-item-education">
-              <label for="education-level">Uzyskany tytuł</label>
-              <select class="input-education-level">
-                <option value="Licencjat">Licencjat</option>
-                <option value="Inżynier">Inżynier</option>
-                <option value="Magister">Magister</option>
-                <option value="Doktorat">Doktorat</option>
-              </select>
-            </div>
-            <div class="form-item form-item-education">
-              <label for="degree-name">Kierunek</label>
-              <input
-                type="text"
-                name="degree-name"
-                class="input-text-field input-degree-name"
-                placeholder="Nazwa kierunku"
-              />
-            </div>
-            <div class="form-item form-item-education">
-              <label for="specialisation-name">Specjalność</label>
-              <input
-                type="text"
-                name="specialisation-name"
-                class="input-text-field input-specialisation-name"
-                placeholder="Nazwa specjalności"
-              />
-            </div>
-            <!-- DOKOŃCZ TUTAJ LISTĘ DROPDOWN W JS -->
-            <div class="form-item form-item-education">
-              <label for="degree-start-year">Rok początku studiów</label>
-              <input
-                type="text"
-                name="degree-start-year"
-                class="input-text-field input-degree-start-year"
-                placeholder="Rok początku studiów"
-              />
-            </div>
-            <div class="form-item form-item-education">
-              <label for="degree-end-year">Rok końca studiów</label>
-              <input
-                type="text"
-                name="degree-end-year"
-                class="input-text-field input-degree-end-year"
-                placeholder="Rok końca studiów"
-              />
-            </div>
+              <div class="form-item form-item-education">
+                <label for="education-level">Uzyskany tytuł</label>
+                <select class="input-education-level">
+                  <option value="Licencjat">Licencjat</option>
+                  <option value="Inżynier">Inżynier</option>
+                  <option value="Magister">Magister</option>
+                  <option value="Doktorat">Doktorat</option>
+                </select>
+              </div>
+              <div class="form-item form-item-education">
+                <label for="degree-name">Kierunek</label>
+                <input
+                  type="text"
+                  name="degree-name"
+                  class="input-text-field input-degree-name"
+                  placeholder="Nazwa kierunku"
+                />
+              </div>
+              <div class="form-item form-item-education">
+                <label for="specialisation-name">Specjalność</label>
+                <input
+                  type="text"
+                  name="specialisation-name"
+                  class="input-text-field input-specialisation-name"
+                  placeholder="Nazwa specjalności"
+                />
+              </div>
+              <!-- DOKOŃCZ TUTAJ LISTĘ DROPDOWN W JS -->
+              <div class="form-item form-item-education">
+                <label for="degree-start-year">Rok początku studiów</label>
+                <input
+                  type="text"
+                  name="degree-start-year"
+                  class="input-text-field input-degree-start-year"
+                  placeholder="Rok początku studiów"
+                />
+              </div>
+              <div class="form-item form-item-education">
+                <label for="degree-end-year">Rok końca studiów</label>
+                <input
+                  type="text"
+                  name="degree-end-year"
+                  class="input-text-field input-degree-end-year"
+                  placeholder="Rok końca studiów"
+                />
+              </div>
 
-            <!-- WRÓĆ DODAJ GUZIK AKTUALNIE STUDIUJĘ -->
-          </form>
-          <button class="btn btn-add-new">
-            <ion-icon class="icon plus-sign" name="add-outline"></ion-icon>
-          </button>
+              <!-- WRÓĆ DODAJ GUZIK AKTUALNIE STUDIUJĘ -->
+            </form>
+            <button class="btn btn-add-new">
+              <ion-icon class="icon plus-sign" name="add-outline"></ion-icon>
+            </button>
+          </div>
         </div>
 
         <div class="config-section config-section-experience">
@@ -190,60 +196,64 @@
             </button>
           </div>
 
-          <form action="" method="get" class="form form-experience">
-            <div class="form-item form-item-experience">
-              <label for="company-name">Przedsiębiorstwo</label>
-              <input
-                type="text"
-                name="company-name"
-                class="input-text-field input-company-name"
-                placeholder="Nazwa przedsiębiorstwa"
-              />
-            </div>
+          <div
+            class="config-section-content config-section-content-experience hidden"
+          >
+            <form action="" method="get" class="form form-experience">
+              <div class="form-item form-item-experience">
+                <label for="company-name">Przedsiębiorstwo</label>
+                <input
+                  type="text"
+                  name="company-name"
+                  class="input-text-field input-company-name"
+                  placeholder="Nazwa przedsiębiorstwa"
+                />
+              </div>
 
-            <div class="form-item form-item-experience">
-              <label for="position-title">Stanowisko</label>
-              <input
-                type="text"
-                name="position-title"
-                class="input-text-field input-position-title"
-                placeholder="Nazwa stanowiska"
-              />
-            </div>
+              <div class="form-item form-item-experience">
+                <label for="position-title">Stanowisko</label>
+                <input
+                  type="text"
+                  name="position-title"
+                  class="input-text-field input-position-title"
+                  placeholder="Nazwa stanowiska"
+                />
+              </div>
 
-            <div class="form-item form-item-experience">
-              <label for="job-start-date">Data rozpoczęcia pracy</label>
-              <input
-                type="month"
-                name="job-start-date"
-                placeholder="Data początku pracy"
-              />
-            </div>
+              <div class="form-item form-item-experience">
+                <label for="job-start-date">Data rozpoczęcia pracy</label>
+                <input
+                  type="month"
+                  name="job-start-date"
+                  placeholder="Data początku pracy"
+                />
+              </div>
 
-            <div class="form-item form-item-experience">
-              <label for="job-end-date">Data zakończenia pracy</label>
-              <input
-                type="month"
-                name="job-end-date"
-                placeholder="Data zakończenia pracy"
-              />
-            </div>
+              <div class="form-item form-item-experience">
+                <label for="job-end-date">Data zakończenia pracy</label>
+                <input
+                  type="month"
+                  name="job-end-date"
+                  placeholder="Data zakończenia pracy"
+                />
+              </div>
 
-            <div class="form-item form-item-experience">
-              <label for="job-description">Krótki opis obowiązków</label>
-              <input
-                type="text"
-                name="job-description"
-                class="input-text-field input-job-description"
-                placeholder="Krótki opis obowiązków"
-              />
-            </div>
+              <div class="form-item form-item-experience">
+                <label for="job-description">Krótki opis obowiązków</label>
+                <input
+                  type="text"
+                  name="job-description"
+                  class="input-text-field input-job-description"
+                  placeholder="Krótki opis obowiązków"
+                />
+              </div>
 
-            <!-- WRÓĆ DODAJ GUZIK AKTUALNIE PRACUJĘ -->
-          </form>
-          <button class="btn btn-add-new">
-            <ion-icon class="icon plus-sign" name="add-outline"></ion-icon>
-          </button>
+              <!-- WRÓĆ DODAJ GUZIK AKTUALNIE PRACUJĘ -->
+            </form>
+            <button class="btn btn-add-new">
+              <ion-icon class="icon plus-sign" name="add-outline"></ion-icon>
+            </button>
+          </div>
         </div>
 
         <div class="config-section config-section-skills">
@@ -261,32 +271,38 @@
             </button>
           </div>
 
-          <form action="" method="get" class="form form-skills">
-            <div class="form-item form-item-skills">
-              <label for="hard-skills">Umiejętności twarde</label>
-              <input
-                type="text"
-                name="hard-skill"
-                class="input-hard-skill"
-                placeholder="Umiejętność twarda"
-              />
-              <button class="btn btn-add-new">
-                <ion-icon class="icon plus-sign" name="add-outline"></ion-icon>
-              </button>
-            </div>
+          <div
+            class="config-section-content config-section-content-skills hidden"
+          >
+            <form action="" method="get" class="form form-skills">
+              <div class="form-item form-item-skills">
+                <label for="hard-skills">Umiejętności twarde</label>
+                <input
+                  type="text"
+                  name="hard-skill"
+                  class="input-hard-skill"
+                  placeholder="Umiejętność twarda"
+                />
+                <button class="btn btn-add-new">
+                  <ion-icon
+                    class="icon plus-sign"
+                    name="add-outline"
+                  ></ion-icon>
+                </button>
+              </div>
 
-            <div class="form-item form-item-skills">
-              <label for="soft-skills">Umiejętności miękkie</label>
-              <input
-                type="text"
-                name="soft-skill"
-                class="input-soft-skill"
-                placeholder="Umiejętność miękka"
-              />
-            </div>
-          </form>
+              <div class="form-item form-item-skills">
+                <label for="soft-skills">Umiejętności miękkie</label>
+                <input
+                  type="text"
+                  name="soft-skill"
+                  class="input-soft-skill"
+                  placeholder="Umiejętność miękka"
+                />
+              </div>
+            </form>
+          </div>
         </div>
-
         <div class="config-section config-section-certificates">
           <div class="config-section-header config-section-header-skills">
             <label class="btn toggle-switch">
@@ -302,20 +318,27 @@
             </button>
           </div>
 
-          <form action="" method="get" class="form form-certificates">
-            <div class="form-item form-item-certificates">
-              <label for="certificates">Lista certyfikatów</label>
-              <input
-                type="text"
-                name="certificate"
-                class="input-certificate"
-                placeholder="Nazwa certyfikatu"
-              />
-              <button class="btn btn-add-new">
-                <ion-icon class="icon plus-sign" name="add-outline"></ion-icon>
-              </button>
-            </div>
-          </form>
+          <div
+            class="config-section-content config-section-content-certificates hidden"
+          >
+            <form action="" method="get" class="form form-certificates">
+              <div class="form-item form-item-certificates">
+                <label for="certificates">Lista certyfikatów</label>
+                <input
+                  type="text"
+                  name="certificate"
+                  class="input-certificate"
+                  placeholder="Nazwa certyfikatu"
+                />
+                <button class="btn btn-add-new">
+                  <ion-icon
+                    class="icon plus-sign"
+                    name="add-outline"
+                  ></ion-icon>
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
 
@@ -432,6 +455,7 @@
       </p>
     </footer>
 
+    <script src="js/main.js"></script>
     <script
       type="module"
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"

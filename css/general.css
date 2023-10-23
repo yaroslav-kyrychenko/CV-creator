@@ -56,6 +56,7 @@ input,
 select {
   font-family: inherit;
   font-size: 1.6rem;
+  padding: 0.5rem 0.5rem;
 }
 
 label {
@@ -163,10 +164,25 @@ CONFIG SECTION
   justify-content: space-between;
 }
 
+.hidden {
+  max-height: 0;
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transition: all 0.5s;
+}
+
+.config-section-content:not(.hidden) {
+  max-height: 100rem;
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+  transition: all 0.5s ease-in-out;
+}
+
 /* /////////////////////////////////////
 PREVIEW WINDOW
 //////////////////////////////////// */
-
 .resume-section-heading {
   font-size: 2.4rem;
   padding-bottom: 1.6rem;
