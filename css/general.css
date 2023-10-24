@@ -23,8 +23,10 @@ Primary:
 #bdc3c7
 
 Tints:
-#262728
+#aab0b3
 Shades:
+#676869
+#262728
 Accents:
 Greys:
 
@@ -195,4 +197,28 @@ PREVIEW WINDOW
 
 .resume-subsection-heading-soft {
   padding-top: 1.6rem;
+}
+
+@keyframes activeElementAnimation {
+  0% {
+    color: #262728;
+    transform: scale(1);
+    transform-origin: left;
+  }
+
+  50% {
+    color: #676869;
+    transform: scale(1.07);
+    transform-origin: left;
+  }
+
+  100% {
+    color: #262728;
+    transform: scale(1);
+    transform-origin: left;
+  }
+}
+
+.active-resume-element {
+  animation: activeElementAnimation 2s infinite;
 }
