@@ -38,10 +38,11 @@
               <div class="form-item form-item-personal-details">
                 <!-- WRÓĆ DODAJ TUTAJ ZDJĘCIE -->
                 <label for="name">Imię i nazwisko</label>
+                <!-- WRÓĆ CZY input-text-field jest potrzebne -->
                 <input
                   type="text"
                   name="name"
-                  class="input-text-field input-name"
+                  class="input-element input-text-field input-name"
                   placeholder="Imię i nazwisko"
                 />
               </div>
@@ -51,7 +52,7 @@
                 <input
                   type="text"
                   name="birthyear"
-                  class="input-text-field input-birthyear"
+                  class="input-element input-text-field input-birthyear"
                   placeholder="Rok urodzenia"
                 />
               </div>
@@ -61,7 +62,7 @@
                 <input
                   type="tel"
                   name="phone-number"
-                  class="input-text-field input-phone-number"
+                  class="input-element input-text-field input-phone-number"
                   placeholder="Nr telefonu"
                 />
               </div>
@@ -71,7 +72,7 @@
                 <input
                   type="email"
                   name="email"
-                  class="input-text-field input-email"
+                  class="input-element input-text-field input-email"
                   placeholder="Email"
                 />
               </div>
@@ -83,7 +84,7 @@
                 <input
                   type="url"
                   name="social-media-links"
-                  class="input-text-field input-social-media-links"
+                  class="input-element input-text-field input-social-media-links"
                   placeholder="Linki do portali społecznościowych"
                 />
                 <button class="btn btn-add-new">
@@ -121,14 +122,14 @@
                 <input
                   type="text"
                   name="university-name"
-                  class="input-text-field input-university-name"
+                  class="input-element input-text-field input-university-name"
                   placeholder="Nazwa uczelni"
                 />
               </div>
 
               <div class="form-item form-item-education">
                 <label for="education-level">Uzyskany tytuł</label>
-                <select class="input-education-level">
+                <select class="input-element input-education-level">
                   <option value="Licencjat">Licencjat</option>
                   <option value="Inżynier">Inżynier</option>
                   <option value="Magister">Magister</option>
@@ -140,7 +141,7 @@
                 <input
                   type="text"
                   name="degree-name"
-                  class="input-text-field input-degree-name"
+                  class="input-element input-text-field input-degree-name"
                   placeholder="Nazwa kierunku"
                 />
               </div>
@@ -149,7 +150,7 @@
                 <input
                   type="text"
                   name="specialisation-name"
-                  class="input-text-field input-specialisation-name"
+                  class="input-element input-text-field input-specialisation-name"
                   placeholder="Nazwa specjalności"
                 />
               </div>
@@ -159,7 +160,7 @@
                 <input
                   type="text"
                   name="degree-start-year"
-                  class="input-text-field input-degree-start-year"
+                  class="input-element input-text-field input-degree-start-year"
                   placeholder="Rok początku studiów"
                 />
               </div>
@@ -168,7 +169,7 @@
                 <input
                   type="text"
                   name="degree-end-year"
-                  class="input-text-field input-degree-end-year"
+                  class="input-element input-text-field input-degree-end-year"
                   placeholder="Rok końca studiów"
                 />
               </div>
@@ -205,7 +206,7 @@
                 <input
                   type="text"
                   name="company-name"
-                  class="input-text-field input-company-name"
+                  class="input-element input-text-field input-company-name"
                   placeholder="Nazwa przedsiębiorstwa"
                 />
               </div>
@@ -215,7 +216,7 @@
                 <input
                   type="text"
                   name="position-title"
-                  class="input-text-field input-position-title"
+                  class="input-element input-text-field input-position-title"
                   placeholder="Nazwa stanowiska"
                 />
               </div>
@@ -225,6 +226,7 @@
                 <input
                   type="month"
                   name="job-start-date"
+                  class="input-element input-job-start-date"
                   placeholder="Data początku pracy"
                 />
               </div>
@@ -234,6 +236,7 @@
                 <input
                   type="month"
                   name="job-end-date"
+                  class="input-element input-job-end-date"
                   placeholder="Data zakończenia pracy"
                 />
               </div>
@@ -243,7 +246,7 @@
                 <input
                   type="text"
                   name="job-description"
-                  class="input-text-field input-job-description"
+                  class="input-element input-text-field input-job-description"
                   placeholder="Krótki opis obowiązków"
                 />
               </div>
@@ -280,7 +283,7 @@
                 <input
                   type="text"
                   name="hard-skill"
-                  class="input-hard-skill"
+                  class="input-element input-hard-skill"
                   placeholder="Umiejętność twarda"
                 />
                 <button class="btn btn-add-new">
@@ -296,7 +299,7 @@
                 <input
                   type="text"
                   name="soft-skill"
-                  class="input-soft-skill"
+                  class="input-element input-soft-skill"
                   placeholder="Umiejętność miękka"
                 />
               </div>
@@ -327,7 +330,7 @@
                 <input
                   type="text"
                   name="certificate"
-                  class="input-certificate"
+                  class="input-element input-certificate"
                   placeholder="Nazwa certyfikatu"
                 />
                 <button class="btn btn-add-new">
@@ -352,6 +355,7 @@
           <h2 class="resume-name">Frodo Baggins</h2>
           <p class="resume-birthyear">2968 (wiek 51 lat na początku wyprawy)</p>
           <p class="resume-phone-number">+41 555 123 456</p>
+          <p class="resume-email">frodo.baggins@mordor.com</p>
           <a href="#" class="resume-social-media-links"
             >Brak (świat Śródziemia nie korzysta z mediów społecznościowych)</a
           >
