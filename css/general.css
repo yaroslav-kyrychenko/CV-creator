@@ -164,6 +164,7 @@ CONFIG SECTION
 .form-item {
   display: flex;
   justify-content: space-between;
+  position: relative;
 }
 
 .hidden {

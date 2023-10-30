@@ -36,25 +36,24 @@ btnListExpand.forEach((btnExpand) => {
   });
 });
 
-// WRÓĆ DO PRZEROBIEN3IA NA NOWY ALGORYTM
-inputName.addEventListener('focusin', () => {
-  resumeName.classList.add('active-resume-element');
-});
-
-inputName.addEventListener('focusout', () => {
-  resumeName.classList.remove('active-resume-element');
-});
-
 const listenForChangeInResumeText = function (
   inputHTMLElement,
   resumeHTMLElement
 ) {
+  inputHTMLElement.addEventListener('focusin', () => {
+    resumeHTMLElement.classList.add('active-resume-element');
+  });
+
   inputHTMLElement.addEventListener('input', () =>
     debouncedUpdateResumeTextHandler(inputHTMLElement, resumeHTMLElement)
   );
 
   inputHTMLElement.addEventListener('change', () => {
     updateResumeText(inputHTMLElement, resumeHTMLElement);
+  });
+
+  inputHTMLElement.addEventListener('focusout', () => {
+    resumeHTMLElement.classList.remove('active-resume-element');
   });
 };
 
@@ -83,7 +82,7 @@ const updateResumeText = function (inputHTMLElement, resumeHTMLElement) {
   }
 };
 
-const debouncedUpdateResumeTextHandler = debounce(updateResumeText, 100);
+const debouncedUpdateResumeTextHandler = debounce(updateResumeText, 400);
 
 const getFormattedDate = function (stringDate) {
   const [year, month] = stringDate.split('-');

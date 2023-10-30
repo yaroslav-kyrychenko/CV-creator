@@ -125,6 +125,36 @@ CONFIG SECTION
   transition: all 0.6s;
 }
 
+.btn-add-new-link,
+.btn-add-new-education,
+.btn-add-new-job,
+.btn-add-new-hard-skill,
+.btn-add-new-soft-skill,
+.btn-add-new-certificate {
+  height: 3.3rem;
+  width: 3.3rem;
+  font-size: 1.6rem;
+  position: absolute;
+}
+
+.btn-add-new-link,
+.btn-add-new-hard-skill,
+.btn-add-new-soft-skill,
+.btn-add-new-certificate {
+  top: 0;
+  right: -4rem;
+}
+
+.config-section-content-education,
+.config-section-content-experience {
+  position: relative;
+}
+
+.btn-add-new-education,
+.btn-add-new-job {
+  bottom: 0;
+  right: -4rem;
+}
 /* /////////////////////////////////////
 PREVIEW WINDOW
 //////////////////////////////////// */
