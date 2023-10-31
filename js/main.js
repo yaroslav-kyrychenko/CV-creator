@@ -1,11 +1,20 @@
 'use strict';
 
-const btnListExpand = document.querySelectorAll('.btn-expand');
+const listBtnExpand = document.querySelectorAll('.btn-expand');
+const listToggleSwitches = document.querySelectorAll('.toggle-switch');
 
 const inputName = document.querySelector('.input-name');
 const resumeName = document.querySelector('.resume-name');
 
-const inputResumeMapping = {
+const sectionsMapping = {
+  'config-section-personal-details': 'resume-personal-details',
+  'config-section-education': 'resume-education',
+  'config-section-experience': 'resume-experience',
+  'config-section-skills': 'resume-skills',
+  'config-section-certificates': 'resume-certificates',
+};
+
+const subsectionsMapping = {
   'input-name': 'resume-name',
   'input-birthyear': 'resume-birthyear',
   'input-phone-number': 'resume-phone-number',
@@ -28,7 +37,7 @@ const inputResumeMapping = {
   'input-certificate': 'resume-list-item-certificate',
 };
 
-btnListExpand.forEach((btnExpand) => {
+listBtnExpand.forEach((btnExpand) => {
   btnExpand.addEventListener('click', () => {
     const sectionConfigHeaderEl = btnExpand.parentElement;
     const sectionConfigContentsEl = sectionConfigHeaderEl.nextElementSibling;
@@ -93,14 +102,22 @@ const getFormattedDate = function (stringDate) {
 const listInputElements = document.querySelectorAll('.input-element');
 listInputElements.forEach((inputElement) => {
   const inputClasslist = inputElement.classList;
-  for (const inputItem in inputResumeMapping) {
+  for (const inputItem in subsectionsMapping) {
     if (inputClasslist.contains(inputItem)) {
       const inputHTMLElement = document.querySelector(`.${inputItem}`);
       const resumeHTMLElement = document.querySelector(
-        `.${inputResumeMapping[inputItem]}`
+        `.${subsectionsMapping[inputItem]}`
       );
       listenForChangeInResumeText(inputHTMLElement, resumeHTMLElement);
       break;
     }
   }
+});
+
+console.log(listToggleSwitches);
+
+listToggleSwitches.forEach((toggleSwitch) => {
+  toggleSwitch.addEventListener('click', () => {
+    console.log(toggleSwitch);
+  });
 });
