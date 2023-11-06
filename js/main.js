@@ -1,7 +1,9 @@
 'use strict';
 
 const listBtnExpand = document.querySelectorAll('.btn-expand');
-const listToggleSwitches = document.querySelectorAll('.toggle-switch');
+const listToggleSwitchCheckboxes = document.querySelectorAll(
+  '.toggle-switch-checkbox'
+);
 
 const inputName = document.querySelector('.input-name');
 const resumeName = document.querySelector('.resume-name');
@@ -114,10 +116,49 @@ listInputElements.forEach((inputElement) => {
   }
 });
 
-console.log(listToggleSwitches);
-
-listToggleSwitches.forEach((toggleSwitch) => {
-  toggleSwitch.addEventListener('click', () => {
-    console.log(toggleSwitch);
+listToggleSwitchCheckboxes.forEach((toggleSwitchCheckbox) => {
+  toggleSwitchCheckbox.addEventListener('click', () => {
+    const switchedSectionHeaderEl =
+      toggleSwitchCheckbox.parentElement.parentElement.parentElement;
+    for (const sectionName in sectionsMapping) {
+      if (switchedSectionHeaderEl.classList.contains(sectionName)) {
+        const resumeSection = document.querySelector(
+          `.${sectionsMapping[sectionName]}`
+        );
+        resumeSection.classList.toggle('hidden');
+      }
+    }
+    // const sectionConfigContentsEl =
+    //   toggleSwitchCheckbox.parentElement.parentElement.nextElementSibling;
+    // if (
+    //   toggleSwitchCheckbox.checked &&
+    //   sectionConfigContentsEl.classList.contains('hidden')
+    // ) {
+    //   sectionConfigContentsEl.classList.toggle('hidden');
+    // }
+    // if (
+    //   !toggleSwitchCheckbox.checked &&
+    //   !sectionConfigContentsEl.classList.contains('hidden')
+    // ) {
+    //   sectionConfigContentsEl.classList.toggle('hidden');
+    // }
+    toggleSwitchSectionVisibilityHandler(toggleSwitchCheckbox);
   });
 });
+
+const toggleSwitchSectionVisibilityHandler = function (toggleSwitchCheckbox) {
+  const sectionConfigContentsEl =
+    toggleSwitchCheckbox.parentElement.parentElement.nextElementSibling;
+  if (
+    toggleSwitchCheckbox.checked &&
+    sectionConfigContentsEl.classList.contains('hidden')
+  ) {
+    sectionConfigContentsEl.classList.toggle('hidden');
+  }
+  if (
+    !toggleSwitchCheckbox.checked &&
+    !sectionConfigContentsEl.classList.contains('hidden')
+  ) {
+    sectionConfigContentsEl.classList.toggle('hidden');
+  }
+};

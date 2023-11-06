@@ -175,13 +175,19 @@ CONFIG SECTION
   transition: all 0.5s;
 }
 
-.config-section-content:not(.hidden) {
-  max-height: 100rem;
+.config-section-content:not(.hidden),
+.resume-section:not(.hidden) {
+  max-height: 500rem;
   opacity: 1;
   pointer-events: auto;
   visibility: visible;
   transition: all 0.5s ease-in-out;
 }
+
+/* .resume-section:not(.hidden) {
+  opacity: 1;
+  pointer-events: auto;
+} */
 
 /* /////////////////////////////////////
 PREVIEW WINDOW
