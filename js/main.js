@@ -39,14 +39,6 @@ const subsectionsMapping = {
   'input-certificate': 'resume-list-item-certificate',
 };
 
-listBtnExpand.forEach((btnExpand) => {
-  btnExpand.addEventListener('click', () => {
-    const sectionConfigHeaderEl = btnExpand.parentElement;
-    const sectionConfigContentsEl = sectionConfigHeaderEl.nextElementSibling;
-    sectionConfigContentsEl.classList.toggle('hidden');
-  });
-});
-
 const listenForChangeInResumeText = function (
   inputHTMLElement,
   resumeHTMLElement
@@ -55,9 +47,9 @@ const listenForChangeInResumeText = function (
     resumeHTMLElement.classList.add('active-resume-element');
   });
 
-  inputHTMLElement.addEventListener('input', () =>
-    debouncedUpdateResumeTextHandler(inputHTMLElement, resumeHTMLElement)
-  );
+  inputHTMLElement.addEventListener('input', () => {
+    debouncedUpdateResumeTextHandler(inputHTMLElement, resumeHTMLElement);
+  });
 
   inputHTMLElement.addEventListener('change', () => {
     updateResumeText(inputHTMLElement, resumeHTMLElement);
@@ -87,6 +79,7 @@ const updateResumeText = function (inputHTMLElement, resumeHTMLElement) {
   } else if (
     resumeHTMLElement.classList.contains('resume-specialisation-name')
   ) {
+    // WRÓĆ DODAĆ TU WARUNEK DLA DATY URODZENIA
     resumeHTMLElement.textContent = `Specjalność: ${inputHTMLElement.value}`;
   } else {
     resumeHTMLElement.textContent = inputHTMLElement.value;
@@ -96,6 +89,7 @@ const updateResumeText = function (inputHTMLElement, resumeHTMLElement) {
 const debouncedUpdateResumeTextHandler = debounce(updateResumeText, 400);
 
 const getFormattedDate = function (stringDate) {
+  // WRÓĆ TU DODAĆ REGEXA I SFORMATOWAĆ DATĘ NA PODSTAWIE TEGO CZY JEST TYLKO MIESIĄC CZY PEŁNA DATA
   const [year, month] = stringDate.split('-');
   const formattedDate = `${month}/${year}`;
   return formattedDate;
@@ -116,36 +110,6 @@ listInputElements.forEach((inputElement) => {
   }
 });
 
-listToggleSwitchCheckboxes.forEach((toggleSwitchCheckbox) => {
-  toggleSwitchCheckbox.addEventListener('click', () => {
-    const switchedSectionHeaderEl =
-      toggleSwitchCheckbox.parentElement.parentElement.parentElement;
-    for (const sectionName in sectionsMapping) {
-      if (switchedSectionHeaderEl.classList.contains(sectionName)) {
-        const resumeSection = document.querySelector(
-          `.${sectionsMapping[sectionName]}`
-        );
-        resumeSection.classList.toggle('hidden');
-      }
-    }
-    // const sectionConfigContentsEl =
-    //   toggleSwitchCheckbox.parentElement.parentElement.nextElementSibling;
-    // if (
-    //   toggleSwitchCheckbox.checked &&
-    //   sectionConfigContentsEl.classList.contains('hidden')
-    // ) {
-    //   sectionConfigContentsEl.classList.toggle('hidden');
-    // }
-    // if (
-    //   !toggleSwitchCheckbox.checked &&
-    //   !sectionConfigContentsEl.classList.contains('hidden')
-    // ) {
-    //   sectionConfigContentsEl.classList.toggle('hidden');
-    // }
-    toggleSwitchSectionVisibilityHandler(toggleSwitchCheckbox);
-  });
-});
-
 const toggleSwitchSectionVisibilityHandler = function (toggleSwitchCheckbox) {
   const sectionConfigContentsEl =
     toggleSwitchCheckbox.parentElement.parentElement.nextElementSibling;
@@ -162,3 +126,72 @@ const toggleSwitchSectionVisibilityHandler = function (toggleSwitchCheckbox) {
     sectionConfigContentsEl.classList.toggle('hidden');
   }
 };
+
+const yearsSelectHandler = function () {
+  const inputDegreeStartYear = document.querySelector(
+    '.input-degree-start-year'
+  );
+  const inputDegreeEndYear = document.querySelector('.input-degree-end-year');
+
+  const currentYear = new Date().getFullYear();
+  const maxYearsInThePast = 100;
+
+  for (let i = currentYear; i >= currentYear - maxYearsInThePast; i--) {
+    const yearOption = document.createElement('option');
+    yearOption.value = i;
+    yearOption.text = i;
+    inputDegreeStartYear.appendChild(yearOption.cloneNode(true));
+    inputDegreeEndYear.appendChild(yearOption.cloneNode(true));
+  }
+  inputDegreeStartYear.addEventListener('input', () => {
+    validateDegreeYears(inputDegreeStartYear, inputDegreeEndYear);
+  });
+  inputDegreeEndYear.addEventListener('input', () => {
+    validateDegreeYears(inputDegreeStartYear, inputDegreeEndYear);
+  });
+};
+
+const validateDegreeYears = function (
+  inputDegreeStartYear,
+  inputDegreeEndYear
+) {
+  const startYearValue = inputDegreeStartYear.value;
+  const endYearValue = inputDegreeEndYear.value;
+
+  if (startYearValue > endYearValue) {
+    inputDegreeStartYear.classList.add('invalid-year-alert');
+    alert('Rok początku studiów nie powinien przekraczać roku ich końca!');
+  }
+  if (
+    startYearValue <= endYearValue &&
+    inputDegreeStartYear.classList.contains('invalid-year-alert')
+  ) {
+    inputDegreeStartYear.classList.remove('invalid-year-alert');
+  }
+};
+
+listBtnExpand.forEach((btnExpand) => {
+  btnExpand.addEventListener('click', () => {
+    const sectionConfigHeaderEl = btnExpand.parentElement;
+    const sectionConfigContentsEl = sectionConfigHeaderEl.nextElementSibling;
+    sectionConfigContentsEl.classList.toggle('hidden');
+  });
+});
+
+listToggleSwitchCheckboxes.forEach((toggleSwitchCheckbox) => {
+  toggleSwitchCheckbox.addEventListener('click', () => {
+    const switchedSectionHeaderEl =
+      toggleSwitchCheckbox.parentElement.parentElement.parentElement;
+    for (const sectionName in sectionsMapping) {
+      if (switchedSectionHeaderEl.classList.contains(sectionName)) {
+        const resumeSection = document.querySelector(
+          `.${sectionsMapping[sectionName]}`
+        );
+        resumeSection.classList.toggle('hidden');
+      }
+    }
+    toggleSwitchSectionVisibilityHandler(toggleSwitchCheckbox);
+  });
+});
+
+yearsSelectHandler();

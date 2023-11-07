@@ -21,6 +21,7 @@ Large:
 --- 2 COLOURS
 Primary:
 #bdc3c7
+#ff7675 - ALERT
 
 Tints:
 #aab0b3
@@ -228,4 +229,21 @@ PREVIEW WINDOW
 
 .active-resume-element {
   animation: activeElementAnimation 2s infinite;
+}
+
+@keyframes invalidYearAnimation {
+  0% {
+    background-color: #fff;
+  }
+  50% {
+    background-color: #ff7675;
+  }
+  100% {
+    background-color: #fff;
+  }
+}
+
+.invalid-year-alert {
+  background-color: #fff;
+  animation: invalidYearAnimation 2s infinite;
 }
