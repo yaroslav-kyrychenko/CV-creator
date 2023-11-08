@@ -18,7 +18,7 @@ const sectionsMapping = {
 
 const subsectionsMapping = {
   'input-name': 'resume-name',
-  'input-birthyear': 'resume-birthyear',
+  'input-birthdate': 'resume-birthdate',
   'input-phone-number': 'resume-phone-number',
   'input-email': 'resume-email',
   'input-social-media-links': 'resume-social-media-links',
@@ -75,12 +75,18 @@ const debounce = function (functionDebounced, delayInMilliseconds) {
 
 const updateResumeText = function (inputHTMLElement, resumeHTMLElement) {
   if (inputHTMLElement.getAttribute('type') === 'month') {
-    resumeHTMLElement.textContent = getFormattedDate(inputHTMLElement.value);
-  } else if (
-    resumeHTMLElement.classList.contains('resume-specialisation-name')
-  ) {
-    // WRÓĆ DODAĆ TU WARUNEK DLA DATY URODZENIA
+    resumeHTMLElement.textContent = getFormattedDate(
+      inputHTMLElement.value,
+      'month'
+    );
+  } else if (inputHTMLElement.classList.contains('input-specialisation-name')) {
     resumeHTMLElement.textContent = `Specjalność: ${inputHTMLElement.value}`;
+  } else if (inputHTMLElement.classList.contains('input-birthdate')) {
+    const currentAge = calculateCurrentAge(inputHTMLElement);
+    resumeHTMLElement.textContent = `${getFormattedDate(
+      inputHTMLElement.value,
+      'fullDate'
+    )} (${currentAge})`;
   } else {
     resumeHTMLElement.textContent = inputHTMLElement.value;
   }
@@ -88,11 +94,17 @@ const updateResumeText = function (inputHTMLElement, resumeHTMLElement) {
 
 const debouncedUpdateResumeTextHandler = debounce(updateResumeText, 400);
 
-const getFormattedDate = function (stringDate) {
-  // WRÓĆ TU DODAĆ REGEXA I SFORMATOWAĆ DATĘ NA PODSTAWIE TEGO CZY JEST TYLKO MIESIĄC CZY PEŁNA DATA
-  const [year, month] = stringDate.split('-');
-  const formattedDate = `${month}/${year}`;
-  return formattedDate;
+const getFormattedDate = function (stringDate, type) {
+  if (type === 'fullDate') {
+    const [year, month, day] = stringDate.split('-');
+    const formattedDate = `${day}/${month}/${year}`;
+    return formattedDate;
+  }
+  if (type === 'month') {
+    const [year, month] = stringDate.split('-');
+    const formattedDate = `${month}/${year}`;
+    return formattedDate;
+  }
 };
 
 const listInputElements = document.querySelectorAll('.input-element');
@@ -168,6 +180,28 @@ const validateDegreeYears = function (
   ) {
     inputDegreeStartYear.classList.remove('invalid-year-alert');
   }
+};
+
+const calculateCurrentAge = function (inputBirthdate) {
+  const currentDate = new Date();
+  const birthDate = new Date(inputBirthdate.value);
+
+  const currentAgeInMilliseconds = currentDate - birthDate;
+  const currentAgeInYears = Math.floor(
+    currentAgeInMilliseconds / (365 * 24 * 60 * 60 * 1000)
+  );
+  const currentAgeLastDigit = String(currentAgeInYears).at(-1);
+  let formattedAgeString;
+  if (
+    currentAgeLastDigit >= 2 &&
+    currentAgeLastDigit <= 4 &&
+    (currentAgeInYears < 12 || currentAgeInYears > 14)
+  ) {
+    formattedAgeString = `${currentAgeInYears} lata`;
+  } else {
+    formattedAgeString = `${currentAgeInYears} lat`;
+  }
+  if (currentAgeInYears) return formattedAgeString;
 };
 
 listBtnExpand.forEach((btnExpand) => {
