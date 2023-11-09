@@ -187,6 +187,14 @@ PREVIEW WINDOW
   padding: 2.4rem 0;
 }
 
+.resume-social-media-links,
+.resume-social-media-links:active,
+.resume-social-media-links:hover,
+.resume-social-media-links:visited {
+  text-decoration: none;
+  display: inline-block;
+}
+
 .resume-degree-container {
   display: flex;
   font-weight: 700;

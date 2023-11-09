@@ -38,7 +38,6 @@
               <div class="form-item form-item-personal-details">
                 <!-- WRÓĆ DODAJ TUTAJ ZDJĘCIE -->
                 <label for="name">Imię i nazwisko</label>
-                <!-- WRÓĆ CZY input-text-field jest potrzebne -->
                 <input
                   type="text"
                   name="name"
@@ -154,7 +153,6 @@
                   placeholder="Nazwa specjalności"
                 />
               </div>
-              <!-- DOKOŃCZ TUTAJ LISTĘ DROPDOWN W JS -->
               <div class="form-item form-item-education">
                 <label for="degree-start-year">Rok początku studiów</label>
                 <select
@@ -169,8 +167,17 @@
                   name="degree-end-year"
                 ></select>
               </div>
-
-              <!-- WRÓĆ DODAJ GUZIK AKTUALNIE STUDIUJĘ -->
+              <div class="form-item form-item-education">
+                <label for="degree-currently-studying"
+                  >Aktualnie tu studiuję</label
+                >
+                <input
+                  type="checkbox"
+                  name="degree-currently-studying"
+                  class="input-element input-degree-currently-studying"
+                  value="Aktualnie"
+                />
+              </div>
             </form>
             <button class="btn btn-add-new btn-add-new-education">
               <ion-icon class="icon plus-sign" name="add-outline"></ion-icon>
@@ -234,6 +241,16 @@
                   name="job-end-date"
                   class="input-element input-job-end-date"
                   placeholder="Data zakończenia pracy"
+                />
+              </div>
+
+              <div class="form-item form-item-experience">
+                <label for="job-currently-working">Pracuję tu aktualnie</label>
+                <input
+                  type="checkbox"
+                  name="job-currently-working"
+                  class="input-element input-job-currently-working"
+                  value="Aktualnie"
                 />
               </div>
 
@@ -359,7 +376,6 @@
           <p class="resume-birthdate">2968 (wiek 51 lat na początku wyprawy)</p>
           <p class="resume-phone-number">+41 555 123 456</p>
           <p class="resume-email">frodo.baggins@mordor.com</p>
-          <!-- WRÓĆ DODAJ ZACHOWANIE DLA LINKÓW -->
           <a href="#" class="resume-social-media-links"
             >Brak (świat Śródziemia nie korzysta z mediów społecznościowych)</a
           >

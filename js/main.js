@@ -29,10 +29,12 @@ const subsectionsMapping = {
   'input-specialisation-name': 'resume-specialisation-name',
   'input-degree-start-year': 'resume-degree-start-year',
   'input-degree-end-year': 'resume-degree-end-year',
+  'input-degree-currently-studying': 'resume-degree-end-year',
   'input-company-name': 'resume-company-name',
   'input-position-title': 'resume-position-title',
   'input-job-start-date': 'resume-job-start-date',
   'input-job-end-date': 'resume-job-end-date',
+  'input-job-currently-working': 'resume-job-end-date',
   'input-job-description': 'resume-job-description',
   'input-hard-skill': 'resume-list-item-hard-skills',
   'input-soft-skill': 'resume-list-item-soft-skills',
@@ -87,6 +89,27 @@ const updateResumeText = function (inputHTMLElement, resumeHTMLElement) {
       inputHTMLElement.value,
       'fullDate'
     )} (${currentAge})`;
+  } else if (inputHTMLElement.classList.contains('input-social-media-links')) {
+    resumeHTMLElement.setAttribute('href', inputHTMLElement.value);
+    resumeHTMLElement.textContent = inputHTMLElement.value;
+  } else if (
+    inputHTMLElement.classList.contains('input-degree-end-year') ||
+    inputHTMLElement.classList.contains('input-degree-currently-studying')
+  ) {
+    const dateEnd = document.querySelector('.input-degree-end-year');
+    const currentlyStudying = document.querySelector(
+      '.input-degree-currently-studying'
+    );
+    if (inputHTMLElement === dateEnd) {
+      currentlyStudying.checked = false;
+      resumeHTMLElement.textContent = inputHTMLElement.value;
+    }
+    if (inputHTMLElement === currentlyStudying && !currentlyStudying.checked) {
+      return;
+    }
+    if (inputHTMLElement === currentlyStudying && currentlyStudying.checked) {
+      resumeHTMLElement.textContent = inputHTMLElement.value;
+    }
   } else {
     resumeHTMLElement.textContent = inputHTMLElement.value;
   }
@@ -203,6 +226,8 @@ const calculateCurrentAge = function (inputBirthdate) {
   }
   if (currentAgeInYears) return formattedAgeString;
 };
+
+// WRÓĆ DOKOŃCZ AKTUALNIE STUDIUJĘ PRACUJĘ - DO OSOBNEJ FUNKCJI + ZROBIĆ UNIWERSALNYM
 
 listBtnExpand.forEach((btnExpand) => {
   btnExpand.addEventListener('click', () => {
