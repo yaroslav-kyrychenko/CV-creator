@@ -76,7 +76,7 @@ const debounce = function (functionDebounced, delayInMilliseconds) {
 };
 
 const updateResumeText = function (inputHTMLElement, resumeHTMLElement) {
-  if (inputHTMLElement.getAttribute('type') === 'month') {
+  if (inputHTMLElement.classList.contains('input-job-start-date')) {
     resumeHTMLElement.textContent = getFormattedDate(
       inputHTMLElement.value,
       'month'
@@ -93,25 +93,49 @@ const updateResumeText = function (inputHTMLElement, resumeHTMLElement) {
     resumeHTMLElement.setAttribute('href', inputHTMLElement.value);
     resumeHTMLElement.textContent = inputHTMLElement.value;
   } else if (
-    inputHTMLElement.classList.contains('input-degree-end-year') ||
-    inputHTMLElement.classList.contains('input-degree-currently-studying')
+    inputHTMLElement.classList.contains('input-end-date') ||
+    inputHTMLElement.classList.contains('input-currently')
   ) {
-    const dateEnd = document.querySelector('.input-degree-end-year');
-    const currentlyStudying = document.querySelector(
-      '.input-degree-currently-studying'
-    );
-    if (inputHTMLElement === dateEnd) {
-      currentlyStudying.checked = false;
-      resumeHTMLElement.textContent = inputHTMLElement.value;
-    }
-    if (inputHTMLElement === currentlyStudying && !currentlyStudying.checked) {
-      return;
-    }
-    if (inputHTMLElement === currentlyStudying && currentlyStudying.checked) {
-      resumeHTMLElement.textContent = inputHTMLElement.value;
-    }
+    currentlyStudyingOrWorkingHandler(inputHTMLElement, resumeHTMLElement);
   } else {
     resumeHTMLElement.textContent = inputHTMLElement.value;
+  }
+};
+
+const currentlyStudyingOrWorkingHandler = function (
+  inputHTMLElement,
+  resumeHTMLElement
+) {
+  const isDegreeInput =
+    inputHTMLElement.classList.contains('input-degree-end-year') ||
+    inputHTMLElement.classList.contains('input-degree-currently-studying');
+
+  const isJobInput =
+    inputHTMLElement.classList.contains('input-job-end-date') ||
+    inputHTMLElement.classList.contains('input-job-currently-working');
+
+  if (isDegreeInput || isJobInput) {
+    const endDateInput = isDegreeInput
+      ? document.querySelector('.input-degree-end-year')
+      : document.querySelector('.input-job-end-date');
+
+    const currentlyCheckbox = isDegreeInput
+      ? document.querySelector('.input-degree-currently-studying')
+      : document.querySelector('.input-job-currently-working');
+
+    if (inputHTMLElement === endDateInput) {
+      currentlyCheckbox.checked = false;
+      resumeHTMLElement.textContent = isDegreeInput
+        ? inputHTMLElement.value
+        : getFormattedDate(inputHTMLElement.value, 'month');
+    }
+
+    if (inputHTMLElement === currentlyCheckbox && !currentlyCheckbox.checked)
+      return;
+
+    if (inputHTMLElement === currentlyCheckbox && currentlyCheckbox.checked) {
+      resumeHTMLElement.textContent = inputHTMLElement.value;
+    }
   }
 };
 
@@ -186,6 +210,7 @@ const yearsSelectHandler = function () {
   });
 };
 
+// wróć dodaj walidację do lat pracy
 const validateDegreeYears = function (
   inputDegreeStartYear,
   inputDegreeEndYear
