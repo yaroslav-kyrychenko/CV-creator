@@ -231,7 +231,7 @@ PREVIEW WINDOW
   animation: activeElementAnimation 2s infinite;
 }
 
-@keyframes invalidYearAnimation {
+@keyframes invalidDateAnimation {
   0% {
     background-color: #fff;
   }
@@ -243,7 +243,7 @@ PREVIEW WINDOW
   }
 }
 
-.invalid-year-alert {
+.invalid-date-alert {
   background-color: #fff;
-  animation: invalidYearAnimation 2s infinite;
+  animation: invalidDateAnimation 2s infinite;
 }

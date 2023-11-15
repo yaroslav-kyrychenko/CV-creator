@@ -110,6 +110,23 @@ RESUME CREATOR
   flex-basis: auto;
 }
 
+.input-user-photo {
+  display: none;
+}
+
+.btn-input-user-photo {
+  display: inline-block;
+  right: 0;
+  padding: 1.6rem;
+  background-color: #bdc3c7;
+  border-radius: 1rem;
+  cursor: pointer;
+}
+
+.form-item-personal-details:first-of-type {
+  justify-content: end;
+}
+
 /* WRÓĆ DODAJ STYLE DLA CHECKBOXÓW */
 
 /* /////////////////////////////////////
@@ -179,7 +196,7 @@ PREVIEW WINDOW
   line-height: 3rem;
 }
 
-.img-user-photo {
+.resume-img-user-photo {
   width: 25%;
   border-radius: 1rem;
 }

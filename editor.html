@@ -36,7 +36,17 @@
           >
             <form action="" method="get" class="form form-personal-details">
               <div class="form-item form-item-personal-details">
-                <!-- WRÓĆ DODAJ TUTAJ ZDJĘCIE -->
+                <label for="input-user-photo" class="btn-input-user-photo"
+                  ><input
+                    type="file"
+                    name="user-photo"
+                    id="input-user-photo"
+                    class="input-element input-user-photo"
+                    accept="image/*"
+                  />Załaduj swoje zdjęcie</label
+                >
+              </div>
+              <div class="form-item form-item-personal-details">
                 <label for="name">Imię i nazwisko</label>
                 <input
                   type="text"
@@ -366,7 +376,7 @@
       <div class="container-preview-window">
         <div class="resume-section resume-personal-details">
           <img
-            class="img-user-photo"
+            class="resume-img-user-photo"
             src="img/frodo.webp"
             alt="User photo for the resume"
           />

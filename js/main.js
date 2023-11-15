@@ -102,6 +102,21 @@ const updateResumeText = function (inputHTMLElement, resumeHTMLElement) {
   }
 };
 
+const uploadResumePhotoHandler = function () {
+  const inputPhoto = document.querySelector('.input-user-photo');
+  const resumePhoto = document.querySelector('.resume-img-user-photo');
+
+  inputPhoto.addEventListener('change', (e) => {
+    const photo = e.target.files[0];
+    const reader = new FileReader();
+
+    if (photo) reader.readAsDataURL(photo);
+    reader.addEventListener('load', (e) => {
+      resumePhoto.src = e.target.result;
+    });
+  });
+};
+
 const currentlyStudyingOrWorkingHandler = function (
   inputHTMLElement,
   resumeHTMLElement
@@ -186,7 +201,7 @@ const toggleSwitchSectionVisibilityHandler = function (toggleSwitchCheckbox) {
   }
 };
 
-const yearsSelectHandler = function () {
+const degreeYearsSelectHandler = function () {
   const inputDegreeStartYear = document.querySelector(
     '.input-degree-start-year'
   );
@@ -203,30 +218,40 @@ const yearsSelectHandler = function () {
     inputDegreeEndYear.appendChild(yearOption.cloneNode(true));
   }
   inputDegreeStartYear.addEventListener('input', () => {
-    validateDegreeYears(inputDegreeStartYear, inputDegreeEndYear);
+    validateDates(inputDegreeStartYear, inputDegreeEndYear);
   });
   inputDegreeEndYear.addEventListener('input', () => {
-    validateDegreeYears(inputDegreeStartYear, inputDegreeEndYear);
+    validateDates(inputDegreeStartYear, inputDegreeEndYear);
   });
 };
 
-// wróć dodaj walidację do lat pracy
-const validateDegreeYears = function (
-  inputDegreeStartYear,
-  inputDegreeEndYear
-) {
-  const startYearValue = inputDegreeStartYear.value;
-  const endYearValue = inputDegreeEndYear.value;
+const jobDatesSelectHandler = function () {
+  const inputJobStartDate = document.querySelector('.input-job-start-date');
+  const inputJobEndDate = document.querySelector('.input-job-end-date');
 
-  if (startYearValue > endYearValue) {
-    inputDegreeStartYear.classList.add('invalid-year-alert');
-    alert('Rok początku studiów nie powinien przekraczać roku ich końca!');
+  inputJobStartDate.addEventListener('input', () => {
+    validateDates(inputJobStartDate, inputJobEndDate);
+  });
+  inputJobEndDate.addEventListener('input', () => {
+    validateDates(inputJobStartDate, inputJobEndDate);
+  });
+};
+
+const validateDates = function (inputStartDateEl, inputEndDateEl) {
+  const startYearValue = inputStartDateEl?.value;
+  const endYearValue = inputEndDateEl?.value;
+
+  if (endYearValue && startYearValue > endYearValue) {
+    inputStartDateEl.classList.add('invalid-date-alert');
+    inputEndDateEl.classList.add('invalid-date-alert');
+    alert('Data początku nie powinna przekraczać daty końca!');
   }
   if (
     startYearValue <= endYearValue &&
-    inputDegreeStartYear.classList.contains('invalid-year-alert')
+    inputStartDateEl.classList.contains('invalid-date-alert')
   ) {
-    inputDegreeStartYear.classList.remove('invalid-year-alert');
+    inputStartDateEl.classList.remove('invalid-date-alert');
+    inputEndDateEl.classList.remove('invalid-date-alert');
   }
 };
 
@@ -252,8 +277,6 @@ const calculateCurrentAge = function (inputBirthdate) {
   if (currentAgeInYears) return formattedAgeString;
 };
 
-// WRÓĆ DOKOŃCZ AKTUALNIE STUDIUJĘ PRACUJĘ - DO OSOBNEJ FUNKCJI + ZROBIĆ UNIWERSALNYM
-
 listBtnExpand.forEach((btnExpand) => {
   btnExpand.addEventListener('click', () => {
     const sectionConfigHeaderEl = btnExpand.parentElement;
@@ -278,4 +301,6 @@ listToggleSwitchCheckboxes.forEach((toggleSwitchCheckbox) => {
   });
 });
 
-yearsSelectHandler();
+degreeYearsSelectHandler();
+jobDatesSelectHandler();
+uploadResumePhotoHandler();
