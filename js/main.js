@@ -206,6 +206,9 @@ const degreeYearsSelectHandler = function () {
     '.input-degree-start-year'
   );
   const inputDegreeEndYear = document.querySelector('.input-degree-end-year');
+  const inputIsCurrentlyStudying = document.querySelector(
+    '.input-degree-currently-studying'
+  );
 
   const currentYear = new Date().getFullYear();
   const maxYearsInThePast = 100;
@@ -218,36 +221,66 @@ const degreeYearsSelectHandler = function () {
     inputDegreeEndYear.appendChild(yearOption.cloneNode(true));
   }
   inputDegreeStartYear.addEventListener('input', () => {
-    validateDates(inputDegreeStartYear, inputDegreeEndYear);
+    validateDates(
+      inputDegreeStartYear,
+      inputDegreeEndYear,
+      inputIsCurrentlyStudying
+    );
   });
   inputDegreeEndYear.addEventListener('input', () => {
-    validateDates(inputDegreeStartYear, inputDegreeEndYear);
+    validateDates(
+      inputDegreeStartYear,
+      inputDegreeEndYear,
+      inputIsCurrentlyStudying
+    );
+  });
+  inputIsCurrentlyStudying.addEventListener('input', () => {
+    validateDates(
+      inputDegreeStartYear,
+      inputDegreeEndYear,
+      inputIsCurrentlyStudying
+    );
   });
 };
 
 const jobDatesSelectHandler = function () {
   const inputJobStartDate = document.querySelector('.input-job-start-date');
   const inputJobEndDate = document.querySelector('.input-job-end-date');
+  const inputIsCurrentlyWorking = document.querySelector(
+    '.input-job-currently-working'
+  );
 
   inputJobStartDate.addEventListener('input', () => {
-    validateDates(inputJobStartDate, inputJobEndDate);
+    validateDates(inputJobStartDate, inputJobEndDate, inputIsCurrentlyWorking);
   });
   inputJobEndDate.addEventListener('input', () => {
-    validateDates(inputJobStartDate, inputJobEndDate);
+    validateDates(inputJobStartDate, inputJobEndDate, inputIsCurrentlyWorking);
+  });
+  inputIsCurrentlyWorking.addEventListener('input', () => {
+    validateDates(inputJobStartDate, inputJobEndDate, inputIsCurrentlyWorking);
   });
 };
 
-const validateDates = function (inputStartDateEl, inputEndDateEl) {
+const validateDates = function (
+  inputStartDateEl,
+  inputEndDateEl,
+  inputIsCurrentlyWorkingOrStudying
+) {
   const startYearValue = inputStartDateEl?.value;
   const endYearValue = inputEndDateEl?.value;
 
-  if (endYearValue && startYearValue > endYearValue) {
+  if (
+    endYearValue &&
+    startYearValue > endYearValue &&
+    !inputIsCurrentlyWorkingOrStudying.checked
+  ) {
     inputStartDateEl.classList.add('invalid-date-alert');
     inputEndDateEl.classList.add('invalid-date-alert');
     alert('Data początku nie powinna przekraczać daty końca!');
   }
   if (
-    startYearValue <= endYearValue &&
+    (startYearValue <= endYearValue ||
+      inputIsCurrentlyWorkingOrStudying.checked) &&
     inputStartDateEl.classList.contains('invalid-date-alert')
   ) {
     inputStartDateEl.classList.remove('invalid-date-alert');

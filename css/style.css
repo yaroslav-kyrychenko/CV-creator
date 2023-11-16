@@ -127,7 +127,39 @@ RESUME CREATOR
   justify-content: end;
 }
 
-/* WRÓĆ DODAJ STYLE DLA CHECKBOXÓW */
+.input-currently[type='checkbox'] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 2.4rem;
+  height: 2.4rem;
+  border: 0.2rem solid #bdc3c7;
+  border-radius: 0.5rem;
+  position: relative;
+}
+
+.input-currently[type='checkbox']::before {
+  content: '✔';
+  display: block;
+  position: absolute;
+  top: -10%;
+  left: 18%;
+  width: 1rem;
+  height: 1rem;
+  color: #262728;
+  border-radius: 0.2rem;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.input-currently[type='checkbox']:checked {
+  background-color: #bdc3c7;
+  transition: background-color 0.5s;
+}
+
+.input-currently[type='checkbox']:checked::before {
+  opacity: 1;
+}
 
 /* /////////////////////////////////////
 CONFIG SECTION
