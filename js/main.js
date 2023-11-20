@@ -334,6 +334,19 @@ listToggleSwitchCheckboxes.forEach((toggleSwitchCheckbox) => {
   });
 });
 
+const duplicateSection = function () {
+  const btnAddNewEducation = document.querySelector('.btn-add-new-education');
+  btnAddNewEducation.addEventListener('click', () => {
+    const parentEl = btnAddNewEducation.parentElement;
+    // wczytaj klasę parenta i połącz używając mappingu z sekcją preview
+    const formEl = parentEl.children[0];
+    parentEl.appendChild(formEl.cloneNode(true));
+    // oprócz tego, że dodam samo append, muszę też zmienić style - tutaj albo w CSS
+    // w nowo utworzonym elementach muszę modyfikować klasy, żeby zawierały oryginalną nazwę + numer i tak samo w sekcji preview muszę jakoś dostosować numerki
+  });
+};
+
 degreeYearsSelectHandler();
 jobDatesSelectHandler();
 uploadResumePhotoHandler();
+duplicateSection();
