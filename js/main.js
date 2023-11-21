@@ -169,20 +169,26 @@ const getFormattedDate = function (stringDate, type) {
   }
 };
 
-const listInputElements = document.querySelectorAll('.input-element');
-listInputElements.forEach((inputElement) => {
-  const inputClasslist = inputElement.classList;
-  for (const inputItem in subsectionsMapping) {
-    if (inputClasslist.contains(inputItem)) {
-      const inputHTMLElement = document.querySelector(`.${inputItem}`);
-      const resumeHTMLElement = document.querySelector(
-        `.${subsectionsMapping[inputItem]}`
-      );
-      listenForChangeInResumeText(inputHTMLElement, resumeHTMLElement);
-      break;
+// WRÓĆ Z jakiegoś powodu nie działa w takiej postaci, ale działa jeśli skopiuję tę funkcję
+const updateResumeFromInputFields = function (clonedSection) {
+  if (clonedSection) console.log(clonedSection);
+  const listInputElements = clonedSection
+    ? clonedSection.querySelectorAll('.input-element')
+    : document.querySelectorAll('.input-element');
+  listInputElements.forEach((inputElement) => {
+    const inputClasslist = inputElement.classList;
+    for (const inputItem in subsectionsMapping) {
+      if (inputClasslist.contains(inputItem)) {
+        const inputHTMLElement = document.querySelector(`.${inputItem}`);
+        const resumeHTMLElement = document.querySelector(
+          `.${subsectionsMapping[inputItem]}`
+        );
+        listenForChangeInResumeText(inputHTMLElement, resumeHTMLElement);
+        break;
+      }
     }
-  }
-});
+  });
+};
 
 const toggleSwitchSectionVisibilityHandler = function (toggleSwitchCheckbox) {
   const sectionConfigContentsEl =
@@ -340,9 +346,14 @@ const duplicateSection = function () {
     const parentEl = btnAddNewEducation.parentElement;
     // wczytaj klasę parenta i połącz używając mappingu z sekcją preview
     const formEl = parentEl.children[0];
-    parentEl.appendChild(formEl.cloneNode(true));
+    const duplicatedSection = formEl.cloneNode(true);
+    duplicatedSection.classList.add('input-cloned-section');
+    // console.log(duplicatedSection);
+    updateResumeFromInputFields(duplicatedSection);
+    parentEl.appendChild(duplicatedSection);
     // oprócz tego, że dodam samo append, muszę też zmienić style - tutaj albo w CSS
     // w nowo utworzonym elementach muszę modyfikować klasy, żeby zawierały oryginalną nazwę + numer i tak samo w sekcji preview muszę jakoś dostosować numerki
+    // dodaj też guzik do usunięcia - usuwaj ostatniego childa
   });
 };
 
@@ -350,3 +361,4 @@ degreeYearsSelectHandler();
 jobDatesSelectHandler();
 uploadResumePhotoHandler();
 duplicateSection();
+updateResumeFromInputFields();

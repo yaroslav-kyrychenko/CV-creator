@@ -160,6 +160,7 @@ CONFIG SECTION
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
+  padding-bottom: 2.4rem;
 }
 
 .form-item {
@@ -185,10 +186,10 @@ CONFIG SECTION
   transition: all 0.5s ease-in-out;
 }
 
-/* .resume-section:not(.hidden) {
-  opacity: 1;
-  pointer-events: auto;
-} */
+.input-cloned-section {
+  padding-top: 2.4rem;
+  border-top: solid 0.2rem #676869;
+}
 
 /* /////////////////////////////////////
 PREVIEW WINDOW
