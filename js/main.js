@@ -171,7 +171,6 @@ const getFormattedDate = function (stringDate, type) {
 
 // WRÓĆ Z jakiegoś powodu nie działa w takiej postaci, ale działa jeśli skopiuję tę funkcję
 const updateResumeFromInputFields = function (clonedSection) {
-  if (clonedSection) console.log(clonedSection);
   const listInputElements = clonedSection
     ? clonedSection.querySelectorAll('.input-element')
     : document.querySelectorAll('.input-element');
@@ -179,7 +178,8 @@ const updateResumeFromInputFields = function (clonedSection) {
     const inputClasslist = inputElement.classList;
     for (const inputItem in subsectionsMapping) {
       if (inputClasslist.contains(inputItem)) {
-        const inputHTMLElement = document.querySelector(`.${inputItem}`);
+        const inputHTMLElement = inputElement;
+        console.log(inputElement);
         const resumeHTMLElement = document.querySelector(
           `.${subsectionsMapping[inputItem]}`
         );
@@ -342,15 +342,21 @@ listToggleSwitchCheckboxes.forEach((toggleSwitchCheckbox) => {
 
 const duplicateSection = function () {
   const btnAddNewEducation = document.querySelector('.btn-add-new-education');
+  const resumeEducationSection = document.querySelector('.resume-education');
+  const resumeEducationContent = document.querySelector(
+    '.resume-education-content'
+  );
   btnAddNewEducation.addEventListener('click', () => {
     const parentEl = btnAddNewEducation.parentElement;
     // wczytaj klasę parenta i połącz używając mappingu z sekcją preview
     const formEl = parentEl.children[0];
-    const duplicatedSection = formEl.cloneNode(true);
-    duplicatedSection.classList.add('input-cloned-section');
+    const duplicatedInputSection = formEl.cloneNode(true);
+    const duplicatedResumeSection = resumeEducationContent.cloneNode(true);
+    duplicatedInputSection.classList.add('input-cloned-section');
     // console.log(duplicatedSection);
-    updateResumeFromInputFields(duplicatedSection);
-    parentEl.appendChild(duplicatedSection);
+    updateResumeFromInputFields(duplicatedInputSection);
+    parentEl.appendChild(duplicatedInputSection);
+    resumeEducationSection.appendChild(duplicatedResumeSection);
     // oprócz tego, że dodam samo append, muszę też zmienić style - tutaj albo w CSS
     // w nowo utworzonym elementach muszę modyfikować klasy, żeby zawierały oryginalną nazwę + numer i tak samo w sekcji preview muszę jakoś dostosować numerki
     // dodaj też guzik do usunięcia - usuwaj ostatniego childa
