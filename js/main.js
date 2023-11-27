@@ -130,6 +130,7 @@ const currentlyStudyingOrWorkingHandler = function (
     inputHTMLElement.classList.contains('input-job-currently-working');
 
   if (isDegreeInput || isJobInput) {
+    console.log('entered');
     const endDateInput = isDegreeInput
       ? document.querySelector('.input-degree-end-year')
       : document.querySelector('.input-job-end-date');
@@ -137,9 +138,10 @@ const currentlyStudyingOrWorkingHandler = function (
     const currentlyCheckbox = isDegreeInput
       ? document.querySelector('.input-degree-currently-studying')
       : document.querySelector('.input-job-currently-working');
-
+    // wróć napraw, że nie wchodzi walidacja danych dla sklonowanych enddate ani checkboxa currently
     if (inputHTMLElement === endDateInput) {
       currentlyCheckbox.checked = false;
+      console.log('end date');
       resumeHTMLElement.textContent = isDegreeInput
         ? inputHTMLElement.value
         : getFormattedDate(inputHTMLElement.value, 'month');
@@ -149,6 +151,7 @@ const currentlyStudyingOrWorkingHandler = function (
       return;
 
     if (inputHTMLElement === currentlyCheckbox && currentlyCheckbox.checked) {
+      console.log('checked');
       resumeHTMLElement.textContent = inputHTMLElement.value;
     }
   }
@@ -169,7 +172,6 @@ const getFormattedDate = function (stringDate, type) {
   }
 };
 
-// WRÓĆ Z jakiegoś powodu nie działa w takiej postaci, ale działa jeśli skopiuję tę funkcję
 const updateResumeFromInputFields = function (clonedSection) {
   const listInputElements = clonedSection
     ? clonedSection.querySelectorAll('.input-element')
@@ -179,7 +181,6 @@ const updateResumeFromInputFields = function (clonedSection) {
     for (const inputItem in subsectionsMapping) {
       if (inputClasslist.contains(inputItem)) {
         const inputHTMLElement = inputElement;
-        console.log(inputElement);
         const resumeHTMLElement = document.querySelector(
           `.${subsectionsMapping[inputItem]}`
         );
@@ -340,7 +341,7 @@ listToggleSwitchCheckboxes.forEach((toggleSwitchCheckbox) => {
   });
 });
 
-const duplicateSection = function () {
+const addNewEducationSection = function () {
   const btnAddNewEducation = document.querySelector('.btn-add-new-education');
   const resumeEducationSection = document.querySelector('.resume-education');
   const resumeEducationContent = document.querySelector(
@@ -352,9 +353,12 @@ const duplicateSection = function () {
     const formEl = parentEl.children[0];
     const duplicatedInputSection = formEl.cloneNode(true);
     const duplicatedResumeSection = resumeEducationContent.cloneNode(true);
-    duplicatedInputSection.classList.add('input-cloned-section');
-    // console.log(duplicatedSection);
+    duplicatedInputSection.classList.add('input-cloned-education-section');
+    duplicatedResumeSection.classList.add('resume-cloned-education-section');
+    console.log(duplicatedInputSection.classList);
+    console.log(duplicatedResumeSection.classList);
     updateResumeFromInputFields(duplicatedInputSection);
+    jobDatesSelectHandler();
     parentEl.appendChild(duplicatedInputSection);
     resumeEducationSection.appendChild(duplicatedResumeSection);
     // oprócz tego, że dodam samo append, muszę też zmienić style - tutaj albo w CSS
@@ -366,5 +370,5 @@ const duplicateSection = function () {
 degreeYearsSelectHandler();
 jobDatesSelectHandler();
 uploadResumePhotoHandler();
-duplicateSection();
+addNewEducationSection();
 updateResumeFromInputFields();
