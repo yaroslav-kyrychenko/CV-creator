@@ -8,6 +8,15 @@ const listToggleSwitchCheckboxes = document.querySelectorAll(
 const inputName = document.querySelector('.input-name');
 const resumeName = document.querySelector('.resume-name');
 
+let sectionsQuantityForCloningMapping = {
+  links: 1,
+  education: 1,
+  experience: 1,
+  hardSkills: 1,
+  softSkills: 1,
+  certificates: 1,
+};
+
 const sectionsMapping = {
   'config-section-personal-details': 'resume-personal-details',
   'config-section-education': 'resume-education',
@@ -41,24 +50,21 @@ const subsectionsMapping = {
   'input-certificate': 'resume-list-item-certificate',
 };
 
-const listenForChangeInResumeText = function (
-  inputHTMLElement,
-  resumeHTMLElement
-) {
-  inputHTMLElement.addEventListener('focusin', () => {
-    resumeHTMLElement.classList.add('active-resume-element');
+const listenForChangeInResumeText = function (inputElement, resumeElement) {
+  inputElement.addEventListener('focusin', () => {
+    resumeElement.classList.add('active-resume-element');
   });
 
-  inputHTMLElement.addEventListener('input', () => {
-    debouncedUpdateResumeTextHandler(inputHTMLElement, resumeHTMLElement);
+  inputElement.addEventListener('input', () => {
+    debouncedUpdateResumeTextHandler(inputElement, resumeElement);
   });
 
-  inputHTMLElement.addEventListener('change', () => {
-    updateResumeText(inputHTMLElement, resumeHTMLElement);
+  inputElement.addEventListener('change', () => {
+    updateResumeText(inputElement, resumeElement);
   });
 
-  inputHTMLElement.addEventListener('focusout', () => {
-    resumeHTMLElement.classList.remove('active-resume-element');
+  inputElement.addEventListener('focusout', () => {
+    resumeElement.classList.remove('active-resume-element');
   });
 };
 
@@ -118,19 +124,18 @@ const uploadResumePhotoHandler = function () {
 };
 
 const currentlyStudyingOrWorkingHandler = function (
-  inputHTMLElement,
-  resumeHTMLElement
+  inputElement,
+  resumeElement
 ) {
   const isDegreeInput =
-    inputHTMLElement.classList.contains('input-degree-end-year') ||
-    inputHTMLElement.classList.contains('input-degree-currently-studying');
+    inputElement.classList.contains('input-degree-end-year') ||
+    inputElement.classList.contains('input-degree-currently-studying');
 
   const isJobInput =
-    inputHTMLElement.classList.contains('input-job-end-date') ||
-    inputHTMLElement.classList.contains('input-job-currently-working');
+    inputElement.classList.contains('input-job-end-date') ||
+    inputElement.classList.contains('input-job-currently-working');
 
   if (isDegreeInput || isJobInput) {
-    console.log('entered');
     const endDateInput = isDegreeInput
       ? document.querySelector('.input-degree-end-year')
       : document.querySelector('.input-job-end-date');
@@ -139,20 +144,18 @@ const currentlyStudyingOrWorkingHandler = function (
       ? document.querySelector('.input-degree-currently-studying')
       : document.querySelector('.input-job-currently-working');
     // wróć napraw, że nie wchodzi walidacja danych dla sklonowanych enddate ani checkboxa currently
-    if (inputHTMLElement === endDateInput) {
+    if (inputElement === endDateInput) {
       currentlyCheckbox.checked = false;
-      console.log('end date');
-      resumeHTMLElement.textContent = isDegreeInput
-        ? inputHTMLElement.value
-        : getFormattedDate(inputHTMLElement.value, 'month');
+      resumeElement.textContent = isDegreeInput
+        ? inputElement.value
+        : getFormattedDate(inputElement.value, 'month');
     }
 
-    if (inputHTMLElement === currentlyCheckbox && !currentlyCheckbox.checked)
+    if (inputElement === currentlyCheckbox && !currentlyCheckbox.checked)
       return;
 
-    if (inputHTMLElement === currentlyCheckbox && currentlyCheckbox.checked) {
-      console.log('checked');
-      resumeHTMLElement.textContent = inputHTMLElement.value;
+    if (inputElement === currentlyCheckbox && currentlyCheckbox.checked) {
+      resumeElement.textContent = inputElement.value;
     }
   }
 };
@@ -172,19 +175,21 @@ const getFormattedDate = function (stringDate, type) {
   }
 };
 
+// wróć zmień żeby nie zawierał cloned section
 const updateResumeFromInputFields = function (clonedSection) {
   const listInputElements = clonedSection
     ? clonedSection.querySelectorAll('.input-element')
     : document.querySelectorAll('.input-element');
   listInputElements.forEach((inputElement) => {
     const inputClasslist = inputElement.classList;
-    for (const inputItem in subsectionsMapping) {
-      if (inputClasslist.contains(inputItem)) {
-        const inputHTMLElement = inputElement;
-        const resumeHTMLElement = document.querySelector(
-          `.${subsectionsMapping[inputItem]}`
+    for (const inputElClass in subsectionsMapping) {
+      if (inputClasslist.contains(inputElClass)) {
+        // const inputHTMLElement = inputElement;
+        const resumeElement = document.querySelector(
+          `.${subsectionsMapping[inputElClass]}`
         );
-        listenForChangeInResumeText(inputHTMLElement, resumeHTMLElement);
+        // listenForChangeInResumeText(inputHTMLElement, resumeHTMLElement);
+        listenForChangeInResumeText(inputElement, resumeElement);
         break;
       }
     }
@@ -349,23 +354,67 @@ const addNewEducationSection = function () {
   );
   btnAddNewEducation.addEventListener('click', () => {
     const parentEl = btnAddNewEducation.parentElement;
-    // wczytaj klasę parenta i połącz używając mappingu z sekcją preview
     const formEl = parentEl.children[0];
-    const duplicatedInputSection = formEl.cloneNode(true);
-    const duplicatedResumeSection = resumeEducationContent.cloneNode(true);
-    duplicatedInputSection.classList.add('input-cloned-education-section');
-    duplicatedResumeSection.classList.add('resume-cloned-education-section');
-    console.log(duplicatedInputSection.classList);
-    console.log(duplicatedResumeSection.classList);
-    updateResumeFromInputFields(duplicatedInputSection);
+    const clonedInputSection = formEl.cloneNode(true);
+    const clonedResumeSection = resumeEducationContent.cloneNode(true);
+    sectionsQuantityForCloningMapping.education += 1;
+    clonedInputSection.classList.add(
+      `input-cloned-education-section-${sectionsQuantityForCloningMapping.education}`
+    );
+    clonedResumeSection.classList.add(
+      `resume-cloned-education-section-${sectionsQuantityForCloningMapping.education}`
+    );
+    updateResumeFromClonedInputFields(
+      clonedInputSection,
+      clonedResumeSection,
+      sectionsQuantityForCloningMapping.education
+    );
     jobDatesSelectHandler();
-    parentEl.appendChild(duplicatedInputSection);
-    resumeEducationSection.appendChild(duplicatedResumeSection);
-    // oprócz tego, że dodam samo append, muszę też zmienić style - tutaj albo w CSS
-    // w nowo utworzonym elementach muszę modyfikować klasy, żeby zawierały oryginalną nazwę + numer i tak samo w sekcji preview muszę jakoś dostosować numerki
-    // dodaj też guzik do usunięcia - usuwaj ostatniego childa
+    parentEl.appendChild(clonedInputSection);
+    resumeEducationSection.appendChild(clonedResumeSection);
+    console.log(sectionsQuantityForCloningMapping);
   });
 };
+
+const updateResumeFromClonedInputFields = function (
+  clonedInputSection,
+  clonedResumeSection,
+  cloneNum
+) {
+  const listClonedInputElements =
+    clonedInputSection.querySelectorAll('.input-element');
+  listClonedInputElements.forEach((inputClonedElement) => {
+    const inputClasslist = inputClonedElement.classList;
+    for (const inputElClass in subsectionsMapping) {
+      if (inputClasslist.contains(inputElClass)) {
+        inputClasslist.replace(inputElClass, `${inputElClass}-${cloneNum}`);
+        const resumeElClass = subsectionsMapping[inputElClass];
+        let resumeClonedElement = clonedResumeSection.querySelector(
+          `.${resumeElClass}`
+        );
+        if (resumeClonedElement) {
+          resumeClonedElement.classList.replace(
+            resumeElClass,
+            `${resumeElClass}-${cloneNum}`
+          );
+        }
+        // wróć do naprawy to że guzik currently nie działa
+        if (
+          inputClonedElement.getAttribute('name') ===
+          'degree-currently-studying'
+        ) {
+          resumeClonedElement = document.querySelector(
+            `.resume-degree-end-year-${cloneNum}`
+          );
+        }
+
+        listenForChangeInResumeText(inputClonedElement, resumeClonedElement);
+        break;
+      }
+    }
+  });
+};
+// wróć dodaj też guzik do usunięcia - usuwaj ostatniego childa
 
 degreeYearsSelectHandler();
 jobDatesSelectHandler();
