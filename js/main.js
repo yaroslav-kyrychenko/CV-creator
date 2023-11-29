@@ -50,17 +50,21 @@ const subsectionsMapping = {
   'input-certificate': 'resume-list-item-certificate',
 };
 
-const listenForChangeInResumeText = function (inputElement, resumeElement) {
+const listenForChangeInResumeText = function (
+  inputElement,
+  resumeElement,
+  cloneNum
+) {
   inputElement.addEventListener('focusin', () => {
     resumeElement.classList.add('active-resume-element');
   });
 
   inputElement.addEventListener('input', () => {
-    debouncedUpdateResumeTextHandler(inputElement, resumeElement);
+    debouncedUpdateResumeTextHandler(inputElement, resumeElement, cloneNum);
   });
 
   inputElement.addEventListener('change', () => {
-    updateResumeText(inputElement, resumeElement);
+    updateResumeText(inputElement, resumeElement, cloneNum);
   });
 
   inputElement.addEventListener('focusout', () => {
@@ -81,30 +85,27 @@ const debounce = function (functionDebounced, delayInMilliseconds) {
   };
 };
 
-const updateResumeText = function (inputHTMLElement, resumeHTMLElement) {
-  if (inputHTMLElement.classList.contains('input-job-start-date')) {
-    resumeHTMLElement.textContent = getFormattedDate(
-      inputHTMLElement.value,
-      'month'
-    );
-  } else if (inputHTMLElement.classList.contains('input-specialisation-name')) {
-    resumeHTMLElement.textContent = `Specjalność: ${inputHTMLElement.value}`;
-  } else if (inputHTMLElement.classList.contains('input-birthdate')) {
-    const currentAge = calculateCurrentAge(inputHTMLElement);
-    resumeHTMLElement.textContent = `${getFormattedDate(
-      inputHTMLElement.value,
+const updateResumeText = function (inputElement, resumeElement, cloneNum) {
+  if (inputElement.classList.contains('input-job-start-date')) {
+    resumeElement.textContent = getFormattedDate(inputElement.value, 'month');
+  } else if (inputElement.classList.contains('input-specialisation-name')) {
+    resumeElement.textContent = `Specjalność: ${inputElement.value}`;
+  } else if (inputElement.classList.contains('input-birthdate')) {
+    const currentAge = calculateCurrentAge(inputElement);
+    resumeElement.textContent = `${getFormattedDate(
+      inputElement.value,
       'fullDate'
     )} (${currentAge})`;
-  } else if (inputHTMLElement.classList.contains('input-social-media-links')) {
-    resumeHTMLElement.setAttribute('href', inputHTMLElement.value);
-    resumeHTMLElement.textContent = inputHTMLElement.value;
+  } else if (inputElement.classList.contains('input-social-media-links')) {
+    resumeElement.setAttribute('href', inputElement.value);
+    resumeElement.textContent = inputElement.value;
   } else if (
-    inputHTMLElement.classList.contains('input-end-date') ||
-    inputHTMLElement.classList.contains('input-currently')
+    inputElement.classList.contains('input-end-date') ||
+    inputElement.classList.contains('input-currently')
   ) {
-    currentlyStudyingOrWorkingHandler(inputHTMLElement, resumeHTMLElement);
+    currentlyStudyingOrWorkingHandler(inputElement, resumeElement, cloneNum);
   } else {
-    resumeHTMLElement.textContent = inputHTMLElement.value;
+    resumeElement.textContent = inputElement.value;
   }
 };
 
@@ -125,24 +126,37 @@ const uploadResumePhotoHandler = function () {
 
 const currentlyStudyingOrWorkingHandler = function (
   inputElement,
-  resumeElement
+  resumeElement,
+  cloneNum
 ) {
+  const cloneNumOptionalSelector = cloneNum ? `-${cloneNum}` : '';
   const isDegreeInput =
-    inputElement.classList.contains('input-degree-end-year') ||
-    inputElement.classList.contains('input-degree-currently-studying');
+    inputElement.getAttribute('name') === 'degree-end-year' ||
+    inputElement.getAttribute('name') === 'degree-currently-studying';
 
   const isJobInput =
-    inputElement.classList.contains('input-job-end-date') ||
-    inputElement.classList.contains('input-job-currently-working');
+    inputElement.getAttribute('name') === 'job-end-date' ||
+    inputElement.getAttribute('name') === 'job-currently-working';
 
   if (isDegreeInput || isJobInput) {
+    console.log(cloneNumOptionalSelector);
     const endDateInput = isDegreeInput
-      ? document.querySelector('.input-degree-end-year')
-      : document.querySelector('.input-job-end-date');
+      ? document.querySelector(
+          `.input-degree-end-year${cloneNumOptionalSelector}`
+        )
+      : document.querySelector(
+          `.input-job-end-date${cloneNumOptionalSelector}`
+        );
+
+    console.log(endDateInput);
 
     const currentlyCheckbox = isDegreeInput
-      ? document.querySelector('.input-degree-currently-studying')
-      : document.querySelector('.input-job-currently-working');
+      ? document.querySelector(
+          `.input-degree-currently-studying${cloneNumOptionalSelector}`
+        )
+      : document.querySelector(
+          `.input-job-currently-working${cloneNumOptionalSelector}`
+        );
     // wróć napraw, że nie wchodzi walidacja danych dla sklonowanych enddate ani checkboxa currently
     if (inputElement === endDateInput) {
       currentlyCheckbox.checked = false;
@@ -273,6 +287,7 @@ const jobDatesSelectHandler = function () {
   });
 };
 
+// wróć nie działa dla sklonowanych
 const validateDates = function (
   inputStartDateEl,
   inputEndDateEl,
@@ -386,10 +401,13 @@ const updateResumeFromClonedInputFields = function (
   listClonedInputElements.forEach((inputClonedElement) => {
     const inputClasslist = inputClonedElement.classList;
     for (const inputElClass in subsectionsMapping) {
-      if (inputClasslist.contains(inputElClass)) {
+      if (
+        inputClasslist.contains(inputElClass) &&
+        !inputClasslist.contains('input-currently')
+      ) {
         inputClasslist.replace(inputElClass, `${inputElClass}-${cloneNum}`);
         const resumeElClass = subsectionsMapping[inputElClass];
-        let resumeClonedElement = clonedResumeSection.querySelector(
+        const resumeClonedElement = clonedResumeSection.querySelector(
           `.${resumeElClass}`
         );
         if (resumeClonedElement) {
@@ -398,22 +416,29 @@ const updateResumeFromClonedInputFields = function (
             `${resumeElClass}-${cloneNum}`
           );
         }
-        // wróć do naprawy to że guzik currently nie działa
-        if (
-          inputClonedElement.getAttribute('name') ===
-          'degree-currently-studying'
-        ) {
-          resumeClonedElement = document.querySelector(
-            `.resume-degree-end-year-${cloneNum}`
-          );
-        }
-
-        listenForChangeInResumeText(inputClonedElement, resumeClonedElement);
+        listenForChangeInResumeText(
+          inputClonedElement,
+          resumeClonedElement,
+          cloneNum
+        );
         break;
+      }
+
+      if (inputClasslist.contains('input-degree-currently-studying')) {
+        inputClasslist.replace(inputElClass, `${inputElClass}-${cloneNum}`);
+        const resumeClonedElement = clonedResumeSection.querySelector(
+          `.resume-degree-end-year-${cloneNum}`
+        );
+        listenForChangeInResumeText(
+          inputClonedElement,
+          resumeClonedElement,
+          cloneNum
+        );
       }
     }
   });
 };
+
 // wróć dodaj też guzik do usunięcia - usuwaj ostatniego childa
 
 degreeYearsSelectHandler();
