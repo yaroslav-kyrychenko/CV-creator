@@ -129,7 +129,7 @@ const currentlyStudyingOrWorkingHandler = function (
   resumeElement,
   cloneNum
 ) {
-  const cloneNumOptionalSelector = cloneNum ? `-${cloneNum}` : '';
+  const cloneNumOptionalSelector = getCloneNumOptionalSelector(cloneNum);
   const isDegreeInput =
     inputElement.getAttribute('name') === 'degree-end-year' ||
     inputElement.getAttribute('name') === 'degree-currently-studying';
@@ -139,7 +139,6 @@ const currentlyStudyingOrWorkingHandler = function (
     inputElement.getAttribute('name') === 'job-currently-working';
 
   if (isDegreeInput || isJobInput) {
-    console.log(cloneNumOptionalSelector);
     const endDateInput = isDegreeInput
       ? document.querySelector(
           `.input-degree-end-year${cloneNumOptionalSelector}`
@@ -148,8 +147,6 @@ const currentlyStudyingOrWorkingHandler = function (
           `.input-job-end-date${cloneNumOptionalSelector}`
         );
 
-    console.log(endDateInput);
-
     const currentlyCheckbox = isDegreeInput
       ? document.querySelector(
           `.input-degree-currently-studying${cloneNumOptionalSelector}`
@@ -157,7 +154,6 @@ const currentlyStudyingOrWorkingHandler = function (
       : document.querySelector(
           `.input-job-currently-working${cloneNumOptionalSelector}`
         );
-    // wróć napraw, że nie wchodzi walidacja danych dla sklonowanych enddate ani checkboxa currently
     if (inputElement === endDateInput) {
       currentlyCheckbox.checked = false;
       resumeElement.textContent = isDegreeInput
@@ -189,20 +185,15 @@ const getFormattedDate = function (stringDate, type) {
   }
 };
 
-// wróć zmień żeby nie zawierał cloned section
-const updateResumeFromInputFields = function (clonedSection) {
-  const listInputElements = clonedSection
-    ? clonedSection.querySelectorAll('.input-element')
-    : document.querySelectorAll('.input-element');
+const updateResumeFromInputFields = function () {
+  const listInputElements = document.querySelectorAll('.input-element');
   listInputElements.forEach((inputElement) => {
     const inputClasslist = inputElement.classList;
     for (const inputElClass in subsectionsMapping) {
       if (inputClasslist.contains(inputElClass)) {
-        // const inputHTMLElement = inputElement;
         const resumeElement = document.querySelector(
           `.${subsectionsMapping[inputElClass]}`
         );
-        // listenForChangeInResumeText(inputHTMLElement, resumeHTMLElement);
         listenForChangeInResumeText(inputElement, resumeElement);
         break;
       }
@@ -227,25 +218,27 @@ const toggleSwitchSectionVisibilityHandler = function (toggleSwitchCheckbox) {
   }
 };
 
-const degreeYearsSelectHandler = function () {
+const degreeYearsSelectHandler = function (cloneNum) {
+  // const cloneNumOptionalSelector = getCloneNumOptionalSelector(cloneNum);
+  // const inputDegreeStartYear = document.querySelector(
+  //   `.input-degree-start-year${cloneNumOptionalSelector}`
+  // );
+  // const inputDegreeEndYear = document.querySelector(
+  //   `.input-degree-end-year${cloneNumOptionalSelector}`
+  // );
+  // const inputIsCurrentlyStudying = document.querySelector(
+  //   `.input-degree-currently-studying${cloneNumOptionalSelector}`
+  // );
   const inputDegreeStartYear = document.querySelector(
-    '.input-degree-start-year'
+    `.input-degree-start-year`
   );
-  const inputDegreeEndYear = document.querySelector('.input-degree-end-year');
+  const inputDegreeEndYear = document.querySelector(`.input-degree-end-year`);
   const inputIsCurrentlyStudying = document.querySelector(
-    '.input-degree-currently-studying'
+    `.input-degree-currently-studying`
   );
+  // wróć nie działa dynamiczne dodawanie numerku - podejrzewam, że problem jest w dodawaniu listenerów, spróbuj przenieść do osobnej funkcji i użyć potem tylko na sklonowanej
 
-  const currentYear = new Date().getFullYear();
-  const maxYearsInThePast = 100;
-
-  for (let i = currentYear; i >= currentYear - maxYearsInThePast; i--) {
-    const yearOption = document.createElement('option');
-    yearOption.value = i;
-    yearOption.text = i;
-    inputDegreeStartYear.appendChild(yearOption.cloneNode(true));
-    inputDegreeEndYear.appendChild(yearOption.cloneNode(true));
-  }
+  populateInputDegreeYears();
   inputDegreeStartYear.addEventListener('input', () => {
     validateDates(
       inputDegreeStartYear,
@@ -267,6 +260,22 @@ const degreeYearsSelectHandler = function () {
       inputIsCurrentlyStudying
     );
   });
+};
+
+const populateInputDegreeYears = function () {
+  const inputDegreeStartYear = document.querySelector(
+    `.input-degree-start-year`
+  );
+  const inputDegreeEndYear = document.querySelector(`.input-degree-end-year`);
+  const currentYear = new Date().getFullYear();
+  const maxYearsInThePast = 100;
+  for (let i = currentYear; i >= currentYear - maxYearsInThePast; i--) {
+    const yearOption = document.createElement('option');
+    yearOption.value = i;
+    yearOption.text = i;
+    inputDegreeStartYear.appendChild(yearOption.cloneNode(true));
+    inputDegreeEndYear.appendChild(yearOption.cloneNode(true));
+  }
 };
 
 const jobDatesSelectHandler = function () {
@@ -325,6 +334,7 @@ const calculateCurrentAge = function (inputBirthdate) {
   );
   const currentAgeLastDigit = String(currentAgeInYears).at(-1);
   let formattedAgeString;
+  if (currentAgeInYears === 0) return '0 lat';
   if (
     currentAgeLastDigit >= 2 &&
     currentAgeLastDigit <= 4 &&
@@ -384,10 +394,10 @@ const addNewEducationSection = function () {
       clonedResumeSection,
       sectionsQuantityForCloningMapping.education
     );
-    jobDatesSelectHandler();
+    console.log(sectionsQuantityForCloningMapping.education);
+    degreeYearsSelectHandler(sectionsQuantityForCloningMapping.education);
     parentEl.appendChild(clonedInputSection);
     resumeEducationSection.appendChild(clonedResumeSection);
-    console.log(sectionsQuantityForCloningMapping);
   });
 };
 
@@ -401,42 +411,58 @@ const updateResumeFromClonedInputFields = function (
   listClonedInputElements.forEach((inputClonedElement) => {
     const inputClasslist = inputClonedElement.classList;
     for (const inputElClass in subsectionsMapping) {
-      if (
-        inputClasslist.contains(inputElClass) &&
-        !inputClasslist.contains('input-currently')
-      ) {
-        inputClasslist.replace(inputElClass, `${inputElClass}-${cloneNum}`);
-        const resumeElClass = subsectionsMapping[inputElClass];
-        const resumeClonedElement = clonedResumeSection.querySelector(
-          `.${resumeElClass}`
+      if (inputClasslist.contains(inputElClass)) {
+        const resumeClonedElement = updateResumeFromClonedInputEducationHandler(
+          inputClasslist,
+          inputElClass,
+          clonedResumeSection,
+          cloneNum
         );
-        if (resumeClonedElement) {
-          resumeClonedElement.classList.replace(
-            resumeElClass,
-            `${resumeElClass}-${cloneNum}`
-          );
-        }
         listenForChangeInResumeText(
           inputClonedElement,
           resumeClonedElement,
           cloneNum
         );
+        // degreeYearsSelectHandler(cloneNum);
         break;
-      }
-
-      if (inputClasslist.contains('input-degree-currently-studying')) {
-        inputClasslist.replace(inputElClass, `${inputElClass}-${cloneNum}`);
-        const resumeClonedElement = clonedResumeSection.querySelector(
-          `.resume-degree-end-year-${cloneNum}`
-        );
-        listenForChangeInResumeText(
-          inputClonedElement,
-          resumeClonedElement,
-          cloneNum
-        );
       }
     }
   });
+};
+
+const updateResumeFromClonedInputEducationHandler = function (
+  inputClasslist,
+  inputElClass,
+  clonedResumeSection,
+  cloneNum
+) {
+  if (!inputClasslist.contains('input-currently')) {
+    inputClasslist.replace(inputElClass, `${inputElClass}-${cloneNum}`);
+    const resumeElClass = subsectionsMapping[inputElClass];
+    const resumeClonedElement = clonedResumeSection.querySelector(
+      `.${resumeElClass}`
+    );
+    resumeClonedElement.classList.replace(
+      resumeElClass,
+      `${resumeElClass}-${cloneNum}`
+    );
+    return resumeClonedElement;
+  }
+
+  if (inputClasslist.contains('input-degree-currently-studying')) {
+    inputClasslist.replace(inputElClass, `${inputElClass}-${cloneNum}`);
+    const resumeClonedElement = clonedResumeSection.querySelector(
+      `.resume-degree-end-year-${cloneNum}`
+    );
+    return resumeClonedElement;
+  }
+};
+
+const getCloneNumOptionalSelector = function (cloneNumOptional) {
+  const cloneNumOptionalSelector = cloneNumOptional
+    ? `-${cloneNumOptional}`
+    : '';
+  return cloneNumOptionalSelector;
 };
 
 // wróć dodaj też guzik do usunięcia - usuwaj ostatniego childa
