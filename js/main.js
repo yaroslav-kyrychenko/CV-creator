@@ -31,7 +31,6 @@ const subsectionsMapping = {
   'input-phone-number': 'resume-phone-number',
   'input-email': 'resume-email',
   'input-social-media-links': 'resume-social-media-links',
-  // WRÓĆ POTRZEBNE JEST OBEJŚCIE TAM GDZIE MA BYĆ KILKA TAKICH SAMYCH ELEMENTÓW
   'input-university-name': 'resume-university-name',
   'input-education-level': 'resume-education-level',
   'input-degree-name': 'resume-degree-name',
@@ -218,27 +217,31 @@ const toggleSwitchSectionVisibilityHandler = function (toggleSwitchCheckbox) {
   }
 };
 
-const degreeYearsSelectHandler = function (cloneNum) {
-  // const cloneNumOptionalSelector = getCloneNumOptionalSelector(cloneNum);
-  // const inputDegreeStartYear = document.querySelector(
-  //   `.input-degree-start-year${cloneNumOptionalSelector}`
-  // );
-  // const inputDegreeEndYear = document.querySelector(
-  //   `.input-degree-end-year${cloneNumOptionalSelector}`
-  // );
-  // const inputIsCurrentlyStudying = document.querySelector(
-  //   `.input-degree-currently-studying${cloneNumOptionalSelector}`
-  // );
+const degreeYearsSelectHandler = function (cloneOptionalNum) {
+  const cloneNum = getCloneNumOptionalSelector(cloneOptionalNum);
   const inputDegreeStartYear = document.querySelector(
-    `.input-degree-start-year`
+    `.input-degree-start-year${cloneNum}`
   );
-  const inputDegreeEndYear = document.querySelector(`.input-degree-end-year`);
+  const inputDegreeEndYear = document.querySelector(
+    `.input-degree-end-year${cloneNum}`
+  );
   const inputIsCurrentlyStudying = document.querySelector(
-    `.input-degree-currently-studying`
+    `.input-degree-currently-studying${cloneNum}`
   );
-  // wróć nie działa dynamiczne dodawanie numerku - podejrzewam, że problem jest w dodawaniu listenerów, spróbuj przenieść do osobnej funkcji i użyć potem tylko na sklonowanej
 
   populateInputDegreeYears();
+  addEventListenersToDegreeDates(
+    inputDegreeStartYear,
+    inputDegreeEndYear,
+    inputIsCurrentlyStudying
+  );
+};
+
+const addEventListenersToDegreeDates = function (
+  inputDegreeStartYear,
+  inputDegreeEndYear,
+  inputIsCurrentlyStudying
+) {
   inputDegreeStartYear.addEventListener('input', () => {
     validateDates(
       inputDegreeStartYear,
@@ -296,7 +299,6 @@ const jobDatesSelectHandler = function () {
   });
 };
 
-// wróć nie działa dla sklonowanych
 const validateDates = function (
   inputStartDateEl,
   inputEndDateEl,
@@ -377,27 +379,30 @@ const addNewEducationSection = function () {
   const resumeEducationContent = document.querySelector(
     '.resume-education-content'
   );
+  // wróć przemyśleć dodanie guzika z usuwaniem sekcji - musi być prawdopodobnie w kontenerze razem z dodawaniem sekcji, tylko trzeba uwzględnić kontener tutaj - prawdopodobnie w parentEL niżej
   btnAddNewEducation.addEventListener('click', () => {
     const parentEl = btnAddNewEducation.parentElement;
     const formEl = parentEl.children[0];
     const clonedInputSection = formEl.cloneNode(true);
     const clonedResumeSection = resumeEducationContent.cloneNode(true);
+    let educationCloneNum = sectionsQuantityForCloningMapping.education;
     sectionsQuantityForCloningMapping.education += 1;
+    educationCloneNum += 1;
     clonedInputSection.classList.add(
       `input-cloned-education-section-${sectionsQuantityForCloningMapping.education}`
     );
     clonedResumeSection.classList.add(
       `resume-cloned-education-section-${sectionsQuantityForCloningMapping.education}`
     );
+
+    parentEl.appendChild(clonedInputSection);
+    resumeEducationSection.appendChild(clonedResumeSection);
     updateResumeFromClonedInputFields(
       clonedInputSection,
       clonedResumeSection,
-      sectionsQuantityForCloningMapping.education
+      educationCloneNum
     );
-    console.log(sectionsQuantityForCloningMapping.education);
-    degreeYearsSelectHandler(sectionsQuantityForCloningMapping.education);
-    parentEl.appendChild(clonedInputSection);
-    resumeEducationSection.appendChild(clonedResumeSection);
+    degreeYearsSelectHandler(educationCloneNum);
   });
 };
 
@@ -423,7 +428,6 @@ const updateResumeFromClonedInputFields = function (
           resumeClonedElement,
           cloneNum
         );
-        // degreeYearsSelectHandler(cloneNum);
         break;
       }
     }
