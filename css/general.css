@@ -156,6 +156,32 @@ CONFIG SECTION
   width: 50%;
 }
 
+.add-remove-btn-container {
+  display: flex;
+  gap: 1.6rem;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  transform: translate(120%, -60%);
+}
+
+.btn-add-new,
+.btn-remove {
+  height: 3.3rem;
+  width: 3.3rem;
+  font-size: 1.6rem;
+  color: #262728;
+  background-color: #bdc3c7;
+  border: none;
+  cursor: pointer;
+  border-radius: 1rem;
+}
+
+.btn-add-new:hover,
+.btn-remove:hover {
+  animation: pulsate 1.5s infinite;
+}
+
 .form {
   display: flex;
   flex-direction: column;

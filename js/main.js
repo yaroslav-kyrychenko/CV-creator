@@ -25,7 +25,7 @@ const sectionsMapping = {
   'config-section-certificates': 'resume-certificates',
 };
 
-const subsectionsMapping = {
+const inputItemsMapping = {
   'input-name': 'resume-name',
   'input-birthdate': 'resume-birthdate',
   'input-phone-number': 'resume-phone-number',
@@ -188,10 +188,10 @@ const updateResumeFromInputFields = function () {
   const listInputElements = document.querySelectorAll('.input-element');
   listInputElements.forEach((inputElement) => {
     const inputClasslist = inputElement.classList;
-    for (const inputElClass in subsectionsMapping) {
+    for (const inputElClass in inputItemsMapping) {
       if (inputClasslist.contains(inputElClass)) {
         const resumeElement = document.querySelector(
-          `.${subsectionsMapping[inputElClass]}`
+          `.${inputItemsMapping[inputElClass]}`
         );
         listenForChangeInResumeText(inputElement, resumeElement);
         break;
@@ -379,48 +379,49 @@ const addNewEducationSection = function () {
   const resumeEducationContent = document.querySelector(
     '.resume-education-content'
   );
-  // wróć przemyśleć dodanie guzika z usuwaniem sekcji - musi być prawdopodobnie w kontenerze razem z dodawaniem sekcji, tylko trzeba uwzględnić kontener tutaj - prawdopodobnie w parentEL niżej
+
   btnAddNewEducation.addEventListener('click', () => {
-    const parentEl = btnAddNewEducation.parentElement;
+    const parentEl = btnAddNewEducation.parentElement.parentElement;
     const formEl = parentEl.children[0];
-    const clonedInputSection = formEl.cloneNode(true);
-    const clonedResumeSection = resumeEducationContent.cloneNode(true);
+    const clonedInputSubsection = formEl.cloneNode(true);
+    const clonedResumeSubsection = resumeEducationContent.cloneNode(true);
     let educationCloneNum = sectionsQuantityForCloningMapping.education;
     sectionsQuantityForCloningMapping.education += 1;
     educationCloneNum += 1;
-    clonedInputSection.classList.add(
+    clonedInputSubsection.classList.add(
       `input-cloned-education-section-${sectionsQuantityForCloningMapping.education}`
     );
-    clonedResumeSection.classList.add(
+    clonedResumeSubsection.classList.add(
       `resume-cloned-education-section-${sectionsQuantityForCloningMapping.education}`
     );
 
-    parentEl.appendChild(clonedInputSection);
-    resumeEducationSection.appendChild(clonedResumeSection);
+    parentEl.appendChild(clonedInputSubsection);
+    resumeEducationSection.appendChild(clonedResumeSubsection);
     updateResumeFromClonedInputFields(
-      clonedInputSection,
-      clonedResumeSection,
+      clonedInputSubsection,
+      clonedResumeSubsection,
       educationCloneNum
     );
     degreeYearsSelectHandler(educationCloneNum);
+    removeLastClone(parentEl, resumeEducationSection);
   });
 };
 
 const updateResumeFromClonedInputFields = function (
-  clonedInputSection,
-  clonedResumeSection,
+  clonedInputSubsection,
+  clonedResumeSubsection,
   cloneNum
 ) {
   const listClonedInputElements =
-    clonedInputSection.querySelectorAll('.input-element');
+    clonedInputSubsection.querySelectorAll('.input-element');
   listClonedInputElements.forEach((inputClonedElement) => {
     const inputClasslist = inputClonedElement.classList;
-    for (const inputElClass in subsectionsMapping) {
+    for (const inputElClass in inputItemsMapping) {
       if (inputClasslist.contains(inputElClass)) {
         const resumeClonedElement = updateResumeFromClonedInputEducationHandler(
           inputClasslist,
           inputElClass,
-          clonedResumeSection,
+          clonedResumeSubsection,
           cloneNum
         );
         listenForChangeInResumeText(
@@ -437,13 +438,13 @@ const updateResumeFromClonedInputFields = function (
 const updateResumeFromClonedInputEducationHandler = function (
   inputClasslist,
   inputElClass,
-  clonedResumeSection,
+  clonedResumeSubsection,
   cloneNum
 ) {
   if (!inputClasslist.contains('input-currently')) {
     inputClasslist.replace(inputElClass, `${inputElClass}-${cloneNum}`);
-    const resumeElClass = subsectionsMapping[inputElClass];
-    const resumeClonedElement = clonedResumeSection.querySelector(
+    const resumeElClass = inputItemsMapping[inputElClass];
+    const resumeClonedElement = clonedResumeSubsection.querySelector(
       `.${resumeElClass}`
     );
     resumeClonedElement.classList.replace(
@@ -455,7 +456,7 @@ const updateResumeFromClonedInputEducationHandler = function (
 
   if (inputClasslist.contains('input-degree-currently-studying')) {
     inputClasslist.replace(inputElClass, `${inputElClass}-${cloneNum}`);
-    const resumeClonedElement = clonedResumeSection.querySelector(
+    const resumeClonedElement = clonedResumeSubsection.querySelector(
       `.resume-degree-end-year-${cloneNum}`
     );
     return resumeClonedElement;
@@ -467,6 +468,32 @@ const getCloneNumOptionalSelector = function (cloneNumOptional) {
     ? `-${cloneNumOptional}`
     : '';
   return cloneNumOptionalSelector;
+};
+
+// wróć - błąd polega na tym, że usuwane są wszystkie sklonowane elementy, a musi być tylko ostatni
+const removeLastClone = function (inputParentEl, resumeParentEl) {
+  const removeLastCloneBtn = document.querySelector('.btn-remove');
+  removeLastCloneBtn.addEventListener('click', () => {
+    const inputLastClonedIndex = getLastClonedChild(inputParentEl);
+    const resumeLastClonedIndex = getLastClonedChild(resumeParentEl);
+    const lastInputClone = inputParentEl.children[inputLastClonedIndex];
+    const lastResumeClone = resumeParentEl.children[resumeLastClonedIndex];
+    inputParentEl.removeChild(lastInputClone);
+    resumeParentEl.removeChild(lastResumeClone);
+
+    console.log(inputParentEl.children[inputLastClonedIndex]);
+    console.log(resumeParentEl.children[resumeLastClonedIndex]);
+
+    // sectionsQuantityForCloningMapping.education -= 1;
+  });
+};
+
+const getLastClonedChild = function (parentEl) {
+  const childrenAmount = parentEl.children.length;
+  if (childrenAmount > 2) {
+    const indexOfLastClonedChild = childrenAmount - 1;
+    return indexOfLastClonedChild;
+  }
 };
 
 // wróć dodaj też guzik do usunięcia - usuwaj ostatniego childa
