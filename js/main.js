@@ -379,10 +379,12 @@ const addNewEducationSection = function () {
   const resumeEducationContent = document.querySelector(
     '.resume-education-content'
   );
+  const inputEducationContent = document.querySelector(
+    '.config-section-content-education'
+  );
 
   btnAddNewEducation.addEventListener('click', () => {
-    const parentEl = btnAddNewEducation.parentElement.parentElement;
-    const formEl = parentEl.children[0];
+    const formEl = inputEducationContent.children[0];
     const clonedInputSubsection = formEl.cloneNode(true);
     const clonedResumeSubsection = resumeEducationContent.cloneNode(true);
     let educationCloneNum = sectionsQuantityForCloningMapping.education;
@@ -395,7 +397,7 @@ const addNewEducationSection = function () {
       `resume-cloned-education-section-${sectionsQuantityForCloningMapping.education}`
     );
 
-    parentEl.appendChild(clonedInputSubsection);
+    inputEducationContent.appendChild(clonedInputSubsection);
     resumeEducationSection.appendChild(clonedResumeSubsection);
     updateResumeFromClonedInputFields(
       clonedInputSubsection,
@@ -403,8 +405,8 @@ const addNewEducationSection = function () {
       educationCloneNum
     );
     degreeYearsSelectHandler(educationCloneNum);
-    removeLastClone(parentEl, resumeEducationSection);
   });
+  removeLastClone(inputEducationContent, resumeEducationSection);
 };
 
 const updateResumeFromClonedInputFields = function (
@@ -470,7 +472,6 @@ const getCloneNumOptionalSelector = function (cloneNumOptional) {
   return cloneNumOptionalSelector;
 };
 
-// wróć - błąd polega na tym, że usuwane są wszystkie sklonowane elementy, a musi być tylko ostatni
 const removeLastClone = function (inputParentEl, resumeParentEl) {
   const removeLastCloneBtn = document.querySelector('.btn-remove');
   removeLastCloneBtn.addEventListener('click', () => {
@@ -478,13 +479,13 @@ const removeLastClone = function (inputParentEl, resumeParentEl) {
     const resumeLastClonedIndex = getLastClonedChild(resumeParentEl);
     const lastInputClone = inputParentEl.children[inputLastClonedIndex];
     const lastResumeClone = resumeParentEl.children[resumeLastClonedIndex];
-    inputParentEl.removeChild(lastInputClone);
-    resumeParentEl.removeChild(lastResumeClone);
-
-    console.log(inputParentEl.children[inputLastClonedIndex]);
-    console.log(resumeParentEl.children[resumeLastClonedIndex]);
-
-    // sectionsQuantityForCloningMapping.education -= 1;
+    if (inputLastClonedIndex === sectionsQuantityForCloningMapping.education) {
+      inputParentEl.removeChild(lastInputClone);
+      resumeParentEl.removeChild(lastResumeClone);
+      sectionsQuantityForCloningMapping.education -= 1;
+    } else {
+      return;
+    }
   });
 };
 
@@ -495,8 +496,6 @@ const getLastClonedChild = function (parentEl) {
     return indexOfLastClonedChild;
   }
 };
-
-// wróć dodaj też guzik do usunięcia - usuwaj ostatniego childa
 
 degreeYearsSelectHandler();
 jobDatesSelectHandler();
