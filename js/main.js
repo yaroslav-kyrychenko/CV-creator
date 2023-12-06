@@ -474,6 +474,10 @@ const getCloneNumOptionalSelector = function (cloneNumOptional) {
 
 const removeLastClone = function (inputParentEl, resumeParentEl) {
   const removeLastCloneBtn = document.querySelector('.btn-remove');
+  // wróć problem z odkrywaniem/ukrywaniem przycisku
+  if (sectionsQuantityForCloningMapping.education > 1) {
+    removeLastCloneBtn.classList.toggle('hidden');
+  }
   removeLastCloneBtn.addEventListener('click', () => {
     const inputLastClonedIndex = getLastClonedChild(inputParentEl);
     const resumeLastClonedIndex = getLastClonedChild(resumeParentEl);
