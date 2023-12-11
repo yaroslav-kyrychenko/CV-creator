@@ -8,13 +8,22 @@ const listToggleSwitchCheckboxes = document.querySelectorAll(
 const inputName = document.querySelector('.input-name');
 const resumeName = document.querySelector('.resume-name');
 
-let subsectionsQuantityForCloningMapping = {
-  links: 1,
-  education: 1,
-  experience: 1,
-  hardSkills: 1,
-  softSkills: 1,
-  certificates: 1,
+// let subsectionsClonesQuantities = {
+//   links: 1,
+//   education: 1,
+//   experience: 1,
+//   hardSkills: 1,
+//   softSkills: 1,
+//   certificates: 1,
+// };
+
+let subsectionsClonesQuantities = {
+  'form-item-social-media-links': 1,
+  'config-section-content-education': 1,
+  'config-section-content-experience': 1,
+  'form-hard-skills': 1,
+  'form-soft-skills': 1,
+  'form-item-certificates': 1,
 };
 
 const sectionsMapping = {
@@ -385,19 +394,20 @@ const addNewEducationSection = function () {
   const inputEducationContent = document.querySelector(
     '.config-section-content-education'
   );
-  let educationCloneNum = subsectionsQuantityForCloningMapping.education;
+  let educationCloneNum =
+    subsectionsClonesQuantities['config-section-content-education'];
 
   btnAddNewEducation.addEventListener('click', () => {
     const formEl = inputEducationContent.children[0];
     const clonedInputSubsection = formEl.cloneNode(true);
     const clonedResumeSubsection = resumeEducationContent.cloneNode(true);
-    subsectionsQuantityForCloningMapping.education += 1;
+    subsectionsClonesQuantities['config-section-content-education'] += 1;
     educationCloneNum += 1;
     clonedInputSubsection.classList.add(
-      `input-cloned-education-section-${subsectionsQuantityForCloningMapping.education}`
+      `input-cloned-education-section-${subsectionsClonesQuantities['config-section-content-education']}`
     );
     clonedResumeSubsection.classList.add(
-      `resume-cloned-education-section-${subsectionsQuantityForCloningMapping.education}`
+      `resume-cloned-education-section-${subsectionsClonesQuantities['config-section-content-education']}`
     );
 
     inputEducationContent.appendChild(clonedInputSubsection);
@@ -408,7 +418,6 @@ const addNewEducationSection = function () {
       educationCloneNum
     );
     degreeYearsSelectHandler(educationCloneNum);
-    console.log(educationCloneNum);
   });
   removeLastClone(inputEducationContent, resumeEducationSection);
 };
@@ -476,40 +485,55 @@ const getCloneNumOptionalSelector = function (cloneNumOptional) {
   return cloneNumOptionalSelector;
 };
 
+// wróć przerobić, żeby była wielorazowa
 const removeLastClone = function (inputParentEl, resumeParentEl) {
-  const removeLastCloneBtn = document.querySelector('.btn-remove');
+  const removeLastCloneBtn = document.querySelector(
+    '.btn-remove-last-education-item'
+  );
   removeLastCloneBtn.addEventListener('click', () => {
     const inputLastClonedIndex = getLastClonedChild(inputParentEl);
     const resumeLastClonedIndex = getLastClonedChild(resumeParentEl);
     const lastInputClone = inputParentEl.children[inputLastClonedIndex];
     const lastResumeClone = resumeParentEl.children[resumeLastClonedIndex];
     if (
-      inputLastClonedIndex === subsectionsQuantityForCloningMapping.education
+      inputLastClonedIndex ===
+      subsectionsClonesQuantities['config-section-content-education']
     ) {
       inputParentEl.removeChild(lastInputClone);
       resumeParentEl.removeChild(lastResumeClone);
-      subsectionsQuantityForCloningMapping.education -= 1;
+      subsectionsClonesQuantities['config-section-content-education'] -= 1;
     } else {
       return;
     }
   });
 };
 
-// działa dla konkretnie nazwanych elementów, trzeba przerobić tak, żeby działało dla najbliższych
+// wróć działa dla konkretnie nazwanych elementów, trzeba przerobić tak, żeby działało dla najbliższych
 const toggleRemoveSubsectionBtn = function () {
   const btnAddNewEducation = document.querySelector('.btn-add-new-education');
   const btnRemoveEducation = document.querySelector(
     '.btn-remove-last-education-item'
   );
   btnAddNewEducation.addEventListener('click', () => {
-    if (subsectionsQuantityForCloningMapping.education > 1) {
+    if (subsectionsClonesQuantities['config-section-content-education'] > 1) {
       btnRemoveEducation.classList.remove('hidden');
     }
   });
   btnRemoveEducation.addEventListener('click', () => {
-    if (subsectionsQuantityForCloningMapping.education === 1) {
+    if (subsectionsClonesQuantities['config-section-content-education'] === 1) {
       btnRemoveEducation.classList.add('hidden');
     }
+  });
+};
+
+const toggleRemove = function () {
+  const removeBtnList = document.querySelectorAll('.btn-remove');
+  removeBtnList.forEach((removeBtn) => {
+    const removeBtnClasslist = Array.from(removeBtn.classList);
+    const btnClass = removeBtnClasslist.filter((btnClass) =>
+      btnClass.startsWith('btn-remove-last-')
+    )[0];
+    console.log(btnClass);
   });
 };
 
@@ -527,3 +551,4 @@ uploadResumePhotoHandler();
 addNewEducationSection();
 updateResumeFromInputFields();
 toggleRemoveSubsectionBtn();
+toggleRemove();

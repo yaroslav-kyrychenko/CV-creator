@@ -162,7 +162,14 @@ CONFIG SECTION
   position: absolute;
   bottom: 0;
   right: 0;
+}
+
+.add-remove-btn-container-within-section {
   transform: translate(120%, -60%);
+}
+
+.add-remove-btn-container-within-form {
+  transform: translate(120%);
 }
 
 .btn-add-new,
