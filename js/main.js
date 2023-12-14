@@ -528,12 +528,19 @@ const toggleRemoveSubsectionBtn = function () {
 
 const toggleRemove = function () {
   const removeBtnList = document.querySelectorAll('.btn-remove');
-  removeBtnList.forEach((removeBtn) => {
-    const removeBtnClasslist = Array.from(removeBtn.classList);
-    const btnClass = removeBtnClasslist.filter((btnClass) =>
+  removeBtnList.forEach((btn) => {
+    const removeBtnClasslist = Array.from(btn.classList);
+    const removeBtnSpecificClass = removeBtnClasslist.filter((btnClass) =>
       btnClass.startsWith('btn-remove-last-')
     )[0];
-    console.log(btnClass);
+    const removeBtn = document.querySelector(`.${removeBtnSpecificClass}`);
+    const parentElClasslist = removeBtn.parentElement.parentElement.classList;
+    let clonesQuantitiesMappingClass;
+    for (const clonesClass in subsectionsClonesQuantities) {
+      if (parentElClasslist.contains(clonesClass))
+        clonesQuantitiesMappingClass = clonesClass;
+    }
+    console.log(clonesQuantitiesMappingClass);
   });
 };
 
