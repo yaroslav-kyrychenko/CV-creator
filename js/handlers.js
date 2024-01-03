@@ -30,15 +30,17 @@ export const listenForChangeInResumeText = function (
     debouncedUpdateResumeTextHandler(inputElement, resumeElement, cloneNum);
   });
 
-  inputElement.addEventListener('change', () => {
-    updateResumeText(inputElement, resumeElement, cloneNum);
-  });
+  // wróć chyba nie jest potrzebne, ale do przetestowania wszystkie elementy
+  // inputElement.addEventListener('change', () => {
+  //   updateResumeText(inputElement, resumeElement, cloneNum);
+  // });
 
   inputElement.addEventListener('focusout', () => {
     resumeElement.classList.remove('active-resume-element');
   });
 };
 
+// wróć przerobić logikę i rozbić na osobny mapping z funkcjami i handler
 export const updateResumeText = function (
   inputElement,
   resumeElement,
@@ -62,6 +64,12 @@ export const updateResumeText = function (
     inputElement.classList.contains('input-currently')
   ) {
     currentlyStudyingOrWorkingHandler(inputElement, resumeElement, cloneNum);
+  } else if (inputElement.classList.contains('input-hard-skill')) {
+    const listHardSkills = document.querySelector('.resume-list-hard-skills');
+    listHardSkills.innerHTML = `<li class="resume-list-item-hard-skills">${inputElement.value}</li>`;
+  } else if (inputElement.classList.contains('input-soft-skill')) {
+    const listHardSkills = document.querySelector('.resume-list-soft-skills');
+    listHardSkills.innerHTML = `<li class="resume-list-item-soft-skills">${inputElement.value}</li>`;
   } else {
     resumeElement.textContent = inputElement.value;
   }
