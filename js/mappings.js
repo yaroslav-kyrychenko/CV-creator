@@ -33,3 +33,30 @@ export const inputItemsMapping = {
   'input-soft-skill': 'resume-list-item-soft-skills',
   'input-certificate': 'resume-list-item-certificate',
 };
+
+export const toggleRemoveBtnMapping = {
+  'btn-remove-last-link': {
+    parent: 'form-item-social-media-links',
+    addBtn: 'btn-add-new-link',
+  },
+  'btn-remove-last-education-item': {
+    parent: 'config-section-content-education',
+    addBtn: 'btn-add-new-education',
+  },
+  'btn-remove-last-job-item': {
+    parent: 'config-section-content-experience',
+    addBtn: 'btn-add-new-job',
+  },
+  'btn-remove-last-hard-skill': {
+    parent: 'form-hard-skills',
+    addBtn: 'btn-add-new-hard-skill',
+  },
+  'btn-remove-last-soft-skill': {
+    parent: 'form-soft-skills',
+    addBtn: 'btn-add-new-soft-skill',
+  },
+  'btn-remove-last-certificate': {
+    parent: 'form-item-certificates',
+    addBtn: 'btn-add-new-certificate',
+  },
+};

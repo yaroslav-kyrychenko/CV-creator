@@ -1,6 +1,6 @@
 'use strict';
 
-import { inputItemsMapping } from './mappings.js';
+import { inputItemsMapping, toggleRemoveBtnMapping } from './mappings.js';
 import {
   listenForChangeInResumeText,
   degreeYearsSelectHandler,
@@ -142,37 +142,30 @@ const getLastClonedChild = function (parentEl) {
   }
 };
 
-// wróć działa dla konkretnie nazwanych elementów, trzeba przerobić tak, żeby działało dla najbliższych
-export const toggleRemoveSubsectionBtn = function () {
-  const btnAddNewEducation = document.querySelector('.btn-add-new-education');
-  const btnRemoveEducation = document.querySelector(
-    '.btn-remove-last-education-item'
-  );
-  btnAddNewEducation.addEventListener('click', () => {
-    if (subsectionsClonesQuantities['config-section-content-education'] > 1) {
-      btnRemoveEducation.classList.remove('hidden');
-    }
-  });
-  btnRemoveEducation.addEventListener('click', () => {
-    if (subsectionsClonesQuantities['config-section-content-education'] === 1) {
-      btnRemoveEducation.classList.add('hidden');
-    }
-  });
-};
-
 export const toggleRemove = function () {
   const removeBtnList = document.querySelectorAll('.btn-remove');
-  removeBtnList.forEach((btn) => {
-    const removeBtnClasslist = Array.from(btn.classList);
+  removeBtnList.forEach((btnRemoveItem) => {
+    const removeBtnClasslist = Array.from(btnRemoveItem.classList);
     const removeBtnSpecificClass = removeBtnClasslist.filter((btnClass) =>
       btnClass.startsWith('btn-remove-last-')
     )[0];
-    const removeBtn = document.querySelector(`.${removeBtnSpecificClass}`);
-    const parentElClasslist = removeBtn.parentElement.parentElement.classList;
-    let clonesQuantitiesMappingClass;
-    for (const clonesClass in subsectionsClonesQuantities) {
-      if (parentElClasslist.contains(clonesClass))
-        clonesQuantitiesMappingClass = clonesClass;
-    }
+    const elementsMapping = toggleRemoveBtnMapping[removeBtnSpecificClass];
+
+    const parentElClass = elementsMapping.parent;
+
+    const addBtnClass = elementsMapping.addBtn;
+    const btnAddItem = document.querySelector(`.${addBtnClass}`);
+
+    // wróć po dodaniu "dodawania" dla pozostałych sekcji czy działa
+    btnAddItem.addEventListener('click', () => {
+      if (subsectionsClonesQuantities[parentElClass] > 1) {
+        btnRemoveItem.classList.remove('hidden');
+      }
+    });
+    btnRemoveItem.addEventListener('click', () => {
+      if (subsectionsClonesQuantities[parentElClass] === 1) {
+        btnRemoveItem.classList.add('hidden');
+      }
+    });
   });
 };

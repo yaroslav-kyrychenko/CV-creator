@@ -9,11 +9,7 @@ import {
   degreeYearsSelectHandler,
   jobDatesSelectHandler,
 } from './handlers.js';
-import {
-  addNewEducationSection,
-  toggleRemoveSubsectionBtn,
-  toggleRemove,
-} from './clones.js';
+import { addNewEducationSection, toggleRemove } from './clones.js';
 
 const updateResumeFromInputFields = function () {
   const listInputElements = document.querySelectorAll('.input-element');
@@ -36,5 +32,4 @@ jobDatesSelectHandler();
 uploadResumePhotoHandler();
 addNewEducationSection();
 updateResumeFromInputFields();
-toggleRemoveSubsectionBtn();
 toggleRemove();

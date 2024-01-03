@@ -89,7 +89,7 @@ export const calculateCurrentAge = function (inputBirthdate) {
   const currentAgeLastDigit = String(currentAgeInYears).at(-1);
   let formattedAgeString;
   if (currentAgeInYears < 0) {
-    alert('Wybrałeś przyszłą datę. Wybierz właściwą datę.');
+    alert('Została wybrana przyszła data. Wybierz właściwą datę.');
     return '';
   }
   if (currentAgeInYears === 0) return '0 lat';
