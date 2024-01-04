@@ -110,6 +110,21 @@ RESUME CREATOR
   flex-basis: auto;
 }
 
+/* /////////////////////////////////////
+CONFIG SECTION
+//////////////////////////////////// */
+
+.config-container {
+  width: 35vw;
+  padding: 6.4rem 0 6.4rem 6.4rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.6s;
+}
+
 .input-user-photo {
   display: none;
 }
@@ -125,6 +140,45 @@ RESUME CREATOR
 
 .form-item-personal-details:first-of-type {
   justify-content: end;
+}
+
+/* wróć do rozwiązania problem z szerokością pola */
+.form-item-social-media-links {
+  display: flex;
+}
+
+.form-item-social-media-links label {
+  flex-grow: 1;
+}
+
+.social-media-links-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  flex-grow: 1;
+}
+
+.input-social-media-link {
+  width: 100%;
+}
+
+.btn-add-new-link,
+.btn-add-new-hard-skill,
+.btn-add-new-soft-skill,
+.btn-add-new-certificate {
+  top: 0;
+  right: -5rem;
+}
+
+.config-section-content-education,
+.config-section-content-experience {
+  position: relative;
+}
+
+.btn-add-new-education,
+.btn-add-new-job {
+  bottom: 0;
+  right: -5rem;
 }
 
 .input-currently[type='checkbox'] {
@@ -162,39 +216,6 @@ RESUME CREATOR
 }
 
 /* /////////////////////////////////////
-CONFIG SECTION
-//////////////////////////////////// */
-
-.config-container {
-  width: 35vw;
-  padding: 6.4rem 0 6.4rem 6.4rem;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  transition: all 0.6s;
-}
-
-.btn-add-new-link,
-.btn-add-new-hard-skill,
-.btn-add-new-soft-skill,
-.btn-add-new-certificate {
-  top: 0;
-  right: -5rem;
-}
-
-.config-section-content-education,
-.config-section-content-experience {
-  position: relative;
-}
-
-.btn-add-new-education,
-.btn-add-new-job {
-  bottom: 0;
-  right: -5rem;
-}
-/* /////////////////////////////////////
 PREVIEW WINDOW
 //////////////////////////////////// */
 
@@ -222,10 +243,10 @@ PREVIEW WINDOW
   padding: 2.4rem 0;
 }
 
-.resume-social-media-links,
-.resume-social-media-links:active,
-.resume-social-media-links:hover,
-.resume-social-media-links:visited {
+.resume-social-media-link,
+.resume-social-media-link:active,
+.resume-social-media-link:hover,
+.resume-social-media-link:visited {
   text-decoration: none;
   display: inline-block;
 }

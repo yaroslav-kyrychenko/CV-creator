@@ -7,7 +7,7 @@ import {
 } from './handlers.js';
 
 let subsectionsClonesQuantities = {
-  'form-item-social-media-links': 1,
+  'input-social-media-link': 1,
   'config-section-content-education': 1,
   'config-section-content-experience': 1,
   'form-hard-skills': 1,
@@ -17,9 +17,6 @@ let subsectionsClonesQuantities = {
 
 export const addNewEducationSection = function () {
   const btnAddNewEducation = document.querySelector('.btn-add-new-education');
-  const btnRemoveEducation = document.querySelector(
-    '.btn-remove-last-education-item'
-  );
   const resumeEducationSection = document.querySelector('.resume-education');
   const resumeEducationContent = document.querySelector(
     '.resume-education-content'
@@ -34,8 +31,8 @@ export const addNewEducationSection = function () {
     const formEl = inputEducationContent.children[0];
     const clonedInputSubsection = formEl.cloneNode(true);
     const clonedResumeSubsection = resumeEducationContent.cloneNode(true);
-    subsectionsClonesQuantities['config-section-content-education'] += 1;
-    educationCloneNum += 1;
+    subsectionsClonesQuantities['config-section-content-education']++;
+    educationCloneNum++;
     clonedInputSubsection.classList.add(
       `input-cloned-education-section-${subsectionsClonesQuantities['config-section-content-education']}`
     );
@@ -55,6 +52,57 @@ export const addNewEducationSection = function () {
   removeLastClone(inputEducationContent, resumeEducationSection);
 };
 
+// wróć do dokończenia
+export const addNewSocialMediaLink = function () {
+  const btnAddNewSocialMediaLink = document.querySelector('.btn-add-new-link');
+  const resumePersonalDetailsSection = document.querySelector(
+    '.resume-personal-details'
+  );
+  const resumeSocialMediaLink = document.querySelector(
+    '.resume-social-media-link'
+  );
+  const inputSocialMediaLinkContainer = document.querySelector(
+    '.social-media-links-container'
+  );
+  let socialMediaLinksCloneNum =
+    subsectionsClonesQuantities['input-social-media-link'];
+
+  btnAddNewSocialMediaLink.addEventListener('click', (e) => {
+    const inputFieldSocialMediaLink = inputSocialMediaLinkContainer.children[0];
+    const clonedLinkInputField = inputFieldSocialMediaLink.cloneNode(true);
+    const clonedResumeSocialMediaLink = resumeSocialMediaLink.cloneNode(true);
+    subsectionsClonesQuantities['input-social-media-link']++;
+    socialMediaLinksCloneNum++;
+
+    clonedLinkInputField.classList.add(
+      `input-cloned-social-media-link-${subsectionsClonesQuantities['input-social-media-link']}`
+    );
+    clonedResumeSocialMediaLink.classList.add(
+      `resume-cloned-social-media-link-${subsectionsClonesQuantities['input-social-media-link']}`
+    );
+
+    inputSocialMediaLinkContainer.appendChild(clonedLinkInputField);
+    resumePersonalDetailsSection.appendChild(clonedResumeSocialMediaLink);
+    updateResumeFromClonedInputFields(
+      clonedLinkInputField,
+      clonedResumeSocialMediaLink,
+      socialMediaLinksCloneNum
+    );
+  });
+  // event listener:
+  // formEl
+  // clone input
+  // clone resume
+  // increment cloneNum in the object
+  // increment cloneNum in the scope
+  // add numbered classes to input and resume elements
+  // append input and resume
+  // use updateResumeFromCloned...
+  // 3) use remove last clone
+};
+addNewSocialMediaLink();
+
+// wróć do przerobienia jest ta funkcja, bo aktualnie uwzględnia tylko education
 const updateResumeFromClonedInputFields = function (
   clonedInputSubsection,
   clonedResumeSubsection,

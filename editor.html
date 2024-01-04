@@ -92,22 +92,30 @@
                 <label for="social-media-links"
                   >Linki do portali społecznościowych</label
                 >
-                <input
-                  type="url"
-                  name="social-media-links"
-                  class="input-element input-text-field input-social-media-links"
-                  placeholder="Linki do portali społecznościowych"
-                />
+                <div class="social-media-links-container">
+                  <input
+                    type="url"
+                    name="social-media-link"
+                    class="input-element input-text-field input-social-media-link"
+                    placeholder="Linki do portali społecznościowych"
+                  />
+                </div>
                 <div
                   class="add-remove-btn-container add-remove-btn-container-within-form"
                 >
-                  <button class="btn btn-add-new btn-add-new-link">
+                  <button
+                    type="button"
+                    class="btn btn-add-new btn-add-new-link"
+                  >
                     <ion-icon
                       class="icon plus-sign"
                       name="add-outline"
                     ></ion-icon>
                   </button>
-                  <button class="btn btn-remove btn-remove-last-link hidden">
+                  <button
+                    type="button"
+                    class="btn btn-remove btn-remove-last-link hidden"
+                  >
                     <ion-icon
                       class="icon minus-sign"
                       name="remove-outline"
@@ -455,7 +463,7 @@
           <p class="resume-birthdate">2968 (wiek 51 lat na początku wyprawy)</p>
           <p class="resume-phone-number">+41 555 123 456</p>
           <p class="resume-email">frodo.baggins@mordor.com</p>
-          <a href="#" class="resume-social-media-links"
+          <a href="#" class="resume-social-media-link"
             >Brak (świat Śródziemia nie korzysta z mediów społecznościowych)</a
           >
         </div>

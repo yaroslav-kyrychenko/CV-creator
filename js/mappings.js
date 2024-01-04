@@ -15,7 +15,7 @@ export const inputItemsMapping = {
   'input-birthdate': 'resume-birthdate',
   'input-phone-number': 'resume-phone-number',
   'input-email': 'resume-email',
-  'input-social-media-links': 'resume-social-media-links',
+  'input-social-media-link': 'resume-social-media-link',
   'input-university-name': 'resume-university-name',
   'input-education-level': 'resume-education-level',
   'input-degree-name': 'resume-degree-name',
@@ -36,7 +36,7 @@ export const inputItemsMapping = {
 
 export const toggleRemoveBtnMapping = {
   'btn-remove-last-link': {
-    parent: 'form-item-social-media-links',
+    parent: 'social-media-links-container',
     addBtn: 'btn-add-new-link',
   },
   'btn-remove-last-education-item': {

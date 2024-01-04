@@ -56,7 +56,7 @@ export const updateResumeText = function (
       inputElement.value,
       'fullDate'
     )} (${currentAge})`;
-  } else if (inputElement.classList.contains('input-social-media-links')) {
+  } else if (inputElement.classList.contains('input-social-media-link')) {
     resumeElement.setAttribute('href', inputElement.value);
     resumeElement.textContent = inputElement.value;
   } else if (
