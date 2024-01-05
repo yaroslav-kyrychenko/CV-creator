@@ -2,7 +2,7 @@
 
 'use strict';
 
-import { sectionsMapping } from './mappings.js';
+import { sectionsMapping, updateResumeTextHandlerMapping } from './mappings.js';
 import {
   debounce,
   getCloneNumOptionalSelector,
@@ -17,7 +17,7 @@ const listToggleSwitchCheckboxes = document.querySelectorAll(
 );
 const listBtnExpand = document.querySelectorAll('.btn-expand');
 
-export const listenForChangeInResumeText = function (
+export const listenForChangeInInputFields = function (
   inputElement,
   resumeElement,
   cloneNum
@@ -30,48 +30,29 @@ export const listenForChangeInResumeText = function (
     debouncedUpdateResumeTextHandler(inputElement, resumeElement, cloneNum);
   });
 
-  // wróć chyba nie jest potrzebne, ale do przetestowania wszystkie elementy
-  // inputElement.addEventListener('change', () => {
-  //   updateResumeText(inputElement, resumeElement, cloneNum);
-  // });
-
   inputElement.addEventListener('focusout', () => {
     resumeElement.classList.remove('active-resume-element');
   });
 };
 
-// wróć przerobić logikę i rozbić na osobny mapping z funkcjami i handler
 export const updateResumeText = function (
   inputElement,
   resumeElement,
   cloneNum
 ) {
-  if (inputElement.classList.contains('input-job-start-date')) {
-    resumeElement.textContent = getFormattedDate(inputElement.value, 'month');
-  } else if (inputElement.classList.contains('input-specialisation-name')) {
-    resumeElement.textContent = `Specjalność: ${inputElement.value}`;
-  } else if (inputElement.classList.contains('input-birthdate')) {
-    const currentAge = calculateCurrentAge(inputElement);
-    resumeElement.textContent = `${getFormattedDate(
-      inputElement.value,
-      'fullDate'
-    )} (${currentAge})`;
-  } else if (inputElement.classList.contains('input-social-media-link')) {
-    resumeElement.setAttribute('href', inputElement.value);
-    resumeElement.textContent = inputElement.value;
-  } else if (
-    inputElement.classList.contains('input-end-date') ||
-    inputElement.classList.contains('input-currently')
-  ) {
-    currentlyStudyingOrWorkingHandler(inputElement, resumeElement, cloneNum);
-  } else if (inputElement.classList.contains('input-hard-skill')) {
-    const listHardSkills = document.querySelector('.resume-list-hard-skills');
-    listHardSkills.innerHTML = `<li class="resume-list-item-hard-skills">${inputElement.value}</li>`;
-  } else if (inputElement.classList.contains('input-soft-skill')) {
-    const listHardSkills = document.querySelector('.resume-list-soft-skills');
-    listHardSkills.innerHTML = `<li class="resume-list-item-soft-skills">${inputElement.value}</li>`;
-  } else {
-    resumeElement.textContent = inputElement.value;
+  const inputElementClasslist = inputElement.classList;
+  for (const className of inputElementClasslist) {
+    if (updateResumeTextHandlerMapping.hasOwnProperty(className)) {
+      updateResumeTextHandlerMapping[className];
+      updateResumeTextHandlerMapping[className](
+        inputElement,
+        resumeElement,
+        cloneNum
+      );
+      return;
+    } else {
+      resumeElement.textContent = inputElement.value;
+    }
   }
 };
 

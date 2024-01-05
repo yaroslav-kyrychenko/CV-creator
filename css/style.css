@@ -142,23 +142,21 @@ CONFIG SECTION
   justify-content: end;
 }
 
-/* wróć do rozwiązania problem z szerokością pola */
-.form-item-social-media-links {
-  display: flex;
-}
-
-.form-item-social-media-links label {
-  flex-grow: 1;
-}
-
 .social-media-links-container {
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
-  flex-grow: 1;
 }
 
-.input-social-media-link {
+.input-name,
+.input-birthdate,
+.input-phone-number,
+.input-email,
+.social-media-links-container {
+  width: 50%;
+}
+
+.social-media-links-container input {
   width: 100%;
 }
 

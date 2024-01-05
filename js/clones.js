@@ -2,7 +2,7 @@
 
 import { inputItemsMapping, toggleRemoveBtnMapping } from './mappings.js';
 import {
-  listenForChangeInResumeText,
+  listenForChangeInInputFields,
   degreeYearsSelectHandler,
 } from './handlers.js';
 
@@ -42,7 +42,7 @@ export const addNewEducationSection = function () {
 
     inputEducationContent.appendChild(clonedInputSubsection);
     resumeEducationSection.appendChild(clonedResumeSubsection);
-    updateResumeFromClonedInputFields(
+    updateResumeFromClonedSubsections(
       clonedInputSubsection,
       clonedResumeSubsection,
       educationCloneNum
@@ -89,6 +89,7 @@ export const addNewSocialMediaLink = function () {
       socialMediaLinksCloneNum
     );
   });
+
   // event listener:
   // formEl
   // clone input
@@ -103,7 +104,7 @@ export const addNewSocialMediaLink = function () {
 addNewSocialMediaLink();
 
 // wróć do przerobienia jest ta funkcja, bo aktualnie uwzględnia tylko education
-const updateResumeFromClonedInputFields = function (
+const updateResumeFromClonedSubsections = function (
   clonedInputSubsection,
   clonedResumeSubsection,
   cloneNum
@@ -120,7 +121,7 @@ const updateResumeFromClonedInputFields = function (
           clonedResumeSubsection,
           cloneNum
         );
-        listenForChangeInResumeText(
+        listenForChangeInInputFields(
           inputClonedElement,
           resumeClonedElement,
           cloneNum
@@ -131,18 +132,51 @@ const updateResumeFromClonedInputFields = function (
   });
 };
 
+const updateResumeFromClonedInputFields = function (
+  inputClonedField,
+  resumeClonedElement,
+  cloneNum
+) {
+  for (const inputElClass in inputItemsMapping) {
+    if (inputClonedField.classList.contains(inputElClass)) {
+      const clonedEl = updateResumeFromClonedInputEducationHandler(
+        inputClonedField.classList,
+        inputElClass,
+        resumeClonedElement,
+        cloneNum
+      );
+      listenForChangeInInputFields(inputClonedField, clonedEl, cloneNum);
+      break;
+    }
+  }
+  // cloned element
+  // for loop on the mapping object
+  // clones update handler
+  // listen for change in text
+};
+
 const updateResumeFromClonedInputEducationHandler = function (
   inputClasslist,
   inputElClass,
   clonedResumeSubsection,
   cloneNum
 ) {
+  if (inputClasslist.contains('input-social-media-link')) {
+    inputClasslist.replace(inputElClass, `${inputElClass}-${cloneNum}`);
+    const resumeElClass = inputItemsMapping[inputElClass];
+    clonedResumeSubsection.classList.replace(
+      resumeElClass,
+      `${resumeElClass}-${cloneNum}`
+    );
+    return clonedResumeSubsection;
+  }
   if (!inputClasslist.contains('input-currently')) {
     inputClasslist.replace(inputElClass, `${inputElClass}-${cloneNum}`);
     const resumeElClass = inputItemsMapping[inputElClass];
     const resumeClonedElement = clonedResumeSubsection.querySelector(
       `.${resumeElClass}`
     );
+    console.log(inputClasslist);
     resumeClonedElement.classList.replace(
       resumeElClass,
       `${resumeElClass}-${cloneNum}`
@@ -152,6 +186,7 @@ const updateResumeFromClonedInputEducationHandler = function (
 
   if (inputClasslist.contains('input-degree-currently-studying')) {
     inputClasslist.replace(inputElClass, `${inputElClass}-${cloneNum}`);
+    console.log(inputClasslist);
     const resumeClonedElement = clonedResumeSubsection.querySelector(
       `.resume-degree-end-year-${cloneNum}`
     );

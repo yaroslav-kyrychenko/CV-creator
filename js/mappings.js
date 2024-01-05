@@ -2,6 +2,9 @@
 
 'use strict';
 
+import { currentlyStudyingOrWorkingHandler } from './handlers.js';
+import { getFormattedDate, calculateCurrentAge } from './helpers.js';
+
 export const sectionsMapping = {
   'config-section-personal-details': 'resume-personal-details',
   'config-section-education': 'resume-education',
@@ -58,5 +61,39 @@ export const toggleRemoveBtnMapping = {
   'btn-remove-last-certificate': {
     parent: 'form-item-certificates',
     addBtn: 'btn-add-new-certificate',
+  },
+};
+
+export const updateResumeTextHandlerMapping = {
+  'input-job-start-date': (inputElement, resumeElement) => {
+    resumeElement.textContent = getFormattedDate(inputElement.value, 'month');
+  },
+  'input-specialisation-name': (inputElement, resumeElement) => {
+    resumeElement.textContent = `Specjalność: ${inputElement.value}`;
+  },
+  'input-birthdate': (inputElement, resumeElement) => {
+    const currentAge = calculateCurrentAge(inputElement);
+    resumeElement.textContent = `${getFormattedDate(
+      inputElement.value,
+      'fullDate'
+    )} (${currentAge})`;
+  },
+  'input-social-media-link': (inputElement, resumeElement) => {
+    resumeElement.setAttribute('href', inputElement.value);
+    resumeElement.textContent = inputElement.value;
+  },
+  'input-end-date': (inputElement, resumeElement, cloneNum) => {
+    currentlyStudyingOrWorkingHandler(inputElement, resumeElement, cloneNum);
+  },
+  'input-currently': (inputElement, resumeElement, cloneNum) => {
+    currentlyStudyingOrWorkingHandler(inputElement, resumeElement, cloneNum);
+  },
+  'input-hard-skill': (inputElement, resumeElement) => {
+    const listHardSkills = document.querySelector('.resume-list-hard-skills');
+    listHardSkills.innerHTML = `<li class="resume-list-item-hard-skills">${inputElement.value}</li>`;
+  },
+  'input-soft-skill': (inputElement, resumeElement) => {
+    const listHardSkills = document.querySelector('.resume-list-soft-skills');
+    listHardSkills.innerHTML = `<li class="resume-list-item-soft-skills">${inputElement.value}</li>`;
   },
 };

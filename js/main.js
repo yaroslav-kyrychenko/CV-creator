@@ -4,7 +4,7 @@
 
 import { inputItemsMapping } from './mappings.js';
 import {
-  listenForChangeInResumeText,
+  listenForChangeInInputFields,
   uploadResumePhotoHandler,
   degreeYearsSelectHandler,
   jobDatesSelectHandler,
@@ -20,7 +20,7 @@ const updateResumeFromInputFields = function () {
         const resumeElement = document.querySelector(
           `.${inputItemsMapping[inputElClass]}`
         );
-        listenForChangeInResumeText(inputElement, resumeElement);
+        listenForChangeInInputFields(inputElement, resumeElement);
         break;
       }
     }
