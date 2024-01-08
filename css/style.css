@@ -246,7 +246,7 @@ PREVIEW WINDOW
 .resume-social-media-link:hover,
 .resume-social-media-link:visited {
   text-decoration: none;
-  display: inline-block;
+  display: block;
 }
 
 .resume-degree-container {

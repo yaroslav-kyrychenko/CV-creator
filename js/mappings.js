@@ -39,27 +39,27 @@ export const inputItemsMapping = {
 
 export const toggleRemoveBtnMapping = {
   'btn-remove-last-link': {
-    parent: 'social-media-links-container',
+    clonedEl: 'input-social-media-link',
     addBtn: 'btn-add-new-link',
   },
   'btn-remove-last-education-item': {
-    parent: 'config-section-content-education',
+    clonedEl: 'config-section-content-education',
     addBtn: 'btn-add-new-education',
   },
   'btn-remove-last-job-item': {
-    parent: 'config-section-content-experience',
+    clonedEl: 'config-section-content-experience',
     addBtn: 'btn-add-new-job',
   },
   'btn-remove-last-hard-skill': {
-    parent: 'form-hard-skills',
+    clonedEl: 'form-hard-skills',
     addBtn: 'btn-add-new-hard-skill',
   },
   'btn-remove-last-soft-skill': {
-    parent: 'form-soft-skills',
+    clonedEl: 'form-soft-skills',
     addBtn: 'btn-add-new-soft-skill',
   },
   'btn-remove-last-certificate': {
-    parent: 'form-item-certificates',
+    clonedEl: 'form-item-certificates',
     addBtn: 'btn-add-new-certificate',
   },
 };

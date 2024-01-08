@@ -17,6 +17,9 @@ let subsectionsClonesQuantities = {
 
 export const addNewEducationSection = function () {
   const btnAddNewEducation = document.querySelector('.btn-add-new-education');
+  const btnRemoveLastEducation = document.querySelector(
+    '.btn-remove-last-education-item'
+  );
   const resumeEducationSection = document.querySelector('.resume-education');
   const resumeEducationContent = document.querySelector(
     '.resume-education-content'
@@ -49,12 +52,19 @@ export const addNewEducationSection = function () {
     );
     degreeYearsSelectHandler(educationCloneNum);
   });
-  removeLastClone(inputEducationContent, resumeEducationSection);
+  removeLastClone(
+    btnRemoveLastEducation,
+    inputEducationContent,
+    resumeEducationSection
+  );
 };
 
 // wróć do dokończenia
 export const addNewSocialMediaLink = function () {
   const btnAddNewSocialMediaLink = document.querySelector('.btn-add-new-link');
+  const btnRemoveLastSocialMediaLink = document.querySelector(
+    '.btn-remove-last-link'
+  );
   const resumePersonalDetailsSection = document.querySelector(
     '.resume-personal-details'
   );
@@ -90,6 +100,12 @@ export const addNewSocialMediaLink = function () {
     );
   });
 
+  removeLastClone(
+    btnRemoveLastSocialMediaLink,
+    inputSocialMediaLinkContainer,
+    resumePersonalDetailsSection
+  );
+
   // event listener:
   // formEl
   // clone input
@@ -101,7 +117,7 @@ export const addNewSocialMediaLink = function () {
   // use updateResumeFromCloned...
   // 3) use remove last clone
 };
-addNewSocialMediaLink();
+// addNewSocialMediaLink();
 
 // wróć do przerobienia jest ta funkcja, bo aktualnie uwzględnia tylko education
 const updateResumeFromClonedSubsections = function (
@@ -139,20 +155,14 @@ const updateResumeFromClonedInputFields = function (
 ) {
   for (const inputElClass in inputItemsMapping) {
     if (inputClonedField.classList.contains(inputElClass)) {
-      const clonedEl = updateResumeFromClonedInputEducationHandler(
-        inputClonedField.classList,
-        inputElClass,
+      listenForChangeInInputFields(
+        inputClonedField,
         resumeClonedElement,
         cloneNum
       );
-      listenForChangeInInputFields(inputClonedField, clonedEl, cloneNum);
       break;
     }
   }
-  // cloned element
-  // for loop on the mapping object
-  // clones update handler
-  // listen for change in text
 };
 
 const updateResumeFromClonedInputEducationHandler = function (
@@ -161,22 +171,12 @@ const updateResumeFromClonedInputEducationHandler = function (
   clonedResumeSubsection,
   cloneNum
 ) {
-  if (inputClasslist.contains('input-social-media-link')) {
-    inputClasslist.replace(inputElClass, `${inputElClass}-${cloneNum}`);
-    const resumeElClass = inputItemsMapping[inputElClass];
-    clonedResumeSubsection.classList.replace(
-      resumeElClass,
-      `${resumeElClass}-${cloneNum}`
-    );
-    return clonedResumeSubsection;
-  }
   if (!inputClasslist.contains('input-currently')) {
     inputClasslist.replace(inputElClass, `${inputElClass}-${cloneNum}`);
     const resumeElClass = inputItemsMapping[inputElClass];
     const resumeClonedElement = clonedResumeSubsection.querySelector(
       `.${resumeElClass}`
     );
-    console.log(inputClasslist);
     resumeClonedElement.classList.replace(
       resumeElClass,
       `${resumeElClass}-${cloneNum}`
@@ -186,7 +186,6 @@ const updateResumeFromClonedInputEducationHandler = function (
 
   if (inputClasslist.contains('input-degree-currently-studying')) {
     inputClasslist.replace(inputElClass, `${inputElClass}-${cloneNum}`);
-    console.log(inputClasslist);
     const resumeClonedElement = clonedResumeSubsection.querySelector(
       `.resume-degree-end-year-${cloneNum}`
     );
@@ -195,31 +194,57 @@ const updateResumeFromClonedInputEducationHandler = function (
 };
 
 // wróć przerobić, żeby była wielorazowa
-const removeLastClone = function (inputParentEl, resumeParentEl) {
-  const removeLastCloneBtn = document.querySelector(
-    '.btn-remove-last-education-item'
-  );
+const removeLastClone = function (
+  removeLastCloneBtn,
+  inputParentEl,
+  resumeParentEl
+) {
   removeLastCloneBtn.addEventListener('click', () => {
+    // wróć czemu wydaje zły numerek w przypadku linka
     const inputLastClonedIndex = getLastClonedChild(inputParentEl);
     const resumeLastClonedIndex = getLastClonedChild(resumeParentEl);
     const lastInputClone = inputParentEl.children[inputLastClonedIndex];
     const lastResumeClone = resumeParentEl.children[resumeLastClonedIndex];
+    const removeBtnMapping = getRemoveBtnMapping(removeLastCloneBtn);
+    console.log(inputLastClonedIndex);
+    console.log(subsectionsClonesQuantities[removeBtnMapping.clonedEl]);
     if (
       inputLastClonedIndex ===
-      subsectionsClonesQuantities['config-section-content-education']
+      subsectionsClonesQuantities[removeBtnMapping.clonedEl]
     ) {
       inputParentEl.removeChild(lastInputClone);
       resumeParentEl.removeChild(lastResumeClone);
-      subsectionsClonesQuantities['config-section-content-education'] -= 1;
+      subsectionsClonesQuantities[removeBtnMapping] -= 1;
     } else {
       return;
     }
   });
 };
+// const removeLastClone = function (inputParentEl, resumeParentEl) {
+//   const removeLastCloneBtn = document.querySelector(
+//     '.btn-remove-last-education-item'
+//   );
+//   removeLastCloneBtn.addEventListener('click', () => {
+//     const inputLastClonedIndex = getLastClonedChild(inputParentEl);
+//     const resumeLastClonedIndex = getLastClonedChild(resumeParentEl);
+//     const lastInputClone = inputParentEl.children[inputLastClonedIndex];
+//     const lastResumeClone = resumeParentEl.children[resumeLastClonedIndex];
+//     if (
+//       inputLastClonedIndex ===
+//       subsectionsClonesQuantities['config-section-content-education']
+//     ) {
+//       inputParentEl.removeChild(lastInputClone);
+//       resumeParentEl.removeChild(lastResumeClone);
+//       subsectionsClonesQuantities['config-section-content-education'] -= 1;
+//     } else {
+//       return;
+//     }
+//   });
+// };
 
 const getLastClonedChild = function (parentEl) {
   const childrenQuantity = parentEl.children.length;
-  if (childrenQuantity > 2) {
+  if (childrenQuantity >= 2) {
     const indexOfLastClonedChild = childrenQuantity - 1;
     return indexOfLastClonedChild;
   }
@@ -227,28 +252,33 @@ const getLastClonedChild = function (parentEl) {
 
 export const toggleRemove = function () {
   const removeBtnList = document.querySelectorAll('.btn-remove');
-  removeBtnList.forEach((btnRemoveItem) => {
-    const removeBtnClasslist = Array.from(btnRemoveItem.classList);
-    const removeBtnSpecificClass = removeBtnClasslist.filter((btnClass) =>
-      btnClass.startsWith('btn-remove-last-')
-    )[0];
-    const elementsMapping = toggleRemoveBtnMapping[removeBtnSpecificClass];
+  removeBtnList.forEach((removeBtn) => {
+    const removeBtnMapping = getRemoveBtnMapping(removeBtn);
 
-    const parentElClass = elementsMapping.parent;
+    const clonedElClass = removeBtnMapping.clonedEl;
 
-    const addBtnClass = elementsMapping.addBtn;
+    const addBtnClass = removeBtnMapping.addBtn;
     const btnAddItem = document.querySelector(`.${addBtnClass}`);
 
     // wróć po dodaniu "dodawania" dla pozostałych sekcji czy działa
     btnAddItem.addEventListener('click', () => {
-      if (subsectionsClonesQuantities[parentElClass] > 1) {
-        btnRemoveItem.classList.remove('hidden');
+      if (subsectionsClonesQuantities[clonedElClass] > 1) {
+        removeBtn.classList.remove('hidden');
       }
     });
-    btnRemoveItem.addEventListener('click', () => {
-      if (subsectionsClonesQuantities[parentElClass] === 1) {
-        btnRemoveItem.classList.add('hidden');
+    removeBtn.addEventListener('click', () => {
+      if (subsectionsClonesQuantities[clonedElClass] === 1) {
+        removeBtn.classList.add('hidden');
       }
     });
   });
+};
+
+const getRemoveBtnMapping = function (removeBtn) {
+  const removeBtnClasslist = Array.from(removeBtn.classList);
+  const removeBtnSpecificClass = removeBtnClasslist.filter((btnClass) =>
+    btnClass.startsWith('btn-remove-last-')
+  )[0];
+  const removeBtnMapping = toggleRemoveBtnMapping[removeBtnSpecificClass];
+  return removeBtnMapping;
 };

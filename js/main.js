@@ -9,7 +9,11 @@ import {
   degreeYearsSelectHandler,
   jobDatesSelectHandler,
 } from './handlers.js';
-import { addNewEducationSection, toggleRemove } from './clones.js';
+import {
+  addNewEducationSection,
+  addNewSocialMediaLink,
+  toggleRemove,
+} from './clones.js';
 
 const updateResumeFromInputFields = function () {
   const listInputElements = document.querySelectorAll('.input-element');
@@ -31,5 +35,6 @@ degreeYearsSelectHandler();
 jobDatesSelectHandler();
 uploadResumePhotoHandler();
 addNewEducationSection();
+addNewSocialMediaLink();
 updateResumeFromInputFields();
 toggleRemove();
