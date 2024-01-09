@@ -246,6 +246,7 @@ PREVIEW WINDOW
 .resume-social-media-link:hover,
 .resume-social-media-link:visited {
   text-decoration: none;
+  color: #262728;
   display: block;
 }
 

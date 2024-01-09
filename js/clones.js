@@ -206,15 +206,15 @@ const removeLastClone = function (
     const lastInputClone = inputParentEl.children[inputLastClonedIndex];
     const lastResumeClone = resumeParentEl.children[resumeLastClonedIndex];
     const removeBtnMapping = getRemoveBtnMapping(removeLastCloneBtn);
-    console.log(inputLastClonedIndex);
-    console.log(subsectionsClonesQuantities[removeBtnMapping.clonedEl]);
+    // console.log(inputLastClonedIndex);
+    // console.log(resumeLastClonedIndex);
     if (
       inputLastClonedIndex ===
       subsectionsClonesQuantities[removeBtnMapping.clonedEl]
     ) {
       inputParentEl.removeChild(lastInputClone);
       resumeParentEl.removeChild(lastResumeClone);
-      subsectionsClonesQuantities[removeBtnMapping] -= 1;
+      subsectionsClonesQuantities[removeBtnMapping.clonedEl] -= 1;
     } else {
       return;
     }
@@ -243,8 +243,11 @@ const removeLastClone = function (
 // };
 
 const getLastClonedChild = function (parentEl) {
+  console.log(parentEl.children);
   const childrenQuantity = parentEl.children.length;
-  if (childrenQuantity >= 2) {
+  console.log(childrenQuantity);
+  if (childrenQuantity > 2) {
+    // if (childrenQuantity > 2) {
     const indexOfLastClonedChild = childrenQuantity - 1;
     return indexOfLastClonedChild;
   }
