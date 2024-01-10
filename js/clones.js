@@ -59,7 +59,6 @@ export const addNewEducationSection = function () {
   );
 };
 
-// wróć do dokończenia
 export const addNewSocialMediaLink = function () {
   const btnAddNewSocialMediaLink = document.querySelector('.btn-add-new-link');
   const btnRemoveLastSocialMediaLink = document.querySelector(
@@ -105,21 +104,8 @@ export const addNewSocialMediaLink = function () {
     inputSocialMediaLinkContainer,
     resumePersonalDetailsSection
   );
-
-  // event listener:
-  // formEl
-  // clone input
-  // clone resume
-  // increment cloneNum in the object
-  // increment cloneNum in the scope
-  // add numbered classes to input and resume elements
-  // append input and resume
-  // use updateResumeFromCloned...
-  // 3) use remove last clone
 };
-// addNewSocialMediaLink();
 
-// wróć do przerobienia jest ta funkcja, bo aktualnie uwzględnia tylko education
 const updateResumeFromClonedSubsections = function (
   clonedInputSubsection,
   clonedResumeSubsection,
@@ -193,21 +179,17 @@ const updateResumeFromClonedInputEducationHandler = function (
   }
 };
 
-// wróć przerobić, żeby była wielorazowa
 const removeLastClone = function (
   removeLastCloneBtn,
   inputParentEl,
   resumeParentEl
 ) {
   removeLastCloneBtn.addEventListener('click', () => {
-    // wróć czemu wydaje zły numerek w przypadku linka
     const inputLastClonedIndex = getLastClonedChild(inputParentEl);
     const resumeLastClonedIndex = getLastClonedChild(resumeParentEl);
     const lastInputClone = inputParentEl.children[inputLastClonedIndex];
     const lastResumeClone = resumeParentEl.children[resumeLastClonedIndex];
     const removeBtnMapping = getRemoveBtnMapping(removeLastCloneBtn);
-    // console.log(inputLastClonedIndex);
-    // console.log(resumeLastClonedIndex);
     if (
       inputLastClonedIndex ===
       subsectionsClonesQuantities[removeBtnMapping.clonedEl]
@@ -220,27 +202,6 @@ const removeLastClone = function (
     }
   });
 };
-// const removeLastClone = function (inputParentEl, resumeParentEl) {
-//   const removeLastCloneBtn = document.querySelector(
-//     '.btn-remove-last-education-item'
-//   );
-//   removeLastCloneBtn.addEventListener('click', () => {
-//     const inputLastClonedIndex = getLastClonedChild(inputParentEl);
-//     const resumeLastClonedIndex = getLastClonedChild(resumeParentEl);
-//     const lastInputClone = inputParentEl.children[inputLastClonedIndex];
-//     const lastResumeClone = resumeParentEl.children[resumeLastClonedIndex];
-//     if (
-//       inputLastClonedIndex ===
-//       subsectionsClonesQuantities['config-section-content-education']
-//     ) {
-//       inputParentEl.removeChild(lastInputClone);
-//       resumeParentEl.removeChild(lastResumeClone);
-//       subsectionsClonesQuantities['config-section-content-education'] -= 1;
-//     } else {
-//       return;
-//     }
-//   });
-// };
 
 const getLastClonedChild = function (parentEl) {
   console.log(parentEl.children);
