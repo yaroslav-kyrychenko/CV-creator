@@ -97,3 +97,10 @@ export const updateResumeTextHandlerMapping = {
     listHardSkills.innerHTML = `<li class="resume-list-item-soft-skills">${inputElement.value}</li>`;
   },
 };
+
+export const tooltipMapping = {
+  'btn-add-new-link': 'tooltip-add-new-link',
+  'btn-remove-last-link': 'tooltip-remove-last-link',
+  'btn-add-new-education': 'tooltip-add-new-education',
+  'btn-remove-last-education-item': 'tooltip-remove-last-education',
+};

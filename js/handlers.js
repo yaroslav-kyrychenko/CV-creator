@@ -2,7 +2,12 @@
 
 'use strict';
 
-import { sectionsMapping, updateResumeTextHandlerMapping } from './mappings.js';
+import {
+  sectionsMapping,
+  updateResumeTextHandlerMapping,
+  tooltipMapping,
+} from './mappings.js';
+
 import {
   debounce,
   getCloneNumOptionalSelector,
@@ -223,5 +228,25 @@ export const jobDatesSelectHandler = function () {
   });
   inputIsCurrentlyWorking.addEventListener('input', () => {
     validateDates(inputJobStartDate, inputJobEndDate, inputIsCurrentlyWorking);
+  });
+};
+
+export const tooltipDisplayToggleHandler = function () {
+  const listBtnAdd = document.querySelectorAll('.btn-add-new');
+  const listBtnRemove = document.querySelectorAll('.btn-remove');
+  const listBtnAddRemove = [...listBtnAdd, ...listBtnRemove];
+  listBtnAddRemove.forEach((btn) => {
+    let tooltip;
+    for (const btnClass in tooltipMapping) {
+      if (btn.classList.contains(btnClass)) {
+        tooltip = document.querySelector(`.${tooltipMapping[btnClass]}`);
+      }
+    }
+    btn.addEventListener('mouseenter', () => {
+      tooltip.classList.remove('hidden');
+    });
+    btn.addEventListener('mouseleave', () => {
+      tooltip.classList.add('hidden');
+    });
   });
 };

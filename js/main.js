@@ -8,6 +8,7 @@ import {
   uploadResumePhotoHandler,
   degreeYearsSelectHandler,
   jobDatesSelectHandler,
+  tooltipDisplayToggleHandler,
 } from './handlers.js';
 import {
   addNewEducationSection,
@@ -36,5 +37,6 @@ jobDatesSelectHandler();
 uploadResumePhotoHandler();
 addNewEducationSection();
 addNewSocialMediaLink();
+tooltipDisplayToggleHandler();
 updateResumeFromInputFields();
 toggleRemove();

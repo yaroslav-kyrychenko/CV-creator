@@ -162,6 +162,7 @@ CONFIG SECTION
   position: absolute;
   bottom: 0;
   right: 0;
+  max-width: 10rem;
 }
 
 .add-remove-btn-container-within-section {
@@ -169,20 +170,23 @@ CONFIG SECTION
 }
 
 .add-remove-btn-container-within-form {
-  transform: translate(120%);
+  transform: translateX(120%);
 }
 
 /* wróć do zakończenia tooltipy */
 .tooltip {
   position: absolute;
-  top: -6rem;
-  left: 0;
+  bottom: -5rem;
+  right: 0;
+  transform: translateX(110%);
   background-color: #ebedee;
   font-size: 1.4rem;
-  min-width: 16rem;
-  /* max-width: 18rem; */
   padding: 0.8rem;
   border-radius: 1rem;
+}
+
+.tooltip.hidden {
+  transition: none;
 }
 
 .btn-add-new,

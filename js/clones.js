@@ -204,11 +204,8 @@ const removeLastClone = function (
 };
 
 const getLastClonedChild = function (parentEl) {
-  console.log(parentEl.children);
   const childrenQuantity = parentEl.children.length;
-  console.log(childrenQuantity);
   if (childrenQuantity > 2) {
-    // if (childrenQuantity > 2) {
     const indexOfLastClonedChild = childrenQuantity - 1;
     return indexOfLastClonedChild;
   }
