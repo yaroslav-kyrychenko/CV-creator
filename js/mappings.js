@@ -103,4 +103,12 @@ export const tooltipMapping = {
   'btn-remove-last-link': 'tooltip-remove-last-link',
   'btn-add-new-education': 'tooltip-add-new-education',
   'btn-remove-last-education-item': 'tooltip-remove-last-education',
+  'btn-add-new-job': 'tooltip-add-new-job',
+  'btn-remove-last-job-item': 'tooltip-remove-last-job',
+  'btn-add-new-hard-skill': 'tooltip-add-new-hard-skill',
+  'btn-remove-last-hard-skill': 'tooltip-remove-last-hard-skill',
+  'btn-add-new-soft-skill': 'tooltip-add-new-soft-skill',
+  'btn-remove-last-soft-skill': 'tooltip-remove-last-soft-skill',
+  'btn-add-new-certificate': 'tooltip-add-new-certificate',
+  'btn-remove-last-certificate': 'tooltip-remove-last-certificate',
 };

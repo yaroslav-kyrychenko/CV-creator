@@ -176,13 +176,22 @@ CONFIG SECTION
 /* wróć do zakończenia tooltipy */
 .tooltip {
   position: absolute;
-  bottom: -5rem;
+  bottom: 0;
   right: 0;
   transform: translateX(110%);
   background-color: #ebedee;
   font-size: 1.4rem;
   padding: 0.8rem;
   border-radius: 1rem;
+}
+
+.tooltip-field {
+  bottom: 5rem;
+}
+
+.tooltip-section {
+  bottom: 5rem;
+  transform: translateX(25%);
 }
 
 .tooltip.hidden {

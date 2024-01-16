@@ -179,12 +179,6 @@ CONFIG SECTION
   right: -5rem;
 }
 
-/* wróć do zakończenia */
-.tooltip-add-new-education,
-.tooltip-remove-last-education {
-  transform: translateX(-50%);
-}
-
 .input-currently[type='checkbox'] {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -217,6 +211,11 @@ CONFIG SECTION
 
 .input-currently[type='checkbox']:checked::before {
   opacity: 1;
+}
+
+.tooltip-add-new-soft-skill,
+.tooltip-remove-last-soft-skill {
+  bottom: -5rem;
 }
 
 /* /////////////////////////////////////
