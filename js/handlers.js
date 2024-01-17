@@ -178,37 +178,57 @@ export const degreeYearsSelectHandler = function (cloneOptionalNum) {
   );
 
   populateInputDegreeYears();
-  addEventListenersToDegreeDates(
+  addEventListenersToDates(
     inputDegreeStartYear,
     inputDegreeEndYear,
     inputIsCurrentlyStudying
   );
 };
 
-const addEventListenersToDegreeDates = function (
-  inputDegreeStartYear,
-  inputDegreeEndYear,
-  inputIsCurrentlyStudying
+export const jobYearsSelectHandler = function (cloneOptionalNum) {
+  const cloneNum = getCloneNumOptionalSelector(cloneOptionalNum);
+  const inputJobStartYear = document.querySelector(
+    `.input-job-start-date${cloneNum}`
+  );
+  const inputJobEndYear = document.querySelector(
+    `.input-job-end-date${cloneNum}`
+  );
+  const inputIsCurrentlyWorking = document.querySelector(
+    `.input-job-currently-working${cloneNum}`
+  );
+  console.log(inputIsCurrentlyWorking);
+
+  addEventListenersToDates(
+    inputJobStartYear,
+    inputJobEndYear,
+    inputIsCurrentlyWorking
+  );
+};
+
+const addEventListenersToDates = function (
+  inputStartYear,
+  inputEndYear,
+  inputIsCurrentlyStudyingOrWorking
 ) {
-  inputDegreeStartYear.addEventListener('input', () => {
+  inputStartYear.addEventListener('input', () => {
     validateDates(
-      inputDegreeStartYear,
-      inputDegreeEndYear,
-      inputIsCurrentlyStudying
+      inputStartYear,
+      inputEndYear,
+      inputIsCurrentlyStudyingOrWorking
     );
   });
-  inputDegreeEndYear.addEventListener('input', () => {
+  inputEndYear.addEventListener('input', () => {
     validateDates(
-      inputDegreeStartYear,
-      inputDegreeEndYear,
-      inputIsCurrentlyStudying
+      inputStartYear,
+      inputEndYear,
+      inputIsCurrentlyStudyingOrWorking
     );
   });
-  inputIsCurrentlyStudying.addEventListener('input', () => {
+  inputIsCurrentlyStudyingOrWorking.addEventListener('input', () => {
     validateDates(
-      inputDegreeStartYear,
-      inputDegreeEndYear,
-      inputIsCurrentlyStudying
+      inputStartYear,
+      inputEndYear,
+      inputIsCurrentlyStudyingOrWorking
     );
   });
 };

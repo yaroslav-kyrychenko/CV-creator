@@ -8,7 +8,7 @@ import { getFormattedDate, calculateCurrentAge } from './helpers.js';
 export const sectionsMapping = {
   'config-section-personal-details': 'resume-personal-details',
   'config-section-education': 'resume-education',
-  'config-section-experience': 'resume-experience',
+  'config-section-experience': 'resume-job',
   'config-section-skills': 'resume-skills',
   'config-section-certificates': 'resume-certificates',
 };
@@ -47,7 +47,7 @@ export const toggleRemoveBtnMapping = {
     addBtn: 'btn-add-new-education',
   },
   'btn-remove-last-job-item': {
-    clonedEl: 'config-section-content-experience',
+    clonedEl: 'config-section-content-job',
     addBtn: 'btn-add-new-job',
   },
   'btn-remove-last-hard-skill': {

@@ -4,59 +4,16 @@ import { inputItemsMapping, toggleRemoveBtnMapping } from './mappings.js';
 import {
   listenForChangeInInputFields,
   degreeYearsSelectHandler,
+  jobYearsSelectHandler,
 } from './handlers.js';
 
 let subsectionsClonesQuantities = {
   'input-social-media-link': 1,
   'config-section-content-education': 1,
-  'config-section-content-experience': 1,
+  'config-section-content-job': 1,
   'form-hard-skills': 1,
   'form-soft-skills': 1,
   'form-item-certificates': 1,
-};
-
-export const addNewEducationSection = function () {
-  const btnAddNewEducation = document.querySelector('.btn-add-new-education');
-  const btnRemoveLastEducation = document.querySelector(
-    '.btn-remove-last-education-item'
-  );
-  const resumeEducationSection = document.querySelector('.resume-education');
-  const resumeEducationContent = document.querySelector(
-    '.resume-education-content'
-  );
-  const inputEducationContent = document.querySelector(
-    '.config-section-content-education'
-  );
-  let educationCloneNum =
-    subsectionsClonesQuantities['config-section-content-education'];
-
-  btnAddNewEducation.addEventListener('click', () => {
-    const formEl = inputEducationContent.children[0];
-    const clonedInputSubsection = formEl.cloneNode(true);
-    const clonedResumeSubsection = resumeEducationContent.cloneNode(true);
-    subsectionsClonesQuantities['config-section-content-education']++;
-    educationCloneNum++;
-    clonedInputSubsection.classList.add(
-      `input-cloned-education-section-${subsectionsClonesQuantities['config-section-content-education']}`
-    );
-    clonedResumeSubsection.classList.add(
-      `resume-cloned-education-section-${subsectionsClonesQuantities['config-section-content-education']}`
-    );
-
-    inputEducationContent.appendChild(clonedInputSubsection);
-    resumeEducationSection.appendChild(clonedResumeSubsection);
-    updateResumeFromClonedSubsections(
-      clonedInputSubsection,
-      clonedResumeSubsection,
-      educationCloneNum
-    );
-    degreeYearsSelectHandler(educationCloneNum);
-  });
-  removeLastClone(
-    btnRemoveLastEducation,
-    inputEducationContent,
-    resumeEducationSection
-  );
 };
 
 export const addNewSocialMediaLink = function () {
@@ -104,6 +61,88 @@ export const addNewSocialMediaLink = function () {
     inputSocialMediaLinkContainer,
     resumePersonalDetailsSection
   );
+};
+
+export const addNewEducationSection = function () {
+  const btnAddNewEducation = document.querySelector('.btn-add-new-education');
+  const btnRemoveLastEducation = document.querySelector(
+    '.btn-remove-last-education-item'
+  );
+  const resumeEducationSection = document.querySelector('.resume-education');
+  const resumeEducationContent = document.querySelector(
+    '.resume-education-content'
+  );
+  const inputContentSectionClass = 'config-section-content-education';
+  const inputEducationContent = document.querySelector(
+    `.${inputContentSectionClass}`
+  );
+  let educationCloneNum = subsectionsClonesQuantities[inputContentSectionClass];
+
+  btnAddNewEducation.addEventListener('click', () => {
+    const formEl = inputEducationContent.children[0];
+    const clonedInputSubsection = formEl.cloneNode(true);
+    const clonedResumeSubsection = resumeEducationContent.cloneNode(true);
+    subsectionsClonesQuantities[inputContentSectionClass]++;
+    educationCloneNum++;
+    clonedInputSubsection.classList.add(
+      `input-cloned-education-section-${subsectionsClonesQuantities[inputContentSectionClass]}`
+    );
+    clonedResumeSubsection.classList.add(
+      `resume-cloned-education-section-${subsectionsClonesQuantities[inputContentSectionClass]}`
+    );
+
+    inputEducationContent.appendChild(clonedInputSubsection);
+    resumeEducationSection.appendChild(clonedResumeSubsection);
+    updateResumeFromClonedSubsections(
+      clonedInputSubsection,
+      clonedResumeSubsection,
+      educationCloneNum
+    );
+    degreeYearsSelectHandler(educationCloneNum);
+  });
+  removeLastClone(
+    btnRemoveLastEducation,
+    inputEducationContent,
+    resumeEducationSection
+  );
+};
+
+export const addNewJobSection = function () {
+  const btnAddNewJob = document.querySelector('.btn-add-new-job');
+  const btnRemoveLastJob = document.querySelector('.btn-remove-last-job-item');
+  const resumeJobSection = document.querySelector('.resume-job');
+  const resumeJobContent = document.querySelector('.resume-job-content');
+  const inputContentSectionClass = 'config-section-content-job';
+  const inputJobContent = document.querySelector(
+    `.${inputContentSectionClass}`
+  );
+  let jobCloneNum = subsectionsClonesQuantities[inputContentSectionClass];
+
+  btnAddNewJob.addEventListener('click', () => {
+    const formEl = inputJobContent.children[0];
+    const clonedInputSubsection = formEl.cloneNode(true);
+    const clonedResumeSubsection = resumeJobContent.cloneNode(true);
+    subsectionsClonesQuantities[inputContentSectionClass]++;
+    jobCloneNum++;
+    clonedInputSubsection.classList.add(
+      `input-cloned-job-section-${subsectionsClonesQuantities[inputContentSectionClass]}`
+    );
+    clonedResumeSubsection.classList.add(
+      `resume-cloned-job-section-${subsectionsClonesQuantities[inputContentSectionClass]}`
+    );
+
+    inputJobContent.appendChild(clonedInputSubsection);
+    resumeJobSection.appendChild(clonedResumeSubsection);
+    updateResumeFromClonedSubsections(
+      clonedInputSubsection,
+      clonedResumeSubsection,
+      jobCloneNum
+    );
+    jobYearsSelectHandler(jobCloneNum);
+    // wróć dokończyć years select handler
+  });
+
+  removeLastClone(btnRemoveLastJob, inputJobContent, resumeJobSection);
 };
 
 const updateResumeFromClonedSubsections = function (
@@ -174,6 +213,14 @@ const updateResumeFromClonedInputEducationHandler = function (
     inputClasslist.replace(inputElClass, `${inputElClass}-${cloneNum}`);
     const resumeClonedElement = clonedResumeSubsection.querySelector(
       `.resume-degree-end-year-${cloneNum}`
+    );
+    return resumeClonedElement;
+  }
+
+  if (inputClasslist.contains('input-job-currently-working')) {
+    inputClasslist.replace(inputElClass, `${inputElClass}-${cloneNum}`);
+    const resumeClonedElement = clonedResumeSubsection.querySelector(
+      `.resume-job-end-date-${cloneNum}`
     );
     return resumeClonedElement;
   }

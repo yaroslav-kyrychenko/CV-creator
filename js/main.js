@@ -13,6 +13,7 @@ import {
 import {
   addNewEducationSection,
   addNewSocialMediaLink,
+  addNewJobSection,
   toggleRemove,
 } from './clones.js';
 
@@ -37,6 +38,7 @@ jobDatesSelectHandler();
 uploadResumePhotoHandler();
 addNewEducationSection();
 addNewSocialMediaLink();
+addNewJobSection();
 tooltipDisplayToggleHandler();
 updateResumeFromInputFields();
 toggleRemove();
