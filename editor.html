@@ -369,29 +369,35 @@
             <form action="" method="get" class="form form-skills">
               <div class="form-item form-hard-skills">
                 <label for="hard-skills">Umiejętności twarde</label>
-                <input
-                  type="text"
-                  name="hard-skill"
-                  class="input-element input-hard-skill"
-                  placeholder="Umiejętność twarda"
-                />
-                <div
-                  class="add-remove-btn-container add-remove-btn-container-within-form"
-                >
-                  <button class="btn btn-add-new btn-add-new-hard-skill">
-                    <ion-icon
-                      class="icon plus-sign"
-                      name="add-outline"
-                    ></ion-icon>
-                  </button>
-                  <button
-                    class="btn btn-remove btn-remove-last-hard-skill hidden"
+                <div class="hard-skills-container">
+                  <input
+                    type="text"
+                    name="hard-skill"
+                    class="input-element input-hard-skill"
+                    placeholder="Umiejętność twarda"
+                  />
+                  <div
+                    class="add-remove-btn-container add-remove-btn-container-within-form"
                   >
-                    <ion-icon
-                      class="icon minus-sign"
-                      name="remove-outline"
-                    ></ion-icon>
-                  </button>
+                    <button
+                      type="button"
+                      class="btn btn-add-new btn-add-new-hard-skill"
+                    >
+                      <ion-icon
+                        class="icon plus-sign"
+                        name="add-outline"
+                      ></ion-icon>
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-remove btn-remove-last-hard-skill hidden"
+                    >
+                      <ion-icon
+                        class="icon minus-sign"
+                        name="remove-outline"
+                      ></ion-icon>
+                    </button>
+                  </div>
                 </div>
                 <span
                   class="tooltip tooltip-add-new-hard-skill tooltip-field hidden"
@@ -415,13 +421,17 @@
                 <div
                   class="add-remove-btn-container add-remove-btn-container-within-form"
                 >
-                  <button class="btn btn-add-new btn-add-new-soft-skill">
+                  <button
+                    type="button"
+                    class="btn btn-add-new btn-add-new-soft-skill"
+                  >
                     <ion-icon
                       class="icon plus-sign"
                       name="add-outline"
                     ></ion-icon>
                   </button>
                   <button
+                    type="button"
                     class="btn btn-remove btn-remove-last-soft-skill hidden"
                   >
                     <ion-icon

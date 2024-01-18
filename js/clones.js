@@ -11,8 +11,8 @@ let subsectionsClonesQuantities = {
   'input-social-media-link': 1,
   'config-section-content-education': 1,
   'config-section-content-job': 1,
-  'form-hard-skills': 1,
-  'form-soft-skills': 1,
+  'input-hard-skill': 1,
+  'input-soft-skill': 1,
   'form-item-certificates': 1,
 };
 
@@ -30,21 +30,21 @@ export const addNewSocialMediaLink = function () {
   const inputSocialMediaLinkContainer = document.querySelector(
     '.social-media-links-container'
   );
-  let socialMediaLinksCloneNum =
-    subsectionsClonesQuantities['input-social-media-link'];
+  const inputItemClass = 'input-social-media-link';
+  let socialMediaLinksCloneNum = subsectionsClonesQuantities[inputItemClass];
 
-  btnAddNewSocialMediaLink.addEventListener('click', (e) => {
+  btnAddNewSocialMediaLink.addEventListener('click', () => {
     const inputFieldSocialMediaLink = inputSocialMediaLinkContainer.children[0];
     const clonedLinkInputField = inputFieldSocialMediaLink.cloneNode(true);
     const clonedResumeSocialMediaLink = resumeSocialMediaLink.cloneNode(true);
-    subsectionsClonesQuantities['input-social-media-link']++;
+    subsectionsClonesQuantities[inputItemClass]++;
     socialMediaLinksCloneNum++;
 
     clonedLinkInputField.classList.add(
-      `input-cloned-social-media-link-${subsectionsClonesQuantities['input-social-media-link']}`
+      `input-cloned-social-media-link-${subsectionsClonesQuantities[inputItemClass]}`
     );
     clonedResumeSocialMediaLink.classList.add(
-      `resume-cloned-social-media-link-${subsectionsClonesQuantities['input-social-media-link']}`
+      `resume-cloned-social-media-link-${subsectionsClonesQuantities[inputItemClass]}`
     );
 
     inputSocialMediaLinkContainer.appendChild(clonedLinkInputField);
@@ -61,6 +61,27 @@ export const addNewSocialMediaLink = function () {
     inputSocialMediaLinkContainer,
     resumePersonalDetailsSection
   );
+};
+
+export const addNewHardSkill = function () {
+  const btnAddNewHardSkill = document.querySelector('.btn-add-new-hard-skill');
+  const btnRemoveLastHardSkill = document.querySelector(
+    '.btn-remove-last-hard-skill'
+  );
+  const resumeHardSkillsSection = document.querySelector(
+    '.resume-list-hard-skills'
+  );
+  const resumeHardSkill = document.querySelector(
+    '.resume-list-item-hard-skills'
+  );
+  const inputHardSkillsContainer = document.querySelector(
+    '.hard-skills-container'
+  );
+  const inputItemClass = 'input-hard-skill';
+  let hardSkillsCloneNum = subsectionsClonesQuantities[inputItemClass];
+
+  // wróć dokończyć
+  btnAddNewHardSkill.addEventListener('click', () => {});
 };
 
 export const addNewEducationSection = function () {
