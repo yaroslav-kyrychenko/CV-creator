@@ -218,6 +218,14 @@ CONFIG SECTION
   bottom: -5rem;
 }
 
+.hard-skills-container,
+.soft-skills-container,
+.certificates-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
 /* /////////////////////////////////////
 PREVIEW WINDOW
 //////////////////////////////////// */

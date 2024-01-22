@@ -13,10 +13,10 @@ let subsectionsClonesQuantities = {
   'config-section-content-job': 1,
   'input-hard-skill': 1,
   'input-soft-skill': 1,
-  'form-item-certificates': 1,
+  'input-certificate': 1,
 };
 
-export const addNewSocialMediaLink = function () {
+const addNewSocialMediaLink = function () {
   const btnAddNewSocialMediaLink = document.querySelector('.btn-add-new-link');
   const btnRemoveLastSocialMediaLink = document.querySelector(
     '.btn-remove-last-link'
@@ -35,8 +35,12 @@ export const addNewSocialMediaLink = function () {
 
   btnAddNewSocialMediaLink.addEventListener('click', () => {
     const inputFieldSocialMediaLink = inputSocialMediaLinkContainer.children[0];
-    const clonedLinkInputField = inputFieldSocialMediaLink.cloneNode(true);
-    const clonedResumeSocialMediaLink = resumeSocialMediaLink.cloneNode(true);
+    const clonedLinkInputField = inputFieldSocialMediaLink.cloneNode();
+    clonedLinkInputField.value = '';
+
+    const clonedResumeSocialMediaLink = resumeSocialMediaLink.cloneNode();
+    clonedResumeSocialMediaLink.textContent = 'Link';
+
     subsectionsClonesQuantities[inputItemClass]++;
     socialMediaLinksCloneNum++;
 
@@ -63,7 +67,7 @@ export const addNewSocialMediaLink = function () {
   );
 };
 
-export const addNewHardSkill = function () {
+const addNewHardSkill = function () {
   const btnAddNewHardSkill = document.querySelector('.btn-add-new-hard-skill');
   const btnRemoveLastHardSkill = document.querySelector(
     '.btn-remove-last-hard-skill'
@@ -78,13 +82,144 @@ export const addNewHardSkill = function () {
     '.hard-skills-container'
   );
   const inputItemClass = 'input-hard-skill';
-  let hardSkillsCloneNum = subsectionsClonesQuantities[inputItemClass];
+  // wróć jak się nie zepsuje to usuń
+  // let hardSkillsCloneNum = subsectionsClonesQuantities[inputItemClass];
 
-  // wróć dokończyć
-  btnAddNewHardSkill.addEventListener('click', () => {});
+  btnAddNewHardSkill.addEventListener('click', () => {
+    const inputFieldHardSkill = inputHardSkillsContainer.children[0];
+    const clonedInputHardSkill = inputFieldHardSkill.cloneNode();
+    clonedInputHardSkill.value = '';
+
+    const clonedResumeHardSkill = resumeHardSkill.cloneNode();
+    clonedResumeHardSkill.textContent = 'Umiejętność twarda';
+
+    subsectionsClonesQuantities[inputItemClass]++;
+    // hardSkillsCloneNum++;
+
+    clonedInputHardSkill.classList.add(
+      `input-cloned-hard-skill-${subsectionsClonesQuantities[inputItemClass]}`
+    );
+    clonedResumeHardSkill.classList.add(
+      `resume-cloned-hard-skill-${subsectionsClonesQuantities[inputItemClass]}`
+    );
+
+    inputHardSkillsContainer.appendChild(clonedInputHardSkill);
+    resumeHardSkillsSection.appendChild(clonedResumeHardSkill);
+    updateResumeFromClonedInputFields(
+      clonedInputHardSkill,
+      clonedResumeHardSkill,
+      subsectionsClonesQuantities[inputItemClass]
+    );
+  });
+
+  removeLastClone(
+    btnRemoveLastHardSkill,
+    inputHardSkillsContainer,
+    resumeHardSkillsSection
+  );
 };
 
-export const addNewEducationSection = function () {
+const addNewSoftSkill = function () {
+  const btnAddNewSoftSkill = document.querySelector('.btn-add-new-soft-skill');
+  const btnRemoveLastSoftSkill = document.querySelector(
+    '.btn-remove-last-soft-skill'
+  );
+  const resumeSoftSkillsSection = document.querySelector(
+    '.resume-list-soft-skills'
+  );
+  const resumeSoftSkill = document.querySelector(
+    '.resume-list-item-soft-skills'
+  );
+  const inputSoftSkillsContainer = document.querySelector(
+    '.soft-skills-container'
+  );
+  const inputItemClass = 'input-soft-skill';
+
+  btnAddNewSoftSkill.addEventListener('click', () => {
+    const inputFieldSoftSkill = inputSoftSkillsContainer.children[0];
+    const clonedInputSoftSkill = inputFieldSoftSkill.cloneNode();
+    clonedInputSoftSkill.value = '';
+
+    const clonedResumeSoftSkill = resumeSoftSkill.cloneNode();
+    clonedResumeSoftSkill.textContent = 'Umiejętność miękka';
+
+    subsectionsClonesQuantities[inputItemClass]++;
+
+    clonedInputSoftSkill.classList.add(
+      `input-cloned-soft-skill-${subsectionsClonesQuantities[inputItemClass]}`
+    );
+    clonedResumeSoftSkill.classList.add(
+      `resume-cloned-soft-skill-${subsectionsClonesQuantities[inputItemClass]}`
+    );
+
+    inputSoftSkillsContainer.appendChild(clonedInputSoftSkill);
+    resumeSoftSkillsSection.appendChild(clonedResumeSoftSkill);
+    updateResumeFromClonedInputFields(
+      clonedInputSoftSkill,
+      clonedResumeSoftSkill,
+      subsectionsClonesQuantities[inputItemClass]
+    );
+  });
+
+  removeLastClone(
+    btnRemoveLastSoftSkill,
+    inputSoftSkillsContainer,
+    resumeSoftSkillsSection
+  );
+};
+
+const addNewCertificate = function () {
+  const btnAddNewCertificate = document.querySelector(
+    '.btn-add-new-certificate'
+  );
+  const btnRemoveLastCertificate = document.querySelector(
+    '.btn-remove-last-certificate'
+  );
+  const resumeCertificatesSection = document.querySelector(
+    '.resume-list-certificates'
+  );
+  const resumeCertificate = document.querySelector(
+    '.resume-list-item-certificate'
+  );
+  const inputCertificatesContainer = document.querySelector(
+    '.certificates-container'
+  );
+  const inputItemClass = 'input-certificate';
+
+  btnAddNewCertificate.addEventListener('click', () => {
+    const inputFieldCertificate = inputCertificatesContainer.children[0];
+    const clonedInputCertificate = inputFieldCertificate.cloneNode();
+    clonedInputCertificate.value = '';
+
+    const clonedResumeCertificate = resumeCertificate.cloneNode();
+    clonedResumeCertificate.textContent = 'Certyfikat';
+
+    subsectionsClonesQuantities[inputItemClass]++;
+
+    clonedInputCertificate.classList.add(
+      `input-cloned-certificate-${subsectionsClonesQuantities[inputItemClass]}`
+    );
+    clonedResumeCertificate.classList.add(
+      `resume-cloned-certificate-${subsectionsClonesQuantities[inputItemClass]}`
+    );
+
+    inputCertificatesContainer.appendChild(clonedInputCertificate);
+    resumeCertificatesSection.appendChild(clonedResumeCertificate);
+    updateResumeFromClonedInputFields(
+      clonedInputCertificate,
+      clonedResumeCertificate,
+      subsectionsClonesQuantities[inputItemClass]
+    );
+  });
+
+  removeLastClone(
+    btnRemoveLastCertificate,
+    inputCertificatesContainer,
+    resumeCertificatesSection
+  );
+};
+
+const addNewEducationSection = function () {
   const btnAddNewEducation = document.querySelector('.btn-add-new-education');
   const btnRemoveLastEducation = document.querySelector(
     '.btn-remove-last-education-item'
@@ -97,14 +232,18 @@ export const addNewEducationSection = function () {
   const inputEducationContent = document.querySelector(
     `.${inputContentSectionClass}`
   );
-  let educationCloneNum = subsectionsClonesQuantities[inputContentSectionClass];
+  // wróć jeśli będzie ok działało, to usuń komentarze
+  // let educationCloneNum = subsectionsClonesQuantities[inputContentSectionClass];
 
   btnAddNewEducation.addEventListener('click', () => {
     const formEl = inputEducationContent.children[0];
     const clonedInputSubsection = formEl.cloneNode(true);
     const clonedResumeSubsection = resumeEducationContent.cloneNode(true);
+    // wróć przerób klonowanie, żeby było bez true
     subsectionsClonesQuantities[inputContentSectionClass]++;
-    educationCloneNum++;
+    console.log(subsectionsClonesQuantities[inputContentSectionClass]);
+    // educationCloneNum++;
+    // console.log(educationCloneNum);
     clonedInputSubsection.classList.add(
       `input-cloned-education-section-${subsectionsClonesQuantities[inputContentSectionClass]}`
     );
@@ -117,9 +256,11 @@ export const addNewEducationSection = function () {
     updateResumeFromClonedSubsections(
       clonedInputSubsection,
       clonedResumeSubsection,
-      educationCloneNum
+      subsectionsClonesQuantities[inputContentSectionClass]
     );
-    degreeYearsSelectHandler(educationCloneNum);
+    degreeYearsSelectHandler(
+      subsectionsClonesQuantities[inputContentSectionClass]
+    );
   });
   removeLastClone(
     btnRemoveLastEducation,
@@ -128,7 +269,7 @@ export const addNewEducationSection = function () {
   );
 };
 
-export const addNewJobSection = function () {
+const addNewJobSection = function () {
   const btnAddNewJob = document.querySelector('.btn-add-new-job');
   const btnRemoveLastJob = document.querySelector('.btn-remove-last-job-item');
   const resumeJobSection = document.querySelector('.resume-job');
@@ -177,7 +318,7 @@ const updateResumeFromClonedSubsections = function (
     const inputClasslist = inputClonedElement.classList;
     for (const inputElClass in inputItemsMapping) {
       if (inputClasslist.contains(inputElClass)) {
-        const resumeClonedElement = updateResumeFromClonedInputEducationHandler(
+        const resumeClonedElement = currentlyFieldsHandler(
           inputClasslist,
           inputElClass,
           clonedResumeSubsection,
@@ -211,7 +352,7 @@ const updateResumeFromClonedInputFields = function (
   }
 };
 
-const updateResumeFromClonedInputEducationHandler = function (
+const currentlyFieldsHandler = function (
   inputClasslist,
   inputElClass,
   clonedResumeSubsection,
@@ -273,13 +414,13 @@ const removeLastClone = function (
 
 const getLastClonedChild = function (parentEl) {
   const childrenQuantity = parentEl.children.length;
-  if (childrenQuantity > 2) {
+  if (childrenQuantity >= 2) {
     const indexOfLastClonedChild = childrenQuantity - 1;
     return indexOfLastClonedChild;
   }
 };
 
-export const toggleRemove = function () {
+const toggleRemove = function () {
   const removeBtnList = document.querySelectorAll('.btn-remove');
   removeBtnList.forEach((removeBtn) => {
     const removeBtnMapping = getRemoveBtnMapping(removeBtn);
@@ -311,3 +452,15 @@ const getRemoveBtnMapping = function (removeBtn) {
   const removeBtnMapping = toggleRemoveBtnMapping[removeBtnSpecificClass];
   return removeBtnMapping;
 };
+
+export const cloneInitFunction = function () {
+  addNewSocialMediaLink();
+  addNewJobSection();
+  addNewEducationSection();
+  addNewHardSkill();
+  addNewSoftSkill();
+  addNewCertificate();
+  toggleRemove();
+};
+
+console.log(subsectionsClonesQuantities);

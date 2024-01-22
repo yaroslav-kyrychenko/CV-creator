@@ -51,15 +51,15 @@ export const toggleRemoveBtnMapping = {
     addBtn: 'btn-add-new-job',
   },
   'btn-remove-last-hard-skill': {
-    clonedEl: 'form-hard-skills',
+    clonedEl: 'input-hard-skill',
     addBtn: 'btn-add-new-hard-skill',
   },
   'btn-remove-last-soft-skill': {
-    clonedEl: 'form-soft-skills',
+    clonedEl: 'input-soft-skill',
     addBtn: 'btn-add-new-soft-skill',
   },
   'btn-remove-last-certificate': {
-    clonedEl: 'form-item-certificates',
+    clonedEl: 'input-certificate',
     addBtn: 'btn-add-new-certificate',
   },
 };
@@ -88,14 +88,14 @@ export const updateResumeTextHandlerMapping = {
   'input-currently': (inputElement, resumeElement, cloneNum) => {
     currentlyStudyingOrWorkingHandler(inputElement, resumeElement, cloneNum);
   },
-  'input-hard-skill': (inputElement, resumeElement) => {
-    const listHardSkills = document.querySelector('.resume-list-hard-skills');
-    listHardSkills.innerHTML = `<li class="resume-list-item-hard-skills">${inputElement.value}</li>`;
-  },
-  'input-soft-skill': (inputElement, resumeElement) => {
-    const listHardSkills = document.querySelector('.resume-list-soft-skills');
-    listHardSkills.innerHTML = `<li class="resume-list-item-soft-skills">${inputElement.value}</li>`;
-  },
+  // 'input-hard-skill': (inputElement, resumeElement) => {
+  //   const listHardSkills = document.querySelector('.resume-list-hard-skills');
+  //   listHardSkills.innerHTML = `<li class="resume-list-item-hard-skills">${inputElement.value}</li>`;
+  // },
+  // 'input-soft-skill': (inputElement, resumeElement) => {
+  //   const listHardSkills = document.querySelector('.resume-list-soft-skills');
+  //   listHardSkills.innerHTML = `<li class="resume-list-item-soft-skills">${inputElement.value}</li>`;
+  // },
 };
 
 export const tooltipMapping = {

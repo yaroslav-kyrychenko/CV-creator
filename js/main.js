@@ -10,12 +10,7 @@ import {
   jobDatesSelectHandler,
   tooltipDisplayToggleHandler,
 } from './handlers.js';
-import {
-  addNewEducationSection,
-  addNewSocialMediaLink,
-  addNewJobSection,
-  toggleRemove,
-} from './clones.js';
+import { cloneInitFunction } from './clones.js';
 
 const updateResumeFromInputFields = function () {
   const listInputElements = document.querySelectorAll('.input-element');
@@ -36,9 +31,6 @@ const updateResumeFromInputFields = function () {
 degreeYearsSelectHandler();
 jobDatesSelectHandler();
 uploadResumePhotoHandler();
-addNewEducationSection();
-addNewSocialMediaLink();
-addNewJobSection();
 tooltipDisplayToggleHandler();
 updateResumeFromInputFields();
-toggleRemove();
+cloneInitFunction();

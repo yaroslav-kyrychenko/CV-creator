@@ -196,7 +196,6 @@ export const jobYearsSelectHandler = function (cloneOptionalNum) {
   const inputIsCurrentlyWorking = document.querySelector(
     `.input-job-currently-working${cloneNum}`
   );
-  console.log(inputIsCurrentlyWorking);
 
   addEventListenersToDates(
     inputJobStartYear,

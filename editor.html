@@ -411,34 +411,36 @@
 
               <div class="form-item form-soft-skills">
                 <label for="soft-skills">Umiejętności miękkie</label>
-                <input
-                  type="text"
-                  name="soft-skill"
-                  class="input-element input-soft-skill"
-                  placeholder="Umiejętność miękka"
-                />
+                <div class="soft-skills-container">
+                  <input
+                    type="text"
+                    name="soft-skill"
+                    class="input-element input-soft-skill"
+                    placeholder="Umiejętność miękka"
+                  />
 
-                <div
-                  class="add-remove-btn-container add-remove-btn-container-within-form"
-                >
-                  <button
-                    type="button"
-                    class="btn btn-add-new btn-add-new-soft-skill"
+                  <div
+                    class="add-remove-btn-container add-remove-btn-container-within-form"
                   >
-                    <ion-icon
-                      class="icon plus-sign"
-                      name="add-outline"
-                    ></ion-icon>
-                  </button>
-                  <button
-                    type="button"
-                    class="btn btn-remove btn-remove-last-soft-skill hidden"
-                  >
-                    <ion-icon
-                      class="icon minus-sign"
-                      name="remove-outline"
-                    ></ion-icon>
-                  </button>
+                    <button
+                      type="button"
+                      class="btn btn-add-new btn-add-new-soft-skill"
+                    >
+                      <ion-icon
+                        class="icon plus-sign"
+                        name="add-outline"
+                      ></ion-icon>
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-remove btn-remove-last-soft-skill hidden"
+                    >
+                      <ion-icon
+                        class="icon minus-sign"
+                        name="remove-outline"
+                      ></ion-icon>
+                    </button>
+                  </div>
                 </div>
                 <span
                   class="tooltip tooltip-add-new-soft-skill tooltip-field hidden"
@@ -473,29 +475,35 @@
             <form action="" method="get" class="form form-certificates">
               <div class="form-item form-item-certificates">
                 <label for="certificates">Lista certyfikatów</label>
-                <input
-                  type="text"
-                  name="certificate"
-                  class="input-element input-certificate"
-                  placeholder="Nazwa certyfikatu"
-                />
-                <div
-                  class="add-remove-btn-container add-remove-btn-container-within-form"
-                >
-                  <button class="btn btn-add-new btn-add-new-certificate">
-                    <ion-icon
-                      class="icon plus-sign"
-                      name="add-outline"
-                    ></ion-icon>
-                  </button>
-                  <button
-                    class="btn btn-remove btn-remove-last-certificate hidden"
+                <div class="certificates-container">
+                  <input
+                    type="text"
+                    name="certificate"
+                    class="input-element input-certificate"
+                    placeholder="Nazwa certyfikatu"
+                  />
+                  <div
+                    class="add-remove-btn-container add-remove-btn-container-within-form"
                   >
-                    <ion-icon
-                      class="icon minus-sign"
-                      name="remove-outline"
-                    ></ion-icon>
-                  </button>
+                    <button
+                      type="button"
+                      class="btn btn-add-new btn-add-new-certificate"
+                    >
+                      <ion-icon
+                        class="icon plus-sign"
+                        name="add-outline"
+                      ></ion-icon>
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-remove btn-remove-last-certificate hidden"
+                    >
+                      <ion-icon
+                        class="icon minus-sign"
+                        name="remove-outline"
+                      ></ion-icon>
+                    </button>
+                  </div>
                 </div>
                 <span
                   class="tooltip tooltip-add-new-certificate tooltip-field hidden"
@@ -584,9 +592,6 @@
             <h5 class="resume-subsection-heading">Umiejętności twarde</h5>
             <ul class="resume-list-hard-skills">
               <li class="resume-list-item-hard-skills">
-                Znajomość terenu Shire
-              </li>
-              <li class="resume-list-item-hard-skills">
                 Podstawowa wiedza o pierścieniach (jako Piersiowy opiekun
                 Pierścienia)
               </li>
@@ -599,13 +604,9 @@
               Umiejętności miękkie
             </h5>
             <ul class="resume-list-soft-skills">
-              <li class="resume-list-item-soft-skills">Mądrość</li>
-              <li class="resume-list-item-soft-skills">Odwaga</li>
-              <li class="resume-list-item-soft-skills">Lojalność</li>
               <li class="resume-list-item-soft-skills">
-                Umiejętność przetrwania
+                Odwaga i umiejętność przetrwania
               </li>
-              <li class="resume-list-item-soft-skills">Empatia</li>
             </ul>
           </div>
         </div>
