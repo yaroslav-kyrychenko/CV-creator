@@ -65,10 +65,11 @@ export const toggleRemoveBtnMapping = {
 };
 
 export const updateResumeTextHandlerMapping = {
-  'input-job-start-date': (inputElement, resumeElement) => {
+  'input-start-date-format': (inputElement, resumeElement) => {
+    console.log('test');
     resumeElement.textContent = getFormattedDate(inputElement.value, 'month');
   },
-  'input-specialisation-name': (inputElement, resumeElement) => {
+  'input-specialisation-format': (inputElement, resumeElement) => {
     resumeElement.textContent = `Specjalność: ${inputElement.value}`;
   },
   'input-birthdate': (inputElement, resumeElement) => {
@@ -82,20 +83,12 @@ export const updateResumeTextHandlerMapping = {
     resumeElement.setAttribute('href', inputElement.value);
     resumeElement.textContent = inputElement.value;
   },
-  'input-end-date': (inputElement, resumeElement, cloneNum) => {
+  'input-end-date-format': (inputElement, resumeElement, cloneNum) => {
     currentlyStudyingOrWorkingHandler(inputElement, resumeElement, cloneNum);
   },
-  'input-currently': (inputElement, resumeElement, cloneNum) => {
+  'input-currently-format': (inputElement, resumeElement, cloneNum) => {
     currentlyStudyingOrWorkingHandler(inputElement, resumeElement, cloneNum);
   },
-  // 'input-hard-skill': (inputElement, resumeElement) => {
-  //   const listHardSkills = document.querySelector('.resume-list-hard-skills');
-  //   listHardSkills.innerHTML = `<li class="resume-list-item-hard-skills">${inputElement.value}</li>`;
-  // },
-  // 'input-soft-skill': (inputElement, resumeElement) => {
-  //   const listHardSkills = document.querySelector('.resume-list-soft-skills');
-  //   listHardSkills.innerHTML = `<li class="resume-list-item-soft-skills">${inputElement.value}</li>`;
-  // },
 };
 
 export const tooltipMapping = {

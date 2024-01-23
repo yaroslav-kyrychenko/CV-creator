@@ -179,7 +179,7 @@ CONFIG SECTION
   right: -5rem;
 }
 
-.input-currently[type='checkbox'] {
+.input-currently-format[type='checkbox'] {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -190,7 +190,7 @@ CONFIG SECTION
   position: relative;
 }
 
-.input-currently[type='checkbox']::before {
+.input-currently-format[type='checkbox']::before {
   content: '✔';
   display: block;
   position: absolute;
@@ -204,12 +204,12 @@ CONFIG SECTION
   transition: opacity 0.5s ease-in-out;
 }
 
-.input-currently[type='checkbox']:checked {
+.input-currently-format[type='checkbox']:checked {
   background-color: #bdc3c7;
   transition: background-color 0.5s;
 }
 
-.input-currently[type='checkbox']:checked::before {
+.input-currently-format[type='checkbox']:checked::before {
   opacity: 1;
 }
 

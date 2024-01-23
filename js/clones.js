@@ -82,8 +82,6 @@ const addNewHardSkill = function () {
     '.hard-skills-container'
   );
   const inputItemClass = 'input-hard-skill';
-  // wróć jak się nie zepsuje to usuń
-  // let hardSkillsCloneNum = subsectionsClonesQuantities[inputItemClass];
 
   btnAddNewHardSkill.addEventListener('click', () => {
     const inputFieldHardSkill = inputHardSkillsContainer.children[0];
@@ -232,18 +230,13 @@ const addNewEducationSection = function () {
   const inputEducationContent = document.querySelector(
     `.${inputContentSectionClass}`
   );
-  // wróć jeśli będzie ok działało, to usuń komentarze
-  // let educationCloneNum = subsectionsClonesQuantities[inputContentSectionClass];
 
   btnAddNewEducation.addEventListener('click', () => {
     const formEl = inputEducationContent.children[0];
     const clonedInputSubsection = formEl.cloneNode(true);
     const clonedResumeSubsection = resumeEducationContent.cloneNode(true);
-    // wróć przerób klonowanie, żeby było bez true
     subsectionsClonesQuantities[inputContentSectionClass]++;
-    console.log(subsectionsClonesQuantities[inputContentSectionClass]);
-    // educationCloneNum++;
-    // console.log(educationCloneNum);
+    clearClonesValuesAndText(clonedInputSubsection, clonedResumeSubsection);
     clonedInputSubsection.classList.add(
       `input-cloned-education-section-${subsectionsClonesQuantities[inputContentSectionClass]}`
     );
@@ -318,7 +311,7 @@ const updateResumeFromClonedSubsections = function (
     const inputClasslist = inputClonedElement.classList;
     for (const inputElClass in inputItemsMapping) {
       if (inputClasslist.contains(inputElClass)) {
-        const resumeClonedElement = currentlyFieldsHandler(
+        const resumeClonedElement = replaceClassOfClonedEl(
           inputClasslist,
           inputElClass,
           clonedResumeSubsection,
@@ -352,13 +345,13 @@ const updateResumeFromClonedInputFields = function (
   }
 };
 
-const currentlyFieldsHandler = function (
+const replaceClassOfClonedEl = function (
   inputClasslist,
   inputElClass,
   clonedResumeSubsection,
   cloneNum
 ) {
-  if (!inputClasslist.contains('input-currently')) {
+  if (!inputClasslist.contains('input-currently-format')) {
     inputClasslist.replace(inputElClass, `${inputElClass}-${cloneNum}`);
     const resumeElClass = inputItemsMapping[inputElClass];
     const resumeClonedElement = clonedResumeSubsection.querySelector(
@@ -430,7 +423,6 @@ const toggleRemove = function () {
     const addBtnClass = removeBtnMapping.addBtn;
     const btnAddItem = document.querySelector(`.${addBtnClass}`);
 
-    // wróć po dodaniu "dodawania" dla pozostałych sekcji czy działa
     btnAddItem.addEventListener('click', () => {
       if (subsectionsClonesQuantities[clonedElClass] > 1) {
         removeBtn.classList.remove('hidden');
@@ -453,6 +445,11 @@ const getRemoveBtnMapping = function (removeBtn) {
   return removeBtnMapping;
 };
 
+const clearClonesValuesAndText = function (inputSubsection, resumeSubsection) {
+  console.log(inputSubsection);
+  console.log(resumeSubsection);
+};
+
 export const cloneInitFunction = function () {
   addNewSocialMediaLink();
   addNewJobSection();
@@ -462,5 +459,3 @@ export const cloneInitFunction = function () {
   addNewCertificate();
   toggleRemove();
 };
-
-console.log(subsectionsClonesQuantities);

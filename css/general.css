@@ -173,7 +173,6 @@ CONFIG SECTION
   transform: translateX(120%);
 }
 
-/* wróć do zakończenia tooltipy */
 .tooltip {
   position: absolute;
   bottom: 0;
