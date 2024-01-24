@@ -283,12 +283,12 @@ PREVIEW WINDOW
   font-style: italic;
 }
 
-.resume-position-title {
+.resume-position-title-style {
   font-size: 2rem;
   font-weight: 600;
 }
 
-.resume-company-name {
+.resume-company-name-style {
   font-weight: 600;
 }
 

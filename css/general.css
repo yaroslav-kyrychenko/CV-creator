@@ -249,6 +249,11 @@ CONFIG SECTION
   border-top: solid 0.2rem #676869;
 }
 
+.border-line-input {
+  border-top: 1px solid #676869;
+  padding-top: 2rem;
+}
+
 /* /////////////////////////////////////
 PREVIEW WINDOW
 //////////////////////////////////// */
@@ -264,6 +269,12 @@ PREVIEW WINDOW
 
 .resume-subsection-heading-soft {
   padding-top: 1.6rem;
+}
+
+.border-line-resume {
+  border-top: 1px solid #676869;
+  padding-top: 2rem;
+  margin-top: 2rem;
 }
 
 @keyframes activeElementAnimation {

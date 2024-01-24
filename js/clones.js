@@ -238,10 +238,12 @@ const addNewEducationSection = function () {
     subsectionsClonesQuantities[inputContentSectionClass]++;
     clearClonesValuesAndText(clonedInputSubsection, clonedResumeSubsection);
     clonedInputSubsection.classList.add(
-      `input-cloned-education-section-${subsectionsClonesQuantities[inputContentSectionClass]}`
+      `input-cloned-education-section-${subsectionsClonesQuantities[inputContentSectionClass]}`,
+      'border-line-input'
     );
     clonedResumeSubsection.classList.add(
-      `resume-cloned-education-section-${subsectionsClonesQuantities[inputContentSectionClass]}`
+      `resume-cloned-education-section-${subsectionsClonesQuantities[inputContentSectionClass]}`,
+      'border-line-resume'
     );
 
     inputEducationContent.appendChild(clonedInputSubsection);
@@ -280,10 +282,12 @@ const addNewJobSection = function () {
     subsectionsClonesQuantities[inputContentSectionClass]++;
     jobCloneNum++;
     clonedInputSubsection.classList.add(
-      `input-cloned-job-section-${subsectionsClonesQuantities[inputContentSectionClass]}`
+      `input-cloned-job-section-${subsectionsClonesQuantities[inputContentSectionClass]}`,
+      'border-line-input'
     );
     clonedResumeSubsection.classList.add(
-      `resume-cloned-job-section-${subsectionsClonesQuantities[inputContentSectionClass]}`
+      `resume-cloned-job-section-${subsectionsClonesQuantities[inputContentSectionClass]}`,
+      'border-line-resume'
     );
 
     inputJobContent.appendChild(clonedInputSubsection);
@@ -294,7 +298,6 @@ const addNewJobSection = function () {
       jobCloneNum
     );
     jobYearsSelectHandler(jobCloneNum);
-    // wróć dokończyć years select handler
   });
 
   removeLastClone(btnRemoveLastJob, inputJobContent, resumeJobSection);
