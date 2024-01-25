@@ -6,6 +6,7 @@ import {
   sectionsMapping,
   updateResumeTextHandlerMapping,
   tooltipMapping,
+  printingOptions,
 } from './mappings.js';
 
 import {
@@ -267,5 +268,14 @@ export const tooltipDisplayToggleHandler = function () {
     btn.addEventListener('mouseleave', () => {
       tooltip.classList.add('hidden');
     });
+  });
+};
+
+export const printResume = function () {
+  const btnPrint = document.querySelector('.btn-print');
+  const previewContainer = document.querySelector('.container-preview-window');
+
+  btnPrint.addEventListener('click', () => {
+    html2pdf(previewContainer, printingOptions);
   });
 };

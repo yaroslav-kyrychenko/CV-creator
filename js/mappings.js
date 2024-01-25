@@ -105,3 +105,12 @@ export const tooltipMapping = {
   'btn-add-new-certificate': 'tooltip-add-new-certificate',
   'btn-remove-last-certificate': 'tooltip-remove-last-certificate',
 };
+
+export const printingOptions = {
+  margin: 10,
+  filename: 'CV.pdf',
+  pagebreak: { mode: ['css', 'legacy'], avoid: '.no-break-before-style' },
+  image: { type: 'png' },
+  enableLinks: true,
+  jsPDF: { unit: 'mm', orientation: 'portrait' },
+};

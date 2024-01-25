@@ -110,6 +110,27 @@ RESUME CREATOR
   flex-basis: auto;
 }
 
+.btn-print {
+  font-size: 2.4rem;
+  font-family: inherit;
+  color: #262728;
+  background-color: #bdc3c7;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 1rem;
+  cursor: pointer;
+}
+
+.btn-print:hover {
+  animation: pulsate 1.5s infinite;
+}
+
+.page-header-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 3.2rem 4.8rem;
+}
+
 /* /////////////////////////////////////
 CONFIG SECTION
 //////////////////////////////////// */

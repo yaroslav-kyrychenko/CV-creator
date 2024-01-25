@@ -9,6 +9,7 @@ import {
   degreeYearsSelectHandler,
   jobDatesSelectHandler,
   tooltipDisplayToggleHandler,
+  printResume,
 } from './handlers.js';
 import { cloneInitFunction } from './clones.js';
 
@@ -34,3 +35,4 @@ uploadResumePhotoHandler();
 tooltipDisplayToggleHandler();
 updateResumeFromInputFields();
 cloneInitFunction();
+printResume();
